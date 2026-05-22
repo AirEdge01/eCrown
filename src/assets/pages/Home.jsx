@@ -55,7 +55,7 @@ const Home = () => {
                 className="d-block w-100 h-100 position-absolute top-0 start-0 z-1 object-fit-cover min-vh-100" 
                 alt="Enterprise Data Center Server Room" 
             />
-            {/* Contrast Overlay layer */}
+            
             <div className="position-absolute top-0 start-0 w-100 h-100 z-2" style={{ background: 'linear-gradient(180deg, rgba(11, 15, 25, 0.75) 0%, rgba(11, 15, 25, 0.6) 100%)', backdropFilter: 'blur(1px)' }}></div>
             
             {/* Foreground Content moving with slide 1 */}
@@ -71,7 +71,7 @@ const Home = () => {
                     Engineering premium low-voltage structured cabling, enterprise surveillance setups, and high-performance network infrastructures for scalable operations.
                 </p>
                 <button className="btn-main-primary shadow-lg shimmer-effect d-flex align-items-center justify-content-center px-4 py-3 border-0 rounded">
-                    Get Started Now <Lucide.ChevronRight size={24} className="ms-2" />
+                    Get Started Now <Lucide.ChevronRight size={25} className="ms-2" />
                 </button>
             </div>
         </div>
@@ -100,7 +100,7 @@ const Home = () => {
                     Engineering premium low-voltage structured cabling, enterprise surveillance setups, and high-performance network infrastructures for scalable operations.
                 </p>
                 <button className="btn-main-primary shadow-lg shimmer-effect d-flex align-items-center justify-content-center px-4 py-3 border-0 rounded">
-                    Get Started Now <Lucide.ChevronRight size={24} className="ms-2" />
+                    Get Started Now <Lucide.ChevronRight size={25} className="ms-2" />
                 </button>
             </div>
         </div>
@@ -129,7 +129,7 @@ const Home = () => {
                     Engineering premium low-voltage structured cabling, enterprise surveillance setups, and high-performance network infrastructures for scalable operations.
                 </p>
                 <button className="btn-main-primary shadow-lg shimmer-effect d-flex align-items-center justify-content-center px-4 py-3 border-0 rounded">
-                    Get Started Now <Lucide.ChevronRight size={24} className="ms-2" />
+                    Get Started Now <Lucide.ChevronRight size={25} className="ms-2" />
                 </button>
             </div>
         </div>
