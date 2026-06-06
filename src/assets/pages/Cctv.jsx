@@ -1,9 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+// import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const Cctv = () => {
+
+//  const navigate = useNavigate(); 
+  
+
+//   const storedUserData = JSON.parse(localStorage.getItem('userData'));
+//   useEffect(() => {
+    
+//     if (!storedUserData) {
+//       navigate('/error');
+//     }
+//   }, [storedUserData, navigate]);
+
+  
+//   if (!storedUserData) {
+//     return null;
+//   }
+  
+  
+  
   return (
     <>
     <Navbar/>

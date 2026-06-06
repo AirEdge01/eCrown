@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
 import Navbar from '../components/Navbar';
 
 const Pos = () => {
+  const navigate = useNavigate();
+  const [authStatus, setAuthStatus] = useState('loading');
+
+  useEffect(() => {
+    const session = localStorage.getItem('authSession');
+    if (!session) {
+      setAuthStatus('unauthorized');
+      navigate('/error');
+    } else {
+      setAuthStatus('authorized');
+    }
+  }, [navigate]);
+
+  if (authStatus === 'loading') return null;
+  if (authStatus === 'unauthorized') return null;
+
   return (
     <>
       <Navbar />
       <div className="bg-white min-vh-100 position-relative pb-5" style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", color: '#0f172a', overflowX: 'hidden' }}>
-
-
-
 
         {/* SECTION 2: HERO SOLUTION INTRODUCTION */}
         <section className="position-relative text-white py-5 px-4 overflow-hidden d-flex align-items-center" style={{ background: 'linear-gradient(135deg, #020617 0%, #1e3a8a 50%, #2563eb 100%)', minHeight: '75vh' }}>
@@ -18,7 +32,6 @@ const Pos = () => {
           <div className="container py-4 position-relative" style={{ zIndex: 2 }}>
             <div className="row align-items-center">
               <div className="col-lg-7 mb-5 mb-lg-0 text-center text-lg-left">
-
                 <h2 className="display-4 font-weight-bold tracking-tight mt-2 mb-3 animate-slide-in-right" style={{ fontWeight: '800', lineHeight: '1.15' }}>
                   Enterprise Point of Sale (POS) Systems
                 </h2>
@@ -51,7 +64,7 @@ const Pos = () => {
           </div>
         </section>
 
-        {/* SECTION 3: CORE CAPABILITIES MATRIX ("What They Do") */}
+        {/* SECTION 3: CORE CAPABILITIES MATRIX */}
         <section id="capabilities" className="container my-5 py-5">
           <div className="text-center mb-5 animate-fade-in">
             <span className="text-primary font-weight-bold text-uppercase tracking-widest small d-block mb-2" style={{ color: '#2563eb', letterSpacing: '2px' }}>
@@ -189,7 +202,7 @@ const Pos = () => {
         </section>
 
         {/* SECTION 6: INTEGRATION CAPABILITIES */}
-        <section className="bg-dark text-white py-5 my-5 border-top border-bottom position-relative overflow-hidden" style={{ background: '#0f172a !important' }}>
+        <section className="bg-dark text-white py-5 my-5 border-top border-bottom position-relative overflow-hidden" style={{ background: '#0f172a' }}>
           <div className="position-absolute" style={{ top: '-30%', left: '-20%', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
           <div className="container position-relative py-4" style={{ zIndex: 2 }}>
             <div className="text-center mb-5">
@@ -314,7 +327,7 @@ const Pos = () => {
 
         {/* SECTION 9: CONSULTATION CAPTURE FORM CONTAINER */}
         <section id="consultation-hub" className="container my-1">
-          <div className="bg-dark text-white p-4 p-md-5 rounded border shadow-lg position-relative overflow-hidden" style={{ borderRadius: '16px', background: '#0f172a !important' }}>
+          <div className="bg-dark text-white p-4 p-md-5 rounded border shadow-lg position-relative overflow-hidden" style={{ borderRadius: '16px', background: '#0f172a' }}>
             <div className="row justify-content-center position-relative" style={{ zIndex: 2 }}>
               <div className="col-lg-8 mb-4 mb-lg-0 text-center">
                 <span className="text-primary text-uppercase font-weight-bold tracking-wider small d-block mb-2" style={{ color: '#38bdf8' }}> INFRASTRUCTURE HUB</span>
@@ -323,98 +336,32 @@ const Pos = () => {
                   Connect with our systems field technicians directly. We supply custom architecture layouts, complete device sync plans, hardware mounting specifications, and financial data auditing calculations for your business space.
                 </p>
               </div>
-
-              {/* <div className="col-lg-5">
-                <div className="bg-white p-4 rounded text-dark shadow" style={{ borderRadius: '12px' }}>
-                  <form onSubmit={(e) => e.preventDefault()}>
-                    <div className="form-group mb-3">
-                      <label className="small font-weight-bold text-muted mb-1">Contact Name</label>
-                      <input type="text" className="form-control form-control-sm" placeholder="e.g. Oluwatunmise" required style={{ borderRadius: '6px' }} />
-                    </div>
-                    <div className="form-group mb-3">
-                      <label className="small font-weight-bold text-muted mb-1">Email Address</label>
-                      <input type="email" className="form-control form-control-sm" placeholder="name@domain.com" required style={{ borderRadius: '6px' }} />
-                    </div>
-                    <div className="form-group mb-3">
-                      <label className="small font-weight-bold text-muted mb-1">Primary System Scope</label>
-                      <select className="form-control form-control-sm text-muted" style={{ borderRadius: '6px' }}>
-                        <option>Supermarket Cashier Terminal Grid</option>
-                        <option>Restaurant Multi-Station Ticket Relay</option>
-                        <option>Commercial Multi-Floor Checkout Setup</option>
-                      </select>
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-block text-uppercase font-weight-bold btn-sm py-2 w-100 shadow-sm" style={{ background: '#2563eb', border: 'none', borderRadius: '6px' }}>
-                      Submit Request
-                    </button>
-                  </form>
-                </div>
-              </div> */}
             </div>
           </div>
         </section>
 
-
-        {/* Custom Global Layout CSS Interactions */}
         <style>{`
           .rounded-xl { border-radius: 16px !important; }
           .shadow-xs { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
-          
-          .custom-hover-card:hover {
-            transform: translateY(-5px);
-            background-color: #ffffff !important;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 10px 10px -5px rgba(0, 0, 0, 0.03) !important;
-            border: 1px solid #e2e8f0 !important;
-          }
-          
-          .custom-hover-card:hover .card-image-fluid {
-            transform: scale(1.05);
-          }
-
-          .custom-card-hover:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px -5px rgba(0,0,0,0.05) !important;
-          }
-          
-          .custom-card-hover:hover .card-image-fluid {
-            transform: scale(1.04);
-          }
-
-          .custom-hover-glow:hover {
-            box-shadow: 0 20px 35px rgba(37, 99, 235, 0.08) !important;
-          }
-
-          .custom-dark-hover:hover {
-            background-color: rgba(255,255,255, 0.06) !important;
-            border-color: rgba(255, 255, 255, 0.12) !important;
-          }
-
-          .custom-dark-hover:hover .card-image-fluid {
-            transform: scale(1.04);
-          }
-
-          .btn:hover {
-            transform: translateY(-1px);
-            transition: all 0.2s ease;
-          }
-
-          /* Basic Responsive and Animation Utility Classes */
+          .custom-hover-card:hover { transform: translateY(-5px); background-color: #ffffff !important; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 10px 10px -5px rgba(0, 0, 0, 0.03) !important; border: 1px solid #e2e8f0 !important; }
+          .custom-hover-card:hover .card-image-fluid { transform: scale(1.05); }
+          .custom-card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(0,0,0,0.05) !important; }
+          .custom-card-hover:hover .card-image-fluid { transform: scale(1.04); }
+          .custom-hover-glow:hover { box-shadow: 0 20px 35px rgba(37, 99, 235, 0.08) !important; }
+          .custom-dark-hover:hover { background-color: rgba(255,255,255, 0.06) !important; border-color: rgba(255, 255, 255, 0.12) !important; }
+          .custom-dark-hover:hover .card-image-fluid { transform: scale(1.04); }
+          .btn:hover { transform: translateY(-1px); transition: all 0.2s ease; }
           .leading-relaxed { line-height: 1.6; }
           .match-height { display: flex; flex-wrap: wrap; }
           .match-height > [class*="col-"] > .card { height: 100%; }
-
           .animate-fade-in { animation: fadeIn 0.6s ease both; }
           .animate-slide-in-up { animation: slideInUp 0.6s ease both; }
           .animate-slide-in-right { animation: slideInRight 0.6s ease both; }
-
           @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
           @keyframes slideInUp { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
           @keyframes slideInRight { from { transform: translateX(15px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-          
-          @media (max-width: 991.98px) {
-            .col-lg-5.text-center { margin-top: 2rem; }
-          }
+          @media (max-width: 991.98px) { .col-lg-5.text-center { margin-top: 2rem; } }
         `}</style>
-
       </div>
       <Footer />
       <Button />

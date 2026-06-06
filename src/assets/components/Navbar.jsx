@@ -1,9 +1,31 @@
 import React from 'react';
 import * as Lucide from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../ecrowN.png';
 
 const Navbar = () => {
+    const navigate = useNavigate();
+
+    const isAuthenticated = () => {
+        const sessionRaw = localStorage.getItem('authSession');
+        if (!sessionRaw) return false;
+
+        try {
+            const session = JSON.parse(sessionRaw);
+            return session && session.loggedIn === true && typeof session.token === 'string' && session.token.length > 0;
+        } catch {
+            localStorage.removeItem('authSession');
+            return false;
+        }
+    };
+
+    const handleAboutClick = (event) => {
+        if (!isAuthenticated()) {
+            event.preventDefault();
+            navigate('/error', { replace: true });
+        }
+    };
+
     return (
         <>
             <nav className="navbar navbar-expand-lg fixed-top premium-glass-navbar py-3" id="main-nav">
@@ -24,7 +46,7 @@ const Navbar = () => {
                             </li>
 
                             <li className="nav-item premium-nav-item">
-                                <Link to="/about" className="nav-link px-3">ABOUT</Link>
+                                <Link to="/about" onClick={handleAboutClick} className="nav-link px-3">ABOUT</Link>
                             </li>
 
                             <li className="nav-item dropdown premium-nav-item">

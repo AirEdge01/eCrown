@@ -71,7 +71,9 @@ const Home = () => {
                     Engineering premium low-voltage structured cabling, enterprise surveillance setups, and high-performance network infrastructures for scalable operations.
                 </p>
                 <button className="btn-main-primary shadow-lg shimmer-effect d-flex align-items-center justify-content-center px-4 py-3 border-0 rounded">
+                    <Link to="/signup" className="text-decoration-none text-white d-flex align-items-center">
                     Get Started Now <Lucide.ChevronRight size={25} className="ms-2" />
+                    </Link>
                 </button>
             </div>
         </div>

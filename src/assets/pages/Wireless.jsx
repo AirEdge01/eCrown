@@ -4,6 +4,43 @@ import Button from '../components/Button';
 import Navbar from '../components/Navbar';
 
 const Wireless = () => {
+
+  // const [isAuthorized, setIsAuthorized] = useState(false);
+  //   const [isLoading, setIsLoading] = useState(true);
+  
+  //   useEffect(() => {
+  //     const rawData = localStorage.getItem('userData');
+      
+  //     // Catch null strings or uncreated storage items
+  //     if (!rawData || rawData === 'null' || rawData === 'undefined') {
+  //       window.location.replace('/error');
+  //       return;
+  //     }
+  
+  //     try {
+  //       const parsed = JSON.parse(rawData);
+  
+  //       // CHANGE 'token' TO YOUR REAL LOGIN SPECIFIC KEY (e.g., parsed.email or parsed.id)
+  //       if (!parsed || !parsed.token) { 
+  //         console.warn("Security Breach: Missing inner validation token.");
+  //         localStorage.removeItem('userData'); // Wipe bad data
+  //         window.location.replace('/error');
+  //         return;
+  //       }
+  
+  //       // If key exists, grant page visibility
+  //       setIsAuthorized(true);
+  //       setIsLoading(false);
+  //     } catch (e) {
+  //       localStorage.removeItem('userData');
+  //       window.location.replace('/error');
+  //     }
+  //   }, []);
+  
+  //   if (isLoading || !isAuthorized) {
+  //     return null; // Absolute white screen protection while checking
+  //   }
+  
   // Styles for the modern look
   const styles = {
     hero: {
