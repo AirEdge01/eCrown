@@ -5,22 +5,22 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const ServicesDashboard = () => {
-    const navigate = useNavigate(); 
+//     const navigate = useNavigate(); 
   
 
-  const storedUserData = JSON.parse(localStorage.getItem('userData'));
-  useEffect(() => {
+//   const storedUserData = JSON.parse(localStorage.getItem('userData'));
+//   useEffect(() => {
     
-    if (!storedUserData) {
-      navigate('/error');
-    }
-  },
-   [storedUserData, navigate]);
+//     if (!storedUserData) {
+//       navigate('/error');
+//     }
+//   },
+//    [storedUserData, navigate]);
 
   
-  if (!storedUserData) {
-    return null;
-  }
+//   if (!storedUserData) {
+//     return null;
+//   }
 
     // Array definition mapping updated eCrown core tech titles, icons, and dynamic target routes
     const ecrownServices = [
@@ -40,7 +40,7 @@ const ServicesDashboard = () => {
         },
         {
             title: "Low-voltage Runs",
-            description: "Precision low-voltage infrastructure pathways, conduit signaling arrangements, signaling runs, and local compliance wiring installations.",
+            description: "Precision low-voltage infrastructure pathways, conduit signaling arrangements, signaling runs, and local compliance wiring Installation Services.",
             icon: <Lucide.Cpu size={24} />,
             tag: "Electrical Hardware",
             path: "/low"
@@ -61,7 +61,7 @@ const ServicesDashboard = () => {
         },
         {
             title: "Self-Checkout",
-            description: "Automated kiosk installation matrixes, integrated weighing scale units, biometric peripheral setups, and hardware diagnostics.",
+            description: "Automated kiosk Installation Service matrixes, integrated weighing scale units, biometric peripheral setups, and hardware diagnostics.",
             icon: <Lucide.Monitor size={24} />,
             tag: "Automation Kiosks",
             path: "/self"
@@ -122,7 +122,7 @@ const ServicesDashboard = () => {
                                         Welcome to your Integrated Technology Infrastructure Command
                                     </h2>
                                     <p className="text-white-50 small hero-para mb-0">
-                                        This workspace consolidates the **9 critical deployment pillars** of eCrown Technologies into a unified interface. Engineered as a centralized business intelligence layer, it allows administrators to orchestrate infrastructure requests, track procurement pipeline progress, evaluate operational configurations, and audit physical systems data—ensuring elite performance margins from structured data cabling down to green energy storage matrix arrays.
+                                        This workspace consolidates the **9 critical deployment pillars** of eCrown Technologies into a unified interface. Engineered as a centralized business intelligence layer, it allows administrators to orchestrate infrastructure requests, track procurement pipeline progress, evaluate operational configurations, and audit physical systems data ensuring elite performance margins from structured data cabling down to green energy storage matrix arrays.
                                     </p>
                                 </div>
 
@@ -170,7 +170,7 @@ const ServicesDashboard = () => {
                                                 </p>
                                             </div>
 
-                                            {/* Action Bar: Modernized View Link + Call for Installation Button Trigger */}
+                                            {/* Action Bar: Modernized View Link + Call for Installation Service Button Trigger */}
                                             <div className="pt-3 border-top border-light-soft d-flex align-items-center justify-content-between gap-2">
                                                 <Link
                                                     to={service.path}
@@ -181,9 +181,9 @@ const ServicesDashboard = () => {
 
                                                 <Link 
                                                     to="/install" 
-                                                    className="btn btn-installation-action py-1.5 px-3 rounded-3 small fw-bold d-inline-flex align-items-center gap-1 text-decoration-none shadow-sm"
+                                                    className="btn btn-Installation Service-action py-1.5 px-3 rounded-3 small fw-bold d-inline-flex align-items-center gap-1 text-decoration-none shadow-sm"
                                                 >
-                                                    <Lucide.PhoneCall size={13} /> Installation
+                                                    <Lucide.PhoneCall size={13} /> Installation Service
                                                 </Link>
                                             </div>
 
@@ -193,7 +193,7 @@ const ServicesDashboard = () => {
                             ))}
                         </div>
 
-                        {/* --- Commercial Procurement & Field Installation Action Hub --- */}
+                        {/* --- Commercial Procurement & Field Installation Service Action Hub --- */}
                         <div className="procurement-cta-section card border-0 p-4 p-md-5 rounded-4 position-relative overflow-hidden mb-4">
                             <div className="row align-items-center relative-box position-relative z-1">
                                 <div className="col-12 col-xl-7 mb-4 mb-xl-0">
@@ -206,7 +206,7 @@ const ServicesDashboard = () => {
                                         Ready to Source Hardware or Schedule Field Deployments?
                                     </h3>
                                     <p className="text-muted small mb-0 dynamic-cta-para">
-                                        Access our certified B2B technology marketplace to purchase verified corporate systems hardware—ranging from optical link patch panels to terminal POS units. Need specialized setup? Instantly bridge the gap by scheduling our on-site infrastructure engineers for immediate field installations.
+                                        Access our certified B2B technology marketplace to purchase verified corporate systems hardware ranging from optical link patch panels to terminal POS units. Need specialized setup? Instantly bridge the gap by scheduling our on-site infrastructure engineers for immediate field Installation Services.
                                     </p>
                                 </div>
                                 <div className="col-12 col-xl-5 d-flex flex-column flex-sm-row justify-content-xl-end gap-3">
@@ -221,7 +221,7 @@ const ServicesDashboard = () => {
                                         to="/install"
                                         className="btn btn-outline-dark btn-field-call py-3 px-4 rounded-3 d-inline-flex align-items-center justify-content-center gap-2 fw-bold bg-white text-brand-dark border shadow-sm text-decoration-none"
                                     >
-                                        <Lucide.PhoneCall size={17} /> Request Installation
+                                        <Lucide.PhoneCall size={17} />  Installation Service 
                                     </Link>
                                 </div>
                             </div>
@@ -331,7 +331,7 @@ const ServicesDashboard = () => {
                     transform: translateX(2px);
                 }
 
-                .btn-installation-action {
+                .btn-Request Installation Service Service-action {
                     background: #0A1622;
                     color: #ffffff;
                     border: none;
@@ -339,7 +339,7 @@ const ServicesDashboard = () => {
                     font-weight: 600;
                     transition: all 0.2s ease;
                 }
-                .btn-installation-action:hover {
+                .btn-Request Installation Service Service-action:hover {
                     background: #0D6EFD;
                     color: #ffffff;
                     transform: scale(1.02);

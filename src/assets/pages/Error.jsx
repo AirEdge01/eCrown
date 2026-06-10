@@ -6,6 +6,8 @@ import Footer from '../components/Footer';
 
 const Error = () => {
     return (
+
+        
         <div className="error-page-wrapper">
             <Navbar />
             <div className="error-glass-card text-center">
@@ -45,7 +47,7 @@ const Error = () => {
                     </div>
                 </div>
             </div>
-
+        
             {/* Premium Component-Scoped Styles */}
             <style>{`
                 .error-page-wrapper {

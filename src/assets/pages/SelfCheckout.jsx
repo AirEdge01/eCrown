@@ -2,51 +2,18 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Button from '../components/Button';
+import Dash from '../components/Dash';
 
 const SelfCheckout = () => {
 
 
-  // const [isAuthorized, setIsAuthorized] = useState(false);
-  //   const [isLoading, setIsLoading] = useState(true);
-  
-  //   useEffect(() => {
-  //     const rawData = localStorage.getItem('userData');
-      
-  //     // Catch null strings or uncreated storage items
-  //     if (!rawData || rawData === 'null' || rawData === 'undefined') {
-  //       window.location.replace('/error');
-  //       return;
-  //     }
-  
-  //     try {
-  //       const parsed = JSON.parse(rawData);
-  
-  //       // CHANGE 'token' TO YOUR REAL LOGIN SPECIFIC KEY (e.g., parsed.email or parsed.id)
-  //       if (!parsed || !parsed.token) { 
-  //         console.warn("Security Breach: Missing inner validation token.");
-  //         localStorage.removeItem('userData'); // Wipe bad data
-  //         window.location.replace('/error');
-  //         return;
-  //       }
-  
-  //       // If key exists, grant page visibility
-  //       setIsAuthorized(true);
-  //       setIsLoading(false);
-  //     } catch (e) {
-  //       localStorage.removeItem('userData');
-  //       window.location.replace('/error');
-  //     }
-  //   }, []);
-  
-  //   if (isLoading || !isAuthorized) {
-  //     return null; // Absolute white screen protection while checking
-  //   }
+
   
   return (
     <>
       <Navbar />
       <div className="bg-white min-vh-100 position-relative pb-5" style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", color: '#0f172a', overflowX: 'hidden' }}>
-
+        <Dash/>
 
 
         {/* SECTION 2: HERO INTRODUCTION */}
@@ -76,7 +43,7 @@ const SelfCheckout = () => {
               <div className="col-lg-5 text-center">
                 <div className="position-relative p-2 bg-white rounded-xl shadow-2xl hover-lift animate-slide-in-up" style={{ borderRadius: '20px' }}>
                   <img
-                    src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80"
+                    src="https://imageio.forbes.com/specials-images/imageserve/62977578f236a1de7000921f/Mashgin-Smart-Checkout-Circle-K-Lifestyle/1960x0.jpg?format=jpg&width=1440"
                     className="img-fluid w-100"
                     alt="Customer using modern automated self-checkout system"
                     style={{ borderRadius: '14px', objectFit: 'cover', display: 'block', height: '380px', width: '100%' }}
@@ -105,7 +72,7 @@ const SelfCheckout = () => {
             <div className="col-lg-6 mb-4 mb-lg-0">
               <div className="overflow-hidden rounded-xl shadow-sm border p-2 bg-white custom-hover-glow" style={{ borderRadius: '20px' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1563013544-824ae1d704d3?auto=format&fit=crop&w=800&q=80"
+                  src="https://cdn.shopify.com/s/files/1/0144/3482/8374/files/types_of_barcode_scanners_7.png?v=1755057096"
                   className="w-100 img-fluid card-image-fluid"
                   alt="Scanning product barcode close-up under scanner laser light"
                   style={{ objectFit: 'cover', height: '380px', borderRadius: '14px', display: 'block', transition: 'transform 0.5s ease' }}
@@ -140,7 +107,7 @@ const SelfCheckout = () => {
             <div className="col-lg-6 order-lg-2 mb-4 mb-lg-0">
               <div className="overflow-hidden rounded-xl shadow-sm border p-2 bg-white custom-hover-glow" style={{ borderRadius: '20px' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=800&q=80"
+                  src="https://homesourcesystems.com/wp-content/uploads/2025/08/Tap-vs-Swipe.jpg"
                   className="w-100 img-fluid card-image-fluid"
                   alt="Tapping credit card on contactless card payment terminal"
                   style={{ objectFit: 'cover', height: '380px', borderRadius: '14px', display: 'block', transition: 'transform 0.5s ease' }}
@@ -170,7 +137,7 @@ const SelfCheckout = () => {
             <div className="col-lg-6 mb-4 mb-lg-0">
               <div className="overflow-hidden rounded-xl shadow-sm border p-2 bg-white custom-hover-glow" style={{ borderRadius: '20px' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1601599561264-5a7c393cb33a?auto=format&fit=crop&w=800&q=80"
+                  src="https://media.istockphoto.com/id/2169271544/photo/young-couple-talking-while-leaving-on-jewelry-store.jpg?s=612x612&w=0&k=20&c=sUK6jUfOOqmaqONMvG2_eAjBoRM8mBP3II3Uml7GBFs="
                   className="w-100 img-fluid card-image-fluid"
                   alt="Customer leaving retail storefront happily holding fresh grocery bags"
                   style={{ objectFit: 'cover', height: '380px', borderRadius: '14px', display: 'block', transition: 'transform 0.5s ease' }}
@@ -244,7 +211,7 @@ const SelfCheckout = () => {
                   title: "Setup Customer Self-Service Stations",
                   desc: "We program the intuitive, user-friendly customer software interface panels, loading custom step-by-step audio voice alerts, weight-checking anti-theft loops, and instant receipt tracking printers.",
                   icon: "🖥️",
-                  img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80"
+                  img: "https://us-en-cdn.square.ncms.io/content/uploads/2024/03/1162_QSR_S3a_3761_02_RD_SIMP_USEN_Joyland.jpg.jpeg"
                 }
               ].map((service, idx) => (
                 <div key={idx} className="col-lg-4 col-md-6 mb-4">
@@ -284,7 +251,7 @@ const SelfCheckout = () => {
             <div className="col-lg-6">
               <div className="p-3 bg-light rounded-xl shadow-sm border custom-hover-glow" style={{ borderRadius: '24px' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=800&q=80"
+                  src="https://images.stockcake.com/public/2/d/0/2d0fc78d-9d8d-44de-8041-f670b778f73f/supermarket-self-checkout-stockcake.jpg"
                   className="img-fluid shadow w-100"
                   alt="Modern commercial supermarket self-checkout lanes row layout"
                   style={{ borderRadius: '16px', objectFit: 'cover', height: '360px', width: '100%', display: 'block' }}
@@ -306,32 +273,6 @@ const SelfCheckout = () => {
                   Connect with our systems integration division. We engineer complete layout floor-plans, provide modern touchscreen kiosk hardwares, calibrate terminal scanners, and secure backend payment connections.
                 </p>
               </div>
-
-              {/* <div className="col-lg-5">
-                <div className="bg-white p-4 rounded text-dark shadow" style={{ borderRadius: '12px' }}>
-                  <form onSubmit={(e) => e.preventDefault()}>
-                    <div className="form-group mb-3">
-                      <label className="small font-weight-bold text-muted mb-1">Company / Store Name</label>
-                      <input type="text" className="form-control form-control-sm" placeholder="e.g. eCrown Outlets" required style={{ borderRadius: '6px' }} />
-                    </div>
-                    <div className="form-group mb-3">
-                      <label className="small font-weight-bold text-muted mb-1">Business Email Address</label>
-                      <input type="email" className="form-control form-control-sm" placeholder="contact@store.com" required style={{ borderRadius: '6px' }} />
-                    </div>
-                    <div className="form-group mb-3">
-                      <label className="small font-weight-bold text-muted mb-1">Planned Station Units</label>
-                      <select className="form-control form-control-sm text-muted" style={{ borderRadius: '6px' }}>
-                        <option>2 - 4 Automated Express Pods</option>
-                        <option>5 - 8 Multi-Lane Kiosk System</option>
-                        <option>10+ Enterprise Store Grid Layout</option>
-                      </select>
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-block text-uppercase font-weight-bold btn-sm py-2 w-100 shadow-sm" style={{ background: '#2563eb', border: 'none', borderRadius: '6px' }}>
-                      Request Structural Architecture Proposal
-                    </button>
-                  </form>
-                </div>
-              </div> */}
             </div>
           </div>
         </section>

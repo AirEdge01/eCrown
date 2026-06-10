@@ -2,6 +2,9 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
 import Navbar from '../components/Navbar';
+import Dash from '../components/Dash';
+import { Link } from 'react-router-dom';
+
 
 // Fallback logic remains to ensure UI stability
 const createFallbackImage = (label) => {
@@ -52,48 +55,13 @@ const ServiceSection = ({ title, desc, imgMain, imgSide1, imgSide2, reverse }) =
 const Satellite = () => {
 
 
-  // const [isAuthorized, setIsAuthorized] = useState(false);
-  //   const [isLoading, setIsLoading] = useState(true);
-  
-  //   useEffect(() => {
-  //     const rawData = localStorage.getItem('userData');
-      
-  //     // Catch null strings or uncreated storage items
-  //     if (!rawData || rawData === 'null' || rawData === 'undefined') {
-  //       window.location.replace('/error');
-  //       return;
-  //     }
-  
-  //     try {
-  //       const parsed = JSON.parse(rawData);
-  
-  //       // CHANGE 'token' TO YOUR REAL LOGIN SPECIFIC KEY (e.g., parsed.email or parsed.id)
-  //       if (!parsed || !parsed.token) { 
-  //         console.warn("Security Breach: Missing inner validation token.");
-  //         localStorage.removeItem('userData'); // Wipe bad data
-  //         window.location.replace('/error');
-  //         return;
-  //       }
-  
-  //       // If key exists, grant page visibility
-  //       setIsAuthorized(true);
-  //       setIsLoading(false);
-  //     } catch (e) {
-  //       localStorage.removeItem('userData');
-  //       window.location.replace('/error');
-  //     }
-  //   }, []);
-  
-  //   if (isLoading || !isAuthorized) {
-  //     return null; // Absolute white screen protection while checking
-  //   }
   
   return (
     <>
     <Navbar/>
       <div className="bg-white min-vh-100" style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", color: '#0f172a' }}>
         
-        
+        <Dash/>
 
         {/* HERO */}
         <section className="text-white py-5 px-4" style={{ background: 'linear-gradient(135deg, #020617 0%, #1e3a8a 100%)', minHeight: '400px', display: 'flex', alignItems: 'center' }}>
@@ -112,60 +80,60 @@ const Satellite = () => {
           <ServiceSection 
             title="Satellite Networking"
             desc="We bridge the geographic divide with high-speed, orbital connectivity solutions. eCROWN specializes in the site survey, permit acquisition, and precision-alignment of VSAT terminals and LEO satellite constellations."
-            imgMain="https://picsum.photos/seed/sat1/800/600"
-            imgSide1="https://picsum.photos/seed/sat2/400/400"
-            imgSide2="https://picsum.photos/seed/sat3/400/400"
+            imgMain="https://imageio.forbes.com/specials-images/imageserve/66d779b90e851dba15688376//0x0.jpg?height=362&width=480&fit=bounds"
+            imgSide1="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRuMPiLznfnB9GD8WjJZOufjh7-7jtXYxkPw&s"
+            imgSide2="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsxMPw4GVX7TPPfxzYv_BvXXNPjnTGTL9omA&s"
           />
 
           <ServiceSection 
             title="Fiber Optic Backbone"
             desc="High-performance data requires a high-performance backbone. Our certified installation teams handle end-to-end fiber deployment, ranging from heavy-duty trenching and micro-duct installation to delicate fusion splicing."
-            imgMain="https://picsum.photos/seed/fiber1/800/600"
-            imgSide1="https://picsum.photos/seed/fiber2/400/400"
-            imgSide2="https://picsum.photos/seed/fiber3/400/400"
+            imgMain="https://www.nmcabling.co.uk/wp-content/uploads/2021/01/What-is-a-fiber-backbone-1024x513.jpeg"
+            imgSide1="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZO4RKWYvDrntWLUcFmuDHo4YZHkPJvvPo8w&s"
+            imgSide2="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC9uAT19RFVEjMcUKqHneqCwS7vTBEbZT2iw&s"
             reverse
           />
 
           <ServiceSection 
             title="Data Center Infrastructure"
             desc="Your server room is the brain of your organization. We deliver turnkey data center installations, including raised flooring, hot/cold aisle containment, and climate-controlled environmental monitoring."
-            imgMain="https://picsum.photos/seed/data1/800/600"
-            imgSide1="https://picsum.photos/seed/data2/400/400"
-            imgSide2="https://picsum.photos/seed/data3/400/400"
+            imgMain="https://bgasales.com/app/uploads/2023/04/cf_blog_datacentercooling.jpg"
+            imgSide1="https://podtechdatacenter.com/wp-content/uploads/2026/04/server-room-infrastructure.webp"
+            imgSide2="https://newscenter.lbl.gov/wp-content/uploads/2025/12/Featured_1190px_DataCenters_iStock-1809660148.jpg"
           />
 
           <ServiceSection 
             title="Structured Cabling"
             desc="Network chaos costs time and money. Our team installs clean, labeled, and highly organized structured cabling systems that meet TIA/EIA standards."
-            imgMain="https://picsum.photos/seed/cable1/800/600"
-            imgSide1="https://picsum.photos/seed/cable2/400/400"
-            imgSide2="https://picsum.photos/seed/cable3/400/400"
+            imgMain="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnJfTFU40RiZQ0sJZocM7xP3QhUfyM-fbcrw&s"
+            imgSide1="https://storage.googleapis.com/msgsndr/IiwAlyv6EmkKcIvIiBFa/media/69809afa1f68d18b910f641e.webp"
+            imgSide2="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdT__lzKB5H_IbW-NjgSpvdotUt0nAiy-UvA&s"
             reverse
           />
 
           <ServiceSection 
             title="Security & Surveillance"
             desc="Protect your assets with our hardened security ecosystems. We deploy 4K AI-integrated camera systems with advanced motion analytics and perimeter sensors."
-            imgMain="https://picsum.photos/seed/sec1/800/600"
-            imgSide1="https://picsum.photos/seed/sec2/400/400"
+            imgMain="https://fbijobs.gov/sites/default/files/styles/webp/public/2022-10/ss_1_reduced_size.jpg.webp?itok=zOV483dK"
+            imgSide1="https://www.cctvcamerapros.com/v/AI/AI-security-camera.jpg"
             imgSide2="https://picsum.photos/seed/sec3/400/400"
           />
 
           <ServiceSection 
             title="Smart Automation (IoT)"
             desc="Transform your facility into a responsive, intelligent ecosystem. We integrate smart lighting, automated climate controls, and proximity-based occupancy sensors."
-            imgMain="https://picsum.photos/seed/iot1/800/600"
-            imgSide1="https://picsum.photos/seed/iot2/400/400"
-            imgSide2="https://picsum.photos/seed/iot3/400/400"
+            imgMain="https://www.customizelighting.com/wp-content/uploads/2025/12/Smart_building_ecosystem_illustration_showing_IoT.jpg"
+            imgSide1="https://dmwebsoft.com/wp-content/uploads/2024/09/Introduction-The-Rise-of-Smart-Home-Automation-DM-WebSoft-LLP.webp"
+            imgSide2="https://deepfa.ir/img/blogs/CYanP7wyDc.webp"
             reverse
           />
 
           <ServiceSection 
             title="Renewable Energy Systems"
             desc="Reliable power is the foundation of all technology. We install solar arrays, high-capacity lithium-ion battery storage banks, and professional-grade inverter systems."
-            imgMain="https://picsum.photos/seed/solar1/800/600"
-            imgSide1="https://picsum.photos/seed/solar2/400/400"
-            imgSide2="https://picsum.photos/seed/solar3/400/400"
+            imgMain="https://www.moserbaersolar.com/wp-content/uploads/2025/03/reliable-off-grid-solar-system-810x500.jpeg"
+            imgSide1="https://colitetech.com/wp-content/uploads/2024/11/Commercial_Solar_Battery.jpg"
+            imgSide2="https://www.swri.org/sites/default/files/styles/client_services_banner/public/client-services-images/AdobeStock_182548860_0.jpeg.webp?itok=TMZdpwU7"
           />
         </div>
 
@@ -174,7 +142,10 @@ const Satellite = () => {
           <div className="container text-center">
             <h3 className="mb-4">Ready to Schedule an Installation?</h3>
             <p className="mb-4 opacity-75">Our certified engineering team is ready to survey your site and provide a custom quote.</p>
-            <button className="btn btn-outline-light btn-lg px-5">Request Installation Estimate</button>
+            <Link to="/request">
+              <button className="btn btn-outline-light btn-lg px-5">Request Service</button>
+            </Link>
+            
           </div>
         </footer>
 

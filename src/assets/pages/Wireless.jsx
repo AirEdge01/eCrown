@@ -2,231 +2,288 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
 import Navbar from '../components/Navbar';
+import Dash from '../components/Dash';
 
 const Wireless = () => {
-
-  // const [isAuthorized, setIsAuthorized] = useState(false);
-  //   const [isLoading, setIsLoading] = useState(true);
-  
-  //   useEffect(() => {
-  //     const rawData = localStorage.getItem('userData');
-      
-  //     // Catch null strings or uncreated storage items
-  //     if (!rawData || rawData === 'null' || rawData === 'undefined') {
-  //       window.location.replace('/error');
-  //       return;
-  //     }
-  
-  //     try {
-  //       const parsed = JSON.parse(rawData);
-  
-  //       // CHANGE 'token' TO YOUR REAL LOGIN SPECIFIC KEY (e.g., parsed.email or parsed.id)
-  //       if (!parsed || !parsed.token) { 
-  //         console.warn("Security Breach: Missing inner validation token.");
-  //         localStorage.removeItem('userData'); // Wipe bad data
-  //         window.location.replace('/error');
-  //         return;
-  //       }
-  
-  //       // If key exists, grant page visibility
-  //       setIsAuthorized(true);
-  //       setIsLoading(false);
-  //     } catch (e) {
-  //       localStorage.removeItem('userData');
-  //       window.location.replace('/error');
-  //     }
-  //   }, []);
-  
-  //   if (isLoading || !isAuthorized) {
-  //     return null; // Absolute white screen protection while checking
-  //   }
-  
-  // Styles for the modern look
-  const styles = {
-    hero: {
-      position: 'relative',
-      background: 'linear-gradient(135deg, #0056b3 0%, #002d5e 100%)',
-      minHeight: '60vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: 'white',
-      overflow: 'hidden',
-      padding: '50px 0'
-    },
-    glassCard: {
-      background: 'rgba(255, 255, 255, 0.1)',
-      backdropFilter: 'blur(10px)',
-      padding: '40px',
-      borderRadius: '20px',
-      border: '1px solid rgba(255,255,255,0.2)',
-      textAlign: 'center'
-    },
-    ctaButton: {
-      backgroundColor: '#fff',
-      color: '#0056b3',
-      padding: '12px 30px',
-      borderRadius: '50px',
-      fontWeight: 'bold',
-      textDecoration: 'none',
-      transition: 'all 0.3s ease'
-    },
-    sectionTitle: { color: '#0056b3', marginBottom: '2rem' }
-  };
-
   return (
     <>
-    <Navbar/>
-    <div className="container-fluid p-0">
-      
-      {/* 1. CHARMING HERO SECTION */}
-      <section style={styles.hero}>
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-8" style={styles.glassCard}>
-              <h1 className="display-2 fw-bold mb-3">Wireless Networking</h1>
-              <p className="lead mb-4">...excellence at its peak</p>
-              <p className="mb-4 fs-5">
-                We transform your connectivity with high-speed, secure, and seamless 
-                wireless infrastructure tailored for modern enterprise.
-              </p>
-              <a href="#services" style={styles.ctaButton} className="d-inline-block">
-                Explore Services
-              </a>
+      <style>{`
+        .wireless-viewport {
+          background: #f8fafc;
+          font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+          color: #0f172a;
+          overflow-x: hidden;
+        }
+        .ambient-glow {
+          position: fixed;
+          width: 600px;
+          height: 600px;
+          border-radius: 50%;
+          filter: blur(160px);
+          opacity: 0.4;
+          pointer-events: none;
+          z-index: 0;
+        }
+        .wireless-cyber-grid {
+          position: absolute;
+          inset: 0;
+          background-image: linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px), 
+                            linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+          background-size: 40px 40px;
+          pointer-events: none;
+        }
+        .wireless-hero {
+          position: relative;
+          min-height: 75vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(239,246,255,0.88) 100%),
+                      url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+          padding: 60px 0;
+        }
+        .glass-panel {
+          background: rgba(255, 255, 255, 0.75);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.8);
+          border-radius: 24px;
+          padding: 50px;
+          box-shadow: 0 20px 40px rgba(15, 23, 42, 0.04);
+        }
+        .premium-card {
+          background: rgba(255, 255, 255, 0.7);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid rgba(255, 255, 255, 0.7);
+          border-radius: 20px;
+          box-shadow: 0 4px 18px rgba(15, 23, 42, 0.03);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .premium-card:hover {
+          transform: translateY(-5px);
+          background: #ffffff;
+          border-color: rgba(37, 99, 235, 0.2);
+          box-shadow: 0 15px 30px rgba(37, 99, 235, 0.08);
+        }
+        .status-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          background: #ffffff;
+          border: 1px solid rgba(37, 99, 235, 0.15);
+          color: #1e40af;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          padding: 8px 20px;
+          border-radius: 50px;
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.04);
+        }
+        .pulse-beacon {
+          width: 8px;
+          height: 8px;
+          background: #10b981;
+          border-radius: 50%;
+          animation: beaconGlow 2s infinite;
+        }
+        @keyframes beaconGlow {
+          0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+          70% { transform: scale(1.2); box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+          100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+        }
+        .action-link-btn {
+          background: #003399;
+          color: #ffffff;
+          padding: 14px 36px;
+          border-radius: 12px;
+          font-weight: 700;
+          text-decoration: none;
+          transition: all 0.3s ease;
+        }
+        .action-link-btn:hover {
+          background: #2563eb;
+          color: #ffffff;
+          box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+          transform: translateY(-1px);
+        }
+        .section-headline { font-size: 2.1rem; font-weight: 800; color: #0f172a; }
+        .section-tagline { color: #2563eb; font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; display: block; margin-bottom: 6px; }
+        .telemetry-table th { color: #64748b; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 12px; }
+        .telemetry-table td { background: rgba(255, 255, 255, 0.6); border-top: 1px solid #f1f5f9; padding: 14px; font-size: 14px; color: #334155; }
+        .telemetry-badge { background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); color: #065f46; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; }
+      `}</style>
+
+      <div className="wireless-viewport">
+        <Navbar />
+        <Dash />
+
+        <div className="ambient-glow" style={{ top: '-5%', left: '-5%', background: '#dbeafe' }}></div>
+        <div className="ambient-glow" style={{ bottom: '20%', right: '-5%', background: '#eff6ff' }}></div>
+
+        {/* ── 1. HERO SECTION ── */}
+        <section className="wireless-hero">
+          <div className="wireless-cyber-grid"></div>
+          <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+            <div className="row justify-content-center">
+              <div className="col-lg-9 glass-panel text-center">
+                <div className="status-pill mb-4"><span className="pulse-beacon"></span> NEXT-GEN INFRASTRUCTURE</div>
+                <h1 className="display-4 fw-extrabold text-slate-900 mb-2">Wireless Networking</h1>
+                <p className="fs-6 text-primary fw-bold mb-4 tracking-wider">...EXCELLENCE AT ITS PEAK</p>
+                <p className="mx-auto text-secondary mb-4 max-w-2xl" style={{ color: '#475569', maxWidth: '680px', lineHeight: '1.7' }}>
+                  We transform your corporate connectivity with high-speed, secure, and seamless wireless topologies built to process mission-critical enterprise workflows over multi-tier environments.
+                </p>
+                <a href="#services" className="action-link-btn d-inline-block">Explore Enterprise Frameworks</a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 2. INTRODUCTION */}
-      <section className="container my-5" id="services">
-        <div className="row align-items-center">
-          <div className="col-md-6">
-            <h2 className="fw-bold mb-4">What is Wireless Networking?</h2>
-            <p className="fs-5">
-              Wireless networking refers to technologies that allow devices to communicate without physical cables. 
-              At <strong>eCROWN Technologies O₂</strong>, we design, install, and optimize robust wireless communication systems 
-              tailored to your environment, utilizing latest-gen Wi-Fi encryption and high-performance hardware.
-            </p>
+        {/* ── 2. INTRODUCTION SECTION ── */}
+        <section className="container my-5 py-4" id="services">
+          <div className="row align-items-center g-5">
+            <div className="col-md-6">
+              <span className="section-tagline">PRODUCT SPECIFICATION</span>
+              <h2 className="section-headline mb-3">What is Wireless Networking?</h2>
+              <p className="text-stretch" style={{ color: '#475569', lineHeight: '1.75' }}>
+                Wireless networking refers to technologies that allow hardware and digital endpoints to communicate without restrictive physical cable runs. At <strong>eCROWN Technologies O₂</strong>, we map, configure, and isolate complex radio frequency infrastructures tailored to your structural layout, utilizing adaptive active scaling.
+              </p>
+            </div>
+            <div className="col-md-6">
+              <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80" alt="Backbone" className="img-fluid rounded-4 shadow mt-3" style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
+            </div>
           </div>
-          <div className="col-md-6">
-            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8" alt="Wireless Networking" className="img-fluid rounded shadow-lg" />
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 3. EXPERT INSTALLATION SERVICES */}
-      <section className="bg-light py-5">
-        <div className="container">
-          <h2 className="text-center" style={styles.sectionTitle}>Expert Installation Services</h2>
-          <div className="row g-4">
-            {[
-              { title: "Wired/Wireless AP Setup", img: "https://images.unsplash.com/photo-1558494949-ef010bbbb317" },
-              { title: "Router Configuration", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3" },
-              { title: "Network Security", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b" },
-              { title: "Site Surveys", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" }
-            ].map((item, i) => (
-              <div key={i} className="col-md-3">
-                <div className="card h-100 shadow-sm border-0">
-                  <img src={item.img} className="card-img-top" alt={item.title} style={{height: '150px', objectFit: 'cover'}} />
-                  <div className="card-body">
-                    <h5>{item.title}</h5>
+        {/* ── 3. EXPERT INSTALLATION SERVICES ── */}
+        <section className="py-5 bg-white-50" style={{ background: 'rgba(255,255,255,0.4)', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+          <div className="container">
+            <div className="text-center mb-5">
+              <span className="section-tagline">DEPLOYMENT MATRICES</span>
+              <h2 className="section-headline">Expert Installation Services</h2>
+            </div>
+            <div className="row g-4">
+              {[
+                { title: "Wired/Wireless AP Setup", desc: "Multi-cluster localized point deployment with smart handoff logic.", img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" },
+                { title: "Router Configuration", desc: "Core pathway load distribution tuning and traffic structural slicing.", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" },
+                { title: "Network Security", desc: "Cryptographic layer locks, rogue terminal protection, and containment.", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" },
+                { title: "Site Surveys", desc: "Radio frequency spectrum evaluation, obstruction calculation, and mapping.", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" }
+              ].map((item, i) => (
+                <div key={i} className="col-md-3">
+                  <div className="card h-100 premium-card border-0 p-3">
+                    <img src={item.img} className="img-fluid rounded-4 shadow mt-3" alt={item.title} style={{ height: '150px', width: '100%', objectFit: 'cover' }} />
+                    <div className="card-body px-1 pt-3 pb-1">
+                      <h5 className="fw-bold text-dark mb-2 fs-6">{item.title}</h5>
+                      <p className="text-muted small m-0" style={{ lineHeight: '1.5' }}>{item.desc}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. REAL-WORLD IMPACT */}
-      <section className="py-5 text-white" style={{ backgroundColor: '#002d5e' }}>
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-md-6">
-              <h2>Real-World Impact</h2>
-              <p className="lead">From bustling corporate offices to high-end hospitality suites, our infrastructure ensures that your users experience lag-free, secure internet. Whether it's a multi-story hotel or a warehouse, we guarantee reliable coverage.</p>
-            </div>
-            <div className="col-md-6 text-center">
-              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c" alt="Office space" className="img-fluid rounded shadow" />
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 5. CORE FOCUS AREAS */}
-      <section className="container my-5 text-center">
-        <h2 className="mb-5" style={styles.sectionTitle}>Core Focus Areas</h2>
-        <div className="row g-4">
-          {["Technology Infrastructure", "Security Systems", "Business Automation", "Digital Communication"].map((area, i) => (
-            <div key={i} className="col-md-3">
-              <div className="p-4 border rounded shadow-sm h-100 d-flex align-items-center justify-content-center">
-                <h5>{area}</h5>
+        {/* ── 4. REAL-WORLD IMPACT ── */}
+        <section className="py-5">
+          <div className="container">
+            <div className="row align-items-center g-5">
+              <div className="col-md-6">
+                <span className="section-tagline">OPERATIONAL CAPACITY</span>
+                <h2 className="section-headline mb-3">Real-World Impact</h2>
+                <p className="fs-6 text-muted mb-4" style={{ color: '#475569', lineHeight: '1.7' }}>
+                  From complex high-density corporate enterprise environments to high-tier hospitality layouts, our wireless systems guarantee uncompromised, latency-free connectivity metrics designed specifically to cross structural architectural blockades.
+                </p>
+              </div>
+              <div className="col-md-6">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Workspace" className="img-fluid rounded-4 shadow mt-3" style={{ width: '100%', height: '280px', objectFit: 'cover' }} />
               </div>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* 6. ADVANCED SERVICES */}
-      <section className="bg-light py-5">
-        <div className="container">
-          <h2 className="text-center mb-5" style={styles.sectionTitle}>Advanced Services</h2>
+        {/* ── 5. CORE FOCUS AREAS ── */}
+        <section className="container my-4 py-4 text-center">
+          <span className="section-tagline">INFRASTRUCTURE PILLARS</span>
+          <h2 className="section-headline mb-5">Core Focus Areas</h2>
           <div className="row g-4">
             {[
-              { title: "Point-to-Point (P2P)", img: "https://images.unsplash.com/photo-1520869562383-e7baa593845f" },
-              { title: "Satellite Networking", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa" },
-              { title: "IoT Connectivity", img: "https://images.unsplash.com/photo-1518770660439-4636190af475" }
-            ].map((srv, i) => (
-              <div key={i} className="col-md-4 text-center">
-                <div className="card p-3 shadow-sm">
-                  <img src={srv.img} className="img-fluid rounded mb-3" alt={srv.title} />
-                  <h5>{srv.title}</h5>
+              { area: "Technology Infrastructure", img: "https://images.bannerbear.com/direct/4mGpW3zwpg0ZK0AxQw/requests/000/103/448/673/nyLXxdvaNQgPn8EMY9wePZm1E/c4f1fde8296af386ccdca0a25f5ac55903d1cc0b.jpg" },
+              { area: "Security Systems", img: "https://assets-eu-01.kc-usercontent.com/77bbf83a-1306-0152-fea5-3b5eaf937634/7916661a-40c3-4d65-8ea8-6785dfe41ab8/GettyImages-1303567646.jpg" },
+              { area: "Business Automation", img: "https://ppcng.com/wp-content/uploads/2025/05/Business-Automation.png" },
+              { area: "Digital Communication", img: "https://online.unt.edu/images/digital-communication-analytics-hero.jpg" }
+            ].map((item, i) => (
+              <div key={i} className="col-md-3">
+                <div className="card p-3 premium-card h-100 border-0 text-start d-flex flex-column justify-content-between">
+                  <h5 className="mt-1 text-dark fw-bold fs-6 px-1">{item.area}</h5>
+                  <img src={item.img} className="img-fluid rounded-4 shadow mt-3" alt={item.area} style={{ height: '140px', width: '100%', objectFit: 'cover' }} />
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 7. NETWORK PORTFOLIO */}
-      <section className="container my-5">
-        <h2 className="text-center mb-5" style={styles.sectionTitle}>Our Network Portfolio</h2>
-        <div className="row g-3">
-          {[1, 2, 3].map(n => (
-            <div key={n} className="col-md-4">
-              <img src={`https://picsum.photos/400/250?random=${n}`} className="img-fluid rounded shadow" alt="Portfolio" />
+        {/* ── 6. ADVANCED SERVICES ── */}
+        <section className="py-5" style={{ background: 'rgba(255,255,255,0.4)', borderTop: '1px solid #e2e8f0' }}>
+          <div className="container">
+            <div className="text-center mb-5"><span className="section-tagline">TACTICAL NETWORKING</span><h2 className="section-headline">Advanced Services</h2></div>
+            <div className="row g-4">
+              {[
+                { title: "Point-to-Point (P2P)", desc: "High-throughput building long-range microwave bridging.", img: "https://www.andrew.com/globalassets/digizuite/1033681-valuline-500x281.jpg" },
+                { title: "Satellite Networking", desc: "Remote high-speed aerospace downlinks deployed for isolated sites.", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" },
+                { title: "IoT Connectivity", desc: "Low-power dense terminal grids configured for machinery sync.", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" }
+              ].map((srv, i) => (
+                <div key={i} className="col-md-4">
+                  <div className="card p-3 h-100 premium-card border-0">
+                    <img src={srv.img} className="img-fluid rounded-4 shadow mt-3" alt={srv.title} style={{ height: '180px', width: '100%', objectFit: 'cover' }} />
+                    <div className="card-body px-1 pt-3 pb-1">
+                      <h5 className="fw-bold text-dark mb-1 fs-6">{srv.title}</h5>
+                      <p className="text-muted small m-0">{srv.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* 8. CUSTOMER TESTIMONIALS */}
-      <section className="py-5 bg-dark text-white">
-        <div className="container">
-          <h2 className="text-center mb-5">Customer Testimonials</h2>
-          <div className="row">
-            {[1, 2, 3].map(n => (
-              <div key={n} className="col-md-4">
-                <div className="card p-4 text-dark text-center h-100">
-                  <p>"eCROWN Technologies provided professional, reliable service for our office. Highly recommended!"</p>
-                  <small className="fw-bold">- Satisfied Client {n}</small>
-                </div>
+        {/* ── 9. PORTFOLIO GRID ── */}
+        <section className="container my-5 py-4">
+          <div className="text-center mb-5"><span className="section-tagline">FIELD PRODUCTIONS</span><h2 className="section-headline">Our Network Portfolio</h2></div>
+          <div className="row g-4">
+            {["photo-1562408590-e32931084e23", "photo-1544197150-b99a580bb7a8", "photo-1518770660439-4636190af475", ].map((id, idx) => (
+              <div key={idx} className="col-md-4">
+                <img src={`https://images.unsplash.com/${id}?auto=format&fit=crop&w=600&q=80`} className="img-fluid rounded-4 shadow mt-3" alt="Portfolio" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FOOTER */}
-      <footer className="text-center p-4" style={{ backgroundColor: '#001a35', color: '#fff' }}>
-        &copy; 2026 eCROWN TECHNOLOGIES O₂. Excellence at its peak.
-      </footer>
-    </div>
-    <Footer/>
-    <Button/>
+        {/* ── 10. TESTIMONIALS ── */}
+        <section className="py-5" style={{ background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)' }}>
+          <div className="container">
+            <div className="text-center mb-5"><span className="section-tagline">VERIFIED VALIDATIONS</span><h2 className="section-headline">Customer Testimonials</h2></div>
+            <div className="row g-4">
+              {[1, 2, 3].map(n => (
+                <div key={n} className="col-md-4">
+                  <div className="card p-4 premium-card border-0 h-100 d-flex flex-column justify-content-between">
+                    <p className="fs-6 style-italic m-0" style={{ color: '#475569', fontStyle: 'italic', fontSize: '14px', lineHeight: '1.6' }}>
+                      "eCROWN Technologies provided professional, completely reliable wireless topology mapping for our corporate workspace layout."
+                    </p>
+                    <div className="mt-3 pt-2" style={{ borderTop: '1px solid #f1f5f9' }}>
+                      <small className="fw-bold text-primary"> Enterprise Client {n}</small>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <Footer />
+      <Button />
     </>
   );
-}
+};
 
 export default Wireless;

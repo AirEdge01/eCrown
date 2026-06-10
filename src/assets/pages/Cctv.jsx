@@ -3,25 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Dash from '../components/Dash';
 
 const Cctv = () => {
 
-//  const navigate = useNavigate(); 
-  
 
-//   const storedUserData = JSON.parse(localStorage.getItem('userData'));
-//   useEffect(() => {
-    
-//     if (!storedUserData) {
-//       navigate('/error');
-//     }
-//   }, [storedUserData, navigate]);
-
-  
-//   if (!storedUserData) {
-//     return null;
-//   }
-  
   
   
   return (
@@ -33,6 +19,7 @@ const Cctv = () => {
 
       {/* Main content wrapper */}
       <div className="flex-grow-1">
+        <Dash/>
         
         {/* 2. HERO SECTION (Premium Glassmorphism Deep Layout) */}
         <section className="position-relative text-white py-5 px-4 overflow-hidden bg-deep-slate" 
@@ -243,7 +230,7 @@ const Cctv = () => {
             <div className="col-md-6 order-md-1">
               <div className="img-hover-container rounded-4 shadow">
                 <img 
-                  src="https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=800&q=80" 
+                  src="https://www.americanspd.com/wp-content/uploads/2025/04/digital-cctv-camera.png" 
                   className="img-fluid w-100" 
                   style={{ height: '350px', objectFit: 'cover' }} 
                   alt="Electronic infrastructure networking diagnostics"
@@ -270,7 +257,7 @@ const Cctv = () => {
               <div className="col-lg-7">
                 <div className="img-hover-container rounded-4 shadow">
                   <img 
-                    src="https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&w=900&q=80" 
+                    src="https://powervisiontech.com/wp-content/uploads/2024/01/PDF.png   " 
                     className="img-fluid w-100" 
                     style={{ height: '340px', objectFit: 'cover' }} 
                     alt="System connectivity schematic visualization"
@@ -390,7 +377,7 @@ const Cctv = () => {
 
                 {/* Slide 2 */}
                 <div className="carousel-item position-relative ecrown-carousel-height">
-                  <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80" className="d-block w-100 h-100 object-fit-cover" alt="Logistics Center Fulfillment Map" />
+                  <img src="https://images.bitocloud.net/images/produkte/regalsysteme/regale_fuer_stueckgutlagerung/mehrgeschossanlage/Kofferprofi__4_.jpeg?auto=compress%2Cformat&ixlib=php-4.1.0&q=70&rect=241%2C489%2C5264%2C3948&w=718&s=953631a78fa8fa69416d0df335d1bbe5" className="d-block w-100 h-100 object-fit-cover" alt="Logistics Center Fulfillment Map" />
                   <div className="ecrown-carousel-overlay">
                     <div className="text-center px-4">
                       <h3 className="fw-bold text-white mb-2">Logistics & Supply Fulfillment Centers</h3>
@@ -401,7 +388,7 @@ const Cctv = () => {
 
                 {/* Slide 3 */}
                 <div className="carousel-item position-relative ecrown-carousel-height">
-                  <img src="https://images.unsplash.com/photo-1542744094-3a31f103e35f?auto=format&fit=crop&w=1200&q=80" className="d-block w-100 h-100 object-fit-cover" alt="Data Core Infrastructure Server Vault" />
+                  <img src="https://thumbs.dreamstime.com/z/hallway-data-servers-complex-cabling-secure-cloud-infrastructure-center-server-room-demonstrating-network-crucial-393910452.jpg?ct=jpeg" className="d-block w-100 h-100 object-fit-cover" alt="Data Core Infrastructure Server Vault" />
                   <div className="ecrown-carousel-overlay">
                     <div className="text-center px-4">
                       <h3 className="fw-bold text-white mb-2">Data Server Core Vault Infrastructure</h3>

@@ -5,48 +5,48 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const About = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+  // const [isAuthorized, setIsAuthorized] = useState(false);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    const sessionRaw = localStorage.getItem('authSession');
-    const userDataRaw = localStorage.getItem('userData');
+  // useEffect(() => {
+  //   const sessionRaw = localStorage.getItem('authSession');
+  //   const userDataRaw = localStorage.getItem('userData');
 
-    const isValidSession = () => {
-      if (!sessionRaw || sessionRaw === 'null' || sessionRaw === 'undefined') return false;
-      if (!userDataRaw || userDataRaw === 'null' || userDataRaw === 'undefined') return false;
-      try {
-        const session = JSON.parse(sessionRaw);
-        const user = JSON.parse(userDataRaw);
-        return (
-          session &&
-          user &&
-          session.loggedIn === true &&
-          typeof session.token === 'string' &&
-          session.token.length > 0 &&
-          typeof user.email === 'string' &&
-          user.email.length > 0 &&
-          session.email === user.email
-        );
-      } catch {
-        return false;
-      }
-    };
+  //   const isValidSession = () => {
+  //     if (!sessionRaw || sessionRaw === 'null' || sessionRaw === 'undefined') return false;
+  //     if (!userDataRaw || userDataRaw === 'null' || userDataRaw === 'undefined') return false;
+  //     try {
+  //       const session = JSON.parse(sessionRaw);
+  //       const user = JSON.parse(userDataRaw);
+  //       return (
+  //         session &&
+  //         user &&
+  //         session.loggedIn === true &&
+  //         typeof session.token === 'string' &&
+  //         session.token.length > 0 &&
+  //         typeof user.email === 'string' &&
+  //         user.email.length > 0 &&
+  //         session.email === user.email
+  //       );
+  //     } catch {
+  //       return false;
+  //     }
+  //   };
 
-    if (!isValidSession()) {
-      localStorage.removeItem('authSession');
-      navigate('/error', { replace: true });
-      return;
-    }
+  //   if (!isValidSession()) {
+  //     localStorage.removeItem('authSession');
+  //     navigate('/error', { replace: true });
+  //     return;
+  //   }
 
-    setIsAuthorized(true);
-    setIsLoading(false);
-  }, [navigate]);
+  //   setIsAuthorized(true);
+  //   setIsLoading(false);
+  // }, [navigate]);
 
-  if (isLoading || !isAuthorized) {
-    return null; // Absolute white screen protection while checking
-  }
+  // if (isLoading || !isAuthorized) {
+  //   return null; // Absolute white screen protection while checking
+  // }
 
   return (
     <>
@@ -158,7 +158,7 @@ const About = () => {
                   icon: <Lucide.Network size={24} />,
                   title: "Low Voltage Structured Cabling",
                   desc: "High-density multi-gigabit throughput backbones mapped seamlessly to structural specifications.",
-                  image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=600"
+                  image: "https://accutechcom.com/wp-content/uploads/2025/05/low-voltage-structured-cabling.jpg.webp"
                 },
                 {
                   icon: <Lucide.CreditCard size={24} />,
@@ -170,25 +170,25 @@ const About = () => {
                   icon: <Lucide.ScanBarcode size={24} />,
                   title: "Self-Checkout",
                   desc: "Automated kiosk network integration blueprints designed for optimal localized interface latency.",
-                  image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=600"
+                  image: "https://cdn.prod.website-files.com/6863afe185d095220c05f20b/68d2441cf008d5bbd19c0cdb_AI-powered_self_checkout-p-500.jpg"
                 },
                 {
                   icon: <Lucide.Radio size={24} />,
                   title: "Satellite Networking",
                   desc: "Remote receiver configurations and terminal alignment layouts ensuring uninterrupted workspace uplinks.",
-                  image: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=600"
+                  image: "https://satelliteworldtoday.com/wp-content/uploads/2026/03/shutterstock_2703175175-2048x1152.jpg"
                 },
                 {
                   icon: <Lucide.Server size={24} />,
                   title: "Server/Storage",
                   desc: "Mainframe rack infrastructure configuration, load-balanced topologies, and server data arrays.",
-                  image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600"
+                  image: "https://www.aceongroup.com/wp-content/uploads/2025/11/AdobeStock_87909563.jpg"
                 },
                 {
                   icon: <Lucide.Wifi size={24} />,
                   title: "Wireless Networking",
                   desc: "High-density enterprise access point configurations delivering uniform multi-node saturation grids.",
-                  image: "https://images.unsplash.com/photo-1620283085439-39620a1e21c4?q=80&w=600"
+                  image: "https://cdn.shopify.com/s/files/1/0106/6339/5391/files/1024x576-2_8d4af4f6-132e-4226-9653-ae51ed1e9d46_1024x1024.jpg?v=1669860558"
                 }
               ].map((rosterItem, index) => (
                 <div key={index} className="col-md-6 col-lg-4">

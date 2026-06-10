@@ -3,29 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
 import Navbar from '../components/Navbar';
+import Dash from '../components/Dash';
 
 const Pos = () => {
-  const navigate = useNavigate();
-  const [authStatus, setAuthStatus] = useState('loading');
-
-  useEffect(() => {
-    const session = localStorage.getItem('authSession');
-    if (!session) {
-      setAuthStatus('unauthorized');
-      navigate('/error');
-    } else {
-      setAuthStatus('authorized');
-    }
-  }, [navigate]);
-
-  if (authStatus === 'loading') return null;
-  if (authStatus === 'unauthorized') return null;
+  
 
   return (
     <>
       <Navbar />
       <div className="bg-white min-vh-100 position-relative pb-5" style={{ fontFamily: "'Inter', system-ui, -apple-system, sans-serif", color: '#0f172a', overflowX: 'hidden' }}>
-
+        <Dash/>
         {/* SECTION 2: HERO SOLUTION INTRODUCTION */}
         <section className="position-relative text-white py-5 px-4 overflow-hidden d-flex align-items-center" style={{ background: 'linear-gradient(135deg, #020617 0%, #1e3a8a 50%, #2563eb 100%)', minHeight: '75vh' }}>
           <div className="position-absolute" style={{ right: '-10%', bottom: '-20%', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%)', borderRadius: '50%' }}></div>
@@ -98,7 +85,7 @@ const Pos = () => {
                 title: 'Help Businesses Manage Transactions',
                 desc: 'We map highly encrypted transaction gateway pipelines that help store management analyze daily sales graphs, track profits, and securely log electronic funds transfers.',
                 icon: '🛡️',
-                img: 'https://images.unsplash.com/photo-1563013544-824ae1d704d3?auto=format&fit=crop&w=400&q=80'
+                img: 'https://vyaparapp.in/v/z/wp-content/uploads/2025/02/What-Is-Business-Transaction.jpg'
               }
             ].map((feature, idx) => (
               <div key={idx} className="col-md-6 col-lg-3 mb-4 animate-fade-in" style={{ transitionDelay: `${idx * 0.1}s` }}>
@@ -137,7 +124,7 @@ const Pos = () => {
 
             <div className="row g-4 match-height">
               {[
-                { title: 'Smart Inventory Loops', desc: 'Real-time asset tracking with automated stock level alerts and visual product shelf catalog configurations.', icon: '📦', img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80' },
+                { title: 'Smart Inventory Loops', desc: 'Real-time asset tracking with automated stock level alerts and visual product shelf catalog configurations.', icon: '📦', img: 'https://www.tracelink.com/sites/default/files/styles/vertical_drawer_desktop_600px_x_336px_/public/2024-02/Wholesale-Distributor1.png.webp?itok=4FFnYu2k' },
                 { title: 'CRM & Customer Loyalty', desc: 'Maintain client database registries on checkout systems to deploy personalized discount points and reward mechanisms.', icon: '👥', img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=80' },
                 { title: 'Workforce Performance Logs', desc: 'Track cashier shifts, balance logbooks per attendant, and optimize operator productivity straight through the terminal.', icon: '⏰', img: 'https://images.unsplash.com/photo-1521898284481-a5ec348cb555?auto=format&fit=crop&w=400&q=80' }
               ].map((module, idx) => (
@@ -261,12 +248,12 @@ const Pos = () => {
               {
                 title: 'Schools',
                 desc: 'Educational frameworks leverage terminal networks to execute swift book registry logging, automated fee collection kiosks, and integrated meal counter point distributions.',
-                img: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=400&q=80'
+                img: 'https://articles.unishanoi.org/wp-content/uploads/2025/04/positive-learning-environment-unishanoi-5.jpg'
               },
               {
                 title: 'Banks',
                 desc: 'Financial houses necessitate highly secure processing pipelines to execute fast local money verification runs, client tracking logs, and physical document processing.',
-                img: 'https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=400&q=80'
+                img: 'https://cdn.guardian.ng/wp-content/uploads/2020/03/banks-in-nigeria.jpg'
               },
               {
                 title: 'Hotels',
@@ -276,7 +263,7 @@ const Pos = () => {
               {
                 title: 'Supermarkets',
                 desc: 'High-volume commercial environments call for continuous conveyor terminal arrays, rapid hardware barcode runs, and localized transaction tracking systems.',
-                img: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=400&q=80'
+                img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT77_d7bt9q21JgUVWkKjIFkbftl8gL3ykVvQ&s'
               }
             ].map((segment, idx) => (
               <div key={idx} className="col-xl-4 col-md-6 mb-4 animate-fade-in">

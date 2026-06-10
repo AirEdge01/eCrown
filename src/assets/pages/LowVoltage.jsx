@@ -1,701 +1,422 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Cpu, Wifi, Video, Bell, PhoneCall, Layers, CheckCircle2, FileText, Calendar, Eye } from 'lucide-react';
+import React from 'react';
+import Footer from "../components/Footer";
+import Button from "../components/Button";
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import Button from '../components/Button';
+import Dash from '../components/Dash';
 
-const LowVoltageService = () => {
+const stats = [
+  { val: "500+", label: "DEPLOYED SITES" },
+  { val: "99.9%", label: "NETWORK UPTIME" },
+  { val: "15+", label: "YEARS EXP" },
+  { val: "24/7", label: "NOC OPERATIONS" }
+];
 
-  const navigate = useNavigate();
-  const [authStatus, setAuthStatus] = useState('loading');
-
-  useEffect(() => {
-    const session = localStorage.getItem('authSession');
-    if (!session) {
-      setAuthStatus('unauthorized');
-      navigate('/error');
-    } else {
-      setAuthStatus('authorized');
-    }
-  }, [navigate]);
-
-  if (authStatus === 'loading') return null;
-  if (authStatus === 'unauthorized') return null;
-
- 
+const LowVoltage = () => {
   return (
     <>
-      <Navbar />
-      <div className="modern-low-voltage-viewport min-vh-100 position-relative pb-5">
+      
+      <Navbar/>
+      <div className="viewport-root">
+        <Dash/>
+        {/* Flyer Themed Backdrops */}
+        <div className="ambient-glow" style={{ top: '-10%', left: '-5%', background: '#003399' }}></div>
+        <div className="ambient-glow" style={{ bottom: '15%', right: '-5%', background: '#2563eb' }}></div>
 
-        <div className="ambient-blur-glow top-left-light"></div>
-        <div className="ambient-blur-glow bottom-right-light"></div>
+        {/* ── HERO SECTION ── */}
+        <section className="hero-wrap">
+          <div className="cyber-grid"></div>
+          <div className="container" style={{ position: 'relative', zIndex: 2, padding: '0 24px', maxWidth: '900px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            
+            <div className="flyer-badge-pill">
+              <span className="pulse-dot"></span> INSTALLATION SERVICES
+            </div>
 
-        {/* 2. HERO IMMERSIVE BACKBONE BLOCK */}
-        <section className="position-relative text-white py-4 py-md-5 px-3 px-md-4 overflow-hidden d-flex align-items-center hero-sub-layer">
-          <div className="cyber-grid-pattern"></div>
-          <div className="container py-4 py-md-5 position-relative z-index-2">
-            <div className="row align-items-center g-4 g-lg-5">
-              <div className="col-lg-7 text-center text-lg-start">
-                <span className="badge-modern-pill mb-3 d-inline-block text-uppercase">
-                  ⚡ Integrated Infrastructure Architecture
-                </span>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)', fontWeight: 900, lineHeight: 1.1, marginBottom: '24px', letterSpacing: '-0.5px' }}>
+              Low Voltage Runs & <br/>
+              <span className="text-brand-gradient">Structured Infrastructure</span>
+            </h1>
+            
+            <p style={{ color: 'rgba(255, 255, 255, 0.75)', fontSize: 'clamp(1.05rem, 2vw, 1.25rem)', marginBottom: '40px', lineHeight: 1.7, maxWidth: '720px' }}>
+              eCROWN Technologies O₂ delivers precision low-voltage pathways and enterprise cabling runs engineered for maximum structural durability. Excellence at its peak.
+            </p>
 
-                <h2 className="display-5 display-4-md fw-black mt-2 mb-1 tracking-tight text-white leading-tight">
-                  eCROWN Low-Voltage <br />
-                  <span className="text-gradient-cyan">Structured Runs</span>
-                </h2>
-                <h3 className="h6 h5-md fw-bold text-info tracking-wider text-uppercase mb-4">
-                  ...excellence at its peak.
-                </h3>
-
-                <p className="text-high-contrast lead mb-4 mb-md-5 fw-medium">
-                  Engineering premium low-voltage structured cabling, fiber backbones, and secure inter-closet networks for scalable, high-performance operations.
-                </p>
-
-                <div>
-                  <a href="#consultation-form" className="btn btn-premium-cyan px-4 px-md-5 py-3 rounded-pill fw-bold text-uppercase shadow-lg d-inline-flex align-items-center gap-2 text-wrap-none">
-                    <Calendar size={18} /> Request Free Consultation
-                  </a>
-                </div>
-              </div>
-
-              {/* SYSTEM HARDWARE TELEMETRY LIVE SECTION */}
-              <div className="col-lg-5">
-                <div className="video-card-wrapper p-2 rounded-4 border border-white border-opacity-10 shadow-2xl position-relative">
-                  <div className="ratio ratio-16x9 rounded-3 overflow-hidden telemetry-live-fallback d-flex flex-column justify-content-center align-items-center p-3 text-center">
-                    <div className="telemetry-grid-overlay"></div>
-                    <Cpu size={40} className="text-info mb-2 pulse-animation position-relative z-1" />
-                    <div className="text-white fw-bold tracking-wide position-relative z-1 low-voltage-txt-shadow mb-1">HARDWARE NODE ACTIVE</div>
-                    <div className="text-info small tracking-widest font-monospace position-relative z-1" style={{ fontSize: '11px' }}>ERR_LOSS: 0.002dB  SIG_STR: 99.8%</div>
-                  </div>
-                  <div className="video-status-overlay d-flex align-items-center gap-2 px-3 py-1 rounded-pill position-absolute top-3 start-3">
-                    <span className="live-pulse-dot"></span>
-                    <span className="text-uppercase fw-bold text-white tracking-widest" style={{ fontSize: '9px' }}>SYSTEM HARDWARE TELEMETRY LIVE</span>
-                  </div>
-                </div>
-              </div>
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <a href="#low-voltage-specs" className="btn-flyer-primary">Initialize Infrastructure Deployment</a>
             </div>
           </div>
         </section>
 
-        {/* 3. CORE FIELD TECHNICAL SERVICES */}
-        <section className="container my-4 my-md-5 pt-3 position-relative z-index-3">
-          <div className="bg-glass-card rounded-4 p-3 p-md-5 border border-white border-opacity-10 shadow-xl">
-            <div className="row g-4 align-items-center">
-
-              <div className="col-lg-6">
-                <span className="text-info text-uppercase fw-bold small tracking-wider mb-2 d-block">HARDWARE SUBSYSTEM ARCHITECTURE</span>
-                <h3 className="fw-black text-white h2 mb-3 tracking-tight">Low Voltage Runs</h3>
-
-                <div className="alert-concept-box p-3 rounded-3 mb-4 border-start border-3 border-info">
-                  <p className="text-high-contrast small mb-0 fw-medium">
-                    This architecture involves running special distribution cables engineered to transmit high-density data signals using ultra-low, completely safe electrical power levels.
-                  </p>
-                </div>
-
-                <div className="row g-3">
-                  <div className="col-sm-6">
-                    <div className="d-flex align-items-start gap-3 p-3 rounded bg-white bg-opacity-5 border border-white border-opacity-10 grid-item-hover h-100">
-                      <Layers size={20} className="text-info mt-1 flex-shrink-0" />
-                      <div>
-                        <h6 className="text-white fw-bold mb-1">Concealed Engineering</h6>
-                        <p className="small text-high-contrast mb-0">Cables are completely hidden and neatly routed inside structural wall framing or overhead drop ceilings.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-sm-6">
-                    <div className="d-flex align-items-start gap-3 p-3 rounded bg-white bg-opacity-5 border border-white border-opacity-10 grid-item-hover h-100">
-                      <CheckCircle2 size={20} className="text-success mt-1 flex-shrink-0" />
-                      <div>
-                        <h6 className="text-white fw-bold mb-1">Operational Safety</h6>
-                        <p className="small text-high-contrast mb-0">Low electrical power configurations systematically lower energy hazards and cross-talk interference.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-6">
-                <div className="p-3 p-md-4 rounded-3 border border-white border-opacity-10 bg-deep-slate-panel shadow-inner">
-                  <h5 className="text-white fw-bold mb-4 tracking-tight d-flex align-items-center gap-2">
-                    <Cpu size={18} className="text-info" /> Systems Deployed & Configured:
-                  </h5>
-                  <div className="d-flex flex-column gap-3">
-
-                    <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between p-3 rounded bg-dark bg-opacity-60 border-start border-3 border-info row-hover-transition gap-2">
-                      <div className="d-flex align-items-center gap-3">
-                        <div className="icon-wrapper bg-info bg-opacity-20 text-info shadow-sm"><Wifi size={16} /></div>
-                        <span className="text-white small fw-bold">High-Speed Networking Systems & Internet</span>
-                      </div>
-                      <span className="badge bg-info text-dark text-uppercase px-2 py-1" style={{ fontSize: '9px', fontWeight: '800' }}>LAN CORE</span>
-                    </div>
-
-                    <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between p-3 rounded bg-dark bg-opacity-60 border-start border-3 border-primary row-hover-transition gap-2">
-                      <div className="d-flex align-items-center gap-3">
-                        <div className="icon-wrapper bg-primary bg-opacity-20 text-primary shadow-sm"><Video size={16} /></div>
-                        <span className="text-white small fw-bold">Smart Surveillance Cameras & Closed-Circuit TV</span>
-                      </div>
-                      <span className="badge bg-primary text-white text-uppercase px-2 py-1" style={{ fontSize: '9px', fontWeight: '800' }}>CCTV HUB</span>
-                    </div>
-
-                    <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between p-3 rounded bg-dark bg-opacity-60 border-start border-3 border-warning gap-2">
-                      <div className="d-flex align-items-center gap-3">
-                        <div className="icon-wrapper bg-warning bg-opacity-20 text-warning shadow-sm"><Bell size={16} /></div>
-                        <span className="text-white small fw-bold">Intelligent Hazard Alarms & Signal Triggers</span>
-                      </div>
-                      <span className="badge bg-warning text-dark text-uppercase px-2 py-1" style={{ fontSize: '9px', fontWeight: '800' }}>SAFETY SYS</span>
-                    </div>
-
-                    <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between p-3 rounded bg-dark bg-opacity-60 border-start border-3 border-success gap-2">
-                      <div className="d-flex align-items-center gap-3">
-                        <div className="icon-wrapper bg-success bg-opacity-20 text-success shadow-sm"><PhoneCall size={16} /></div>
-                        <span className="text-white small fw-bold">Corporate Telephones & Intercom Routing Networks</span>
-                      </div>
-                      <span className="badge bg-success text-white text-uppercase px-2 py-1" style={{ fontSize: '9px', fontWeight: '800' }}>VOIP COMM</span>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
+        {/* Brand Philosophy Bar */}
+        <section style={{ background: '#020617', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '24px 0' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap', color: 'rgba(255,255,255,0.4)', fontSize: '12px', fontWeight: '700', letterSpacing: '4px' }}>
+            <span>TECHNOLOGY</span> • <span>INNOVATION</span> • <span>EXCELLENCE</span>
           </div>
         </section>
 
-        {/* 4. TECHNICAL SPECIFICATIONS BREAKDOWN GRID */}
-        <main className="container-fluid px-3 px-md-4 position-relative z-index-3 mt-5">
-          <div className="text-center mb-4 mb-md-5">
-            <span className="text-info text-uppercase fw-bold small tracking-widest">DEPLOYMENT SPECIFICATIONS MATRIX</span>
-            <h3 className="fw-black text-white h2 mt-2 tracking-tight">Technical Implementation Parameters</h3>
-          </div>
-
-          <div className="row g-4">
-            <div className="col-sm-6 col-xl-3">
-              <div className="card h-100 border-0 bg-glass-card rounded-4 overflow-hidden shadow-sm">
-                <div className="card-img-wrapper position-relative">
-                  <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=500&q=80" className="card-img-top object-fit-cover" style={{ height: '170px' }} alt="Category 6A Cables" />
-                  <div className="card-img-overlay-shade"></div>
-                </div>
-                <div className="card-body p-3 p-md-4 text-white d-flex flex-column justify-content-between">
-                  <div>
-                    <h5 className="fw-bold mb-2 tracking-tight text-info h6-mobile-fix">Category 6A / 7 Distribution</h5>
-                    <p className="text-high-contrast-body small mb-4">
-                      Structured copper drop runs terminated inside protective closet pathways. Handled with precision twist-ratio controls to isolate internal high-gigabit workstation endpoints.
-                    </p>
-                  </div>
-                  <div className="table-responsive w-100 m-0 p-0">
-                    <table className="table table-sm table-borderless table-dark-matrix small mb-0 rounded-3 overflow-hidden w-100">
-                      <thead>
-                        <tr><th className="p-2">Service Type</th><th className="p-2 text-end">Scope</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td className="p-2">New Infra</td><td className="p-2 text-end text-cyan-solid fw-bold">300-500 Drops</td></tr>
-                        <tr><td className="p-2">Upgrades</td><td className="p-2 text-end text-cyan-solid fw-bold">100-300 Drops</td></tr>
-                        <tr><td className="p-2">SLA Cert</td><td className="p-2 text-end text-cyan-solid fw-bold">Full Audit</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+        {/* Metrics Bar */}
+        <section style={{ background: 'rgba(255, 255, 255, 0.01)', borderBottom: '1px solid rgba(255, 255, 255, 0.04)', padding: '50px 0' }}>
+          <div className="stats-strip">
+            {stats.map((s, i) => (
+              <div key={i} style={{ padding: '20px', borderRight: i < stats.length - 1 ? '1px solid rgba(255, 255, 255, 0.06)' : 'none' }}>
+                <div style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 900, color: '#2563eb' }}>{s.val}</div>
+                <div style={{ fontSize: '11px', color: '#94a3b8', letterSpacing: '2px', fontWeight: '700', marginTop: '6px' }}>{s.label}</div>
               </div>
-            </div>
-
-            <div className="col-sm-6 col-xl-3">
-              <div className="card h-100 border-0 bg-glass-card rounded-4 overflow-hidden shadow-sm">
-                <div className="card-img-wrapper position-relative">
-                  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=500&q=80" className="card-img-top object-fit-cover" style={{ height: '170px' }} alt="Optical Closets" />
-                  <div className="card-img-overlay-shade"></div>
-                </div>
-                <div className="card-body p-3 p-md-4 text-white d-flex flex-column justify-content-between">
-                  <div>
-                    <h5 className="fw-bold mb-2 tracking-tight text-info h6-mobile-fix">Multi-Floor Optical Trunks</h5>
-                    <p className="text-high-contrast-body small mb-4">
-                      High-speed multi-mode and single-mode optical fiber infrastructures. Links Main Closets (MDF) to Intermediate Closets (IDF) across campus sectors with zero signal drop-off.
-                    </p>
-                  </div>
-                  <div className="table-responsive w-100 m-0 p-0">
-                    <table className="table table-sm table-borderless table-dark-matrix small mb-0 rounded-3 overflow-hidden w-100">
-                      <thead>
-                        <tr><th className="p-2">Service Type</th><th className="p-2 text-end">Scope</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td className="p-2">New Infra</td><td className="p-2 text-end text-cyan-solid fw-bold">Multi-Core</td></tr>
-                        <tr><td className="p-2">Upgrades</td><td className="p-2 text-end text-cyan-solid fw-bold">Backbone Relays</td></tr>
-                        <tr><td className="p-2">SLA Cert</td><td className="p-2 text-end text-cyan-solid fw-bold">0.02dB Loss</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-sm-6 col-xl-3">
-              <div className="card h-100 border-0 bg-glass-card rounded-4 overflow-hidden shadow-sm">
-                <div className="card-img-wrapper position-relative">
-                  <img src="https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=500&q=80" className="card-img-top object-fit-cover" style={{ height: '170px' }} alt="Fusion Splicing" />
-                  <div className="card-img-overlay-shade"></div>
-                </div>
-                <div className="card-body p-3 p-md-4 text-white d-flex flex-column justify-content-between">
-                  <div>
-                    <h5 className="fw-bold mb-2 tracking-tight text-info h6-mobile-fix">Fusion Splicing & Assembly</h5>
-                    <p className="text-high-contrast-body small mb-4">
-                      Precision core-alignment electric arc splicing. Eradicates reflection interference across glass connections and seals fiber joints inside protective multi-port dome enclosures.
-                    </p>
-                  </div>
-                  <div className="table-responsive w-100 m-0 p-0">
-                    <table className="table table-sm table-borderless table-dark-matrix small mb-0 rounded-3 overflow-hidden w-100">
-                      <thead>
-                        <tr><th className="p-2">Service Type</th><th className="p-2 text-end">Scope</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td className="p-2">New Splicing</td><td className="p-2 text-end text-cyan-solid fw-bold">Core Align</td></tr>
-                        <tr><td className="p-2">Maintenance</td><td className="p-2 text-end text-cyan-solid fw-bold">OTDR Break</td></tr>
-                        <tr><td className="p-2">Enclosures</td><td className="p-2 text-end text-cyan-solid fw-bold">Pigtail Assembly</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-sm-6 col-xl-3">
-              <div className="card h-100 border-0 bg-glass-card rounded-4 overflow-hidden shadow-sm">
-                <div className="card-img-wrapper position-relative">
-                  <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=500&q=80" className="card-img-top object-fit-cover" style={{ height: '170px' }} alt="Pathways Hooks" />
-                  <div className="card-img-overlay-shade"></div>
-                </div>
-                <div className="card-body p-3 p-md-4 text-white d-flex flex-column justify-content-between">
-                  <div>
-                    <h5 className="fw-bold mb-2 tracking-tight text-info h6-mobile-fix">Pathways & J-Hooks</h5>
-                    <p className="text-high-contrast-body small mb-4">
-                      Heavy-duty systematic grid pathways layout. Cables are neatly supported via structural steel loops and wire baskets, keeping low-voltage runs isolated from noise power lines.
-                    </p>
-                  </div>
-                  <div className="table-responsive w-100 m-0 p-0">
-                    <table className="table table-sm table-borderless table-dark-matrix small mb-0 rounded-3 overflow-hidden w-100">
-                      <thead>
-                        <tr><th className="p-2">Service Type</th><th className="p-2 text-end">Scope</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td className="p-2">Basket Run</td><td className="p-2 text-end text-cyan-solid fw-bold">Metallic Tray</td></tr>
-                        <tr><td className="p-2">J-Hook Dist</td><td className="p-2 text-end text-cyan-solid fw-bold">Fire-Rated Brk</td></tr>
-                        <tr><td className="p-2">Penetration</td><td className="p-2 text-end text-cyan-solid fw-bold">UL Firestop</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-
-        {/* 5. CCTV TERMINATION DIAGRAM SECTION */}
-        <section className="container my-5 pt-4 position-relative z-index-3">
-          <div className="bg-glass-card rounded-4 p-3 p-md-5 border border-white border-opacity-10 shadow-xl">
-            <div className="row align-items-center g-4 g-lg-5">
-              <div className="col-lg-6">
-                <div className="video-card-wrapper p-2 rounded-4 border border-white border-opacity-10 shadow-2xl position-relative">
-                  <div className="ratio ratio-16x9 rounded-3 overflow-hidden cctv-termination-fallback d-flex flex-column justify-content-center align-items-center p-3 text-center">
-                    <div className="cctv-grid-overlay"></div>
-                    <Video size={42} className="text-primary mb-2 pulse-animation position-relative z-1" />
-                    <div className="text-white fw-black tracking-wide position-relative z-1 low-voltage-txt-shadow mb-1" style={{ letterSpacing: '0.5px' }}>Central Command Network Matrix</div>
-                    <div className="text-primary small tracking-widest font-monospace position-relative z-1 fw-bold" style={{ fontSize: '11px' }}>CAM_01 to CAM_64 // TERMINATION OK</div>
-                  </div>
-                  <div className="video-status-overlay d-flex align-items-center gap-2 px-3 py-1 rounded-pill position-absolute bottom-3 end-3">
-                    <span className="live-pulse-dot bg-info"></span>
-                    <span className="text-uppercase fw-bold text-white tracking-widest" style={{ fontSize: '9px' }}>CCTV TERMINATION DIAGRAM</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-6 text-white">
-                <span className="text-info text-uppercase fw-bold small tracking-wider mb-2 d-block">FIELD APPLICATION EXAMPLE</span>
-                <h4 className="fw-black text-white h3 mb-3 tracking-tight">Real-world Project Implementation</h4>
-                <p className="text-high-contrast mb-4">
-                  Consider a complete structural deployment across a modern high-rise workspace: our engineers deploy a fully cohesive setup, connecting smart AI-monitored CCTV cameras through concealed low-voltage lines across every section of the building directly into a single centralized operational command console.
-                </p>
-                <div className="p-3 rounded bg-dark bg-opacity-40 border border-white border-opacity-5 d-flex align-items-center gap-3">
-                  <Eye size={24} className="text-info flex-shrink-0" />
-                  <span className="small fw-bold text-white">Guarantees zero exposed cabling, optimal aesthetic integration, and safe hardware execution.</span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* 6. DEPLOYMENT TOPOLOGY DIAGRAM MATRIX */}
-        <section className="container my-5 pt-3">
-          <div className="text-center mb-4 mb-md-5">
-            <span className="text-info text-uppercase fw-bold small tracking-widest">// ARCHITECTURE SYSTEMS</span>
-            <h2 className="fw-black text-white mt-2 tracking-tight">Deployment Topology</h2>
-            <p className="text-high-contrast mx-auto small text-center">
-              Low-voltage plant layouts linking station drop cabling, fiber backbones, and inter-closet networks for scalable, high-performance operations.
+        {/* ── LOW VOLTAGE RUNS SHOWCASE SECTION ── */}
+        <section id="low-voltage-specs" style={{ padding: '100px 24px', maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '90px' }}>
+            <span style={{ color: '#2563eb', fontSize: '11px', fontWeight: '800', letterSpacing: '3px', textTransform: 'uppercase' }}>TECHNICAL SHOWCASE</span>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 900, marginTop: '8px' }}>Low Voltage Run Engineering</h2>
+            <p style={{ color: '#94a3b8', maxWidth: '600px', margin: '12px auto 0 auto', fontSize: '15px' }}>
+              How eCROWN Technologies O₂ designs, distributes, and isolates high-performance cabling paths across complex commercial landscapes.
             </p>
           </div>
 
-          <div className="row align-items-center bg-glass-card rounded-4 border border-white border-opacity-10 p-3 p-md-4 mx-1 g-4">
-            <div className="col-md-4 text-center border-md-end-custom">
-              <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=500&q=80" className="img-fluid rounded-3 mb-3 border border-white border-opacity-10 shadow" style={{ maxHeight: '180px', width: '100%', objectFit: 'cover' }} alt="Data Racks Network" />
-              <h6 className="fw-bold text-white mb-1">MDF Frame Hub</h6>
-              <p className="text-high-contrast small px-2 mb-0">Centralized server core panel array that handles core incoming data feeds and distributes structured connections to local closets.</p>
+          {/* Block 1: Pathway & Drop Architecture */}
+          <div className="showcase-row">
+            <div className="showcase-text-block">
+              <span className="showcase-tag">01 / PATHWAY ROUTING</span>
+              <h3 className="showcase-title">Precision Backbone Drops & Containment</h3>
+              <p className="showcase-desc">
+                Every low voltage run follows structured pathways mapped out to minimize interference and structural stress. We deploy heavy-duty J-hook configurations, custom data trays, and secure conduit routing that guarantees clean line segregation away from high-voltage electrical lines.
+              </p>
+              <ul className="showcase-spec-list">
+                <li>Independent ceiling-support grid suspensions</li>
+                <li>Strategic bend radius calculation to eliminate data loss</li>
+                <li>Fire-stop penetration sealing across all wall drops</li>
+              </ul>
             </div>
-
-            <div className="col-md-4 text-center border-md-end-custom">
-              <div className="p-3 my-2 border border-white border-opacity-10 rounded bg-dark bg-opacity-40 small mx-auto text-start" style={{ maxWidth: '280px' }}>
-                <div className="fw-bold text-info mb-2 text-center text-uppercase tracking-wider small">Low-Voltage Key Benefits</div>
-                <div className="mb-1 text-white fw-bold">✔️ Reduced Signal Attenuation</div>
-                <div className="mb-1 text-white fw-bold">✔️ Certified Fluke Performance Tests</div>
-                <div className="mb-1 text-white fw-bold">✔️ Neat, Combed Cable Dressings</div>
-                <div className="mb-0 text-white fw-bold">✔️ Full NEC Code Compliance</div>
-              </div>
+            <div className="showcase-image-block">
+              <img 
+                src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80" 
+                alt="Structured network data lines neatly bundled on ceiling cable trays" 
+                className="showcase-img"
+              />
             </div>
+          </div>
 
-            <div className="col-md-4 text-center">
-              <div className="table-responsive">
-                <table className="table table-sm table-borderless small mb-0 table-dark-matrix rounded-3 overflow-hidden">
-                  <thead>
-                    <tr>
-                      <th className="p-2">Media Parameter</th>
-                      <th className="p-2">Cat6A Copper</th>
-                      <th className="p-2">OS2 Fiber Core</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td className="p-2">Bandwidth Speed</td><td className="p-2 text-info fw-bold">10 Gbps Limit</td><td className="p-2 text-info fw-bold">100+ Gbps</td></tr>
-                    <tr><td className="p-2">Distance Run</td><td className="p-2 text-info fw-bold">90 Meters Max</td><td className="p-2 text-info fw-bold">Multi-Km Run</td></tr>
-                    <tr><td className="p-2">EMI Noise Reject</td><td className="p-2 text-info fw-bold">Twisted Shield</td><td className="p-2 text-info fw-bold">Total Light Iso</td></tr>
-                  </tbody>
-                </table>
-              </div>
+          {/* Block 2: High-Density Trunk Deployments */}
+          <div className="showcase-row reverse" style={{ direction: 'rtl' }}>
+            <div className="showcase-text-block" style={{ direction: 'ltr' }}>
+              <span className="showcase-tag">02 / CORE MEDIA BRIDGING</span>
+              <h3 className="showcase-title">Copper Trunk & Fiber Optic Engineering</h3>
+              <p className="showcase-desc">
+                We handle the high-throughput links that feed your enterprise hardware. From flawless Category 6 and 6A terminations powering point-of-sale systems and terminal gates, to multi-mode OM3/OM4 fiber optic channels provisioning server storage racks over infinite distances.
+              </p>
+              <ul className="showcase-spec-list">
+                <li>Certified CAT6 & CAT6A high-density performance runs</li>
+                <li>Multi-mode and single-mode optical fiber trunk paths</li>
+                <li>Zero-sag bundling with specialized hook-and-loop wraps</li>
+              </ul>
+            </div>
+            <div className="showcase-image-block">
+              <img 
+                src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" 
+                alt="Enterprise patch panel showing clean fiber optical connections with glowing indicator lights" 
+                className="showcase-img"
+              />
+            </div>
+          </div>
+
+          {/* Block 3: Verification & Compliance */}
+          <div className="showcase-row">
+            <div className="showcase-text-block">
+              <span className="showcase-tag">03 / PERFORMANCE TESTING</span>
+              <h3 className="showcase-title">End-to-End Node Diagnostic Validation</h3>
+              <p className="showcase-desc">
+                A cable run is only as good as its tested performance. Our certified infrastructure engineers run comprehensive diagnostic validation checks across all terminal paths to guarantee optimal bandwidth delivery and zero signal attenuation before final system handover.
+              </p>
+              <ul className="showcase-spec-list">
+                <li>Fluke DSX-8000 cross-talk and frequency certification</li>
+                <li>Clean alphanumeric designation on all faceplates and closets</li>
+                <li>As-built topology matrix mapping generated for IT desk teams</li>
+              </ul>
+            </div>
+            <div className="showcase-image-block">
+              <img 
+                src="https://bestusatools.com/wp-content/uploads/2025/12/Punch-Tool-Uses-in-Structured-Cabling-Installations-Guide.jpg" 
+                alt="Close up of technician verifying data patch bay connections using network diagnostic tool hardware" 
+                className="showcase-img"
+              />
             </div>
           </div>
         </section>
 
-        {/* 7. TRUSTED CORPORATE IMPLEMENTATIONS */}
-        <section className="py-5 my-5 bg-glass-card border-top border-bottom border-white border-opacity-10">
-          <div className="container">
-            <div className="text-center mb-5">
-              <h3 className="fw-black text-white mb-1 tracking-tight">Trusted Corporate Implementations</h3>
-              <p className="text-high-contrast small text-center">Low-voltage infrastructure installations deployed across premier commercial environments.</p>
-            </div>
-
-            <div id="carouselExampleSlidesOnly" className="carousel slide shadow-2xl rounded-4 overflow-hidden position-relative border border-white border-opacity-10" data-bs-ride="carousel" data-bs-interval="4000">
-              <div className="carousel-inner">
-                <div className="carousel-item active position-relative ecrown-img-frame-height">
-                  <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" className="d-block w-100 h-100 object-fit-cover" alt="Corporate Office Architecture" />
-                  <div className="ecrown-carousel-dark-mask">
-                    <div className="text-center px-3">
-                      <h4 className="fw-bold text-white mb-2 h5-mobile-fix">Finance Central Headquarters</h4>
-                      <span className="badge-modern-pill border-info text-info fw-bold">Cat6A Base Station Dropping</span>
-                    </div>
-                  </div>
+        {/* ── CENTRAL COMMAND NETWORK MATRIX ── */}
+        <section id="matrix" style={{ padding: '0 24px 80px', maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="sla-matrix-banner">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px', alignItems: 'center' }}>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <h3 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0 }}>
+                    Central Command Network Matrix
+                  </h3>
+                </div>
+                <div style={{ fontSize: '11px', color: '#00ff7f', fontWeight: '800', letterSpacing: '1.5px', marginBottom: '20px' }}>
+                  CAM_01 to CAM_64 // TERMINATION OK
+                </div>
+                
+                <div style={{ borderLeft: '2px solid #2563eb', paddingLeft: '16px', marginBottom: '20px' }}>
+                  <h4 style={{ fontSize: '11px', color: '#2563eb', fontWeight: '800', letterSpacing: '1.5px', textTransform: 'uppercase', margin: '0 0 4px 0' }}>
+                    CCTV Termination Diagram
+                  </h4>
+                  <h5 style={{ fontSize: '13px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>
+                    Field Application Example
+                  </h5>
                 </div>
 
-                <div className="carousel-item position-relative ecrown-img-frame-height">
-                  <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80" className="d-block w-100 h-100 object-fit-cover" alt="Industrial Warehouse Facilities" />
-                  <div className="ecrown-carousel-dark-mask">
-                    <div className="text-center px-3">
-                      <h4 className="fw-bold text-white mb-2 h5-mobile-fix">Industrial Fulfillment Centers</h4>
-                      <span className="badge-modern-pill border-info text-info fw-bold">Overhead Support Basket Trays</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="carousel-item position-relative ecrown-img-frame-height">
-                  <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" className="d-block w-100 h-100 object-fit-cover" alt="Data Center Ecosystems" />
-                  <div className="ecrown-carousel-dark-mask">
-                    <div className="text-center px-3">
-                      <h4 className="fw-bold text-white mb-2 h5-mobile-fix">High-Security Data Vaults</h4>
-                      <span className="badge-modern-pill border-info text-info fw-bold">Multi-Mode Fiber Backbone Runs</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 8. CONSULTATION INTEREST FORM */}
-        <section id="consultation-form" className="container my-5 position-relative z-index-3">
-          <div className="bg-glass-card text-white p-3 p-md-5 rounded-4 border border-white border-opacity-10 shadow-2xl">
-            <div className="row align-items-center g-4">
-              <div className="col-lg-7 text-center text-lg-start">
-                <span className="text-info text-uppercase fw-bold small tracking-wider mb-2 d-block">EXPERT INFRASTRUCTURE ASSISTANCE</span>
-                <h3 className="fw-black text-gradient-cyan mb-3 tracking-tight display-6">Ready to Engineer Your Structured Pathway Plan?</h3>
-                <p className="text-high-contrast small mb-0 fw-medium">
-                  Avoid performance lag, messy cables, and cross-talk interference. Contact our technical team today to request an on-site evaluation, detailed pathway diagrams, and an enterprise low-voltage installation estimate customized for your property layout.
+                <h6 style={{ fontSize: '15px', fontWeight: '700', color: '#ffffff', marginBottom: '10px' }}>
+                  Real-world Project Implementation
+                </h6>
+                <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: 1.65, margin: '0 0 20px 0' }}>
+                  Consider a complete structural deployment across a modern high-rise workspace: our engineers deploy a fully cohesive setup, connecting smart AI-monitored CCTV cameras through concealed low-voltage lines across every section of the building directly into a single centralized operational command console.
                 </p>
+                
+                <div style={{ background: 'rgba(0, 255, 127, 0.03)', border: '1px solid rgba(0, 255, 127, 0.15)', padding: '16px', borderRadius: '8px', color: '#00ff7f', fontSize: '13.5px', lineHeight: 1.5, fontWeight: '500' }}>
+                  Guarantees zero exposed cabling, optimal aesthetic integration, and safe hardware execution.
+                </div>
               </div>
 
-              <div className="col-lg-5">
-                <div className="bg-white text-dark p-3 p-md-4 rounded-3 shadow">
-                  <form onSubmit={(e) => e.preventDefault()}>
-                    <div className="mb-3">
-                      <label className="small fw-bold text-muted mb-1">Company Representative Name</label>
-                      <input type="text" className="form-control" placeholder="e.g. John Doe" required />
-                    </div>
-                    <div className="mb-3">
-                      <label className="small fw-bold text-muted mb-1">Corporate Email Address</label>
-                      <input type="email" className="form-control" placeholder="name@company.com" required />
-                    </div>
-                    <div className="mb-4">
-                      <label className="small fw-bold text-muted mb-1">Primary Infrastructure Scope</label>
-                      <select className="form-select text-muted small">
-                        <option>Category 6A / 7 Copper Station Drop Runs</option>
-                        <option>Multi-Floor Optical Fiber Core Backbones</option>
-                        <option>MDF / IDF Server Room Rack Remodeling</option>
-                        <option>On-Site System Fluke Certification Auditing</option>
-                      </select>
-                    </div>
-                    <button type="submit" className="btn btn-dark w-100 text-uppercase fw-bold py-2 small tracking-wider btn-hover-effect">
-                      Submit Request Form
-                    </button>
-                  </form>
-                </div>
+              <div>
+                <img 
+                  src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80" 
+                  alt="Modern dark operational control room tracking system data metrics" 
+                  className="matrix-image-frame"
+                />
               </div>
             </div>
           </div>
         </section>
 
-        {/* 9. PREMIUM SERVICE MAINTENANCE SLA BLOCK */}
-        <section className="container my-5 position-relative z-index-3">
-          <div className="bg-premium-sla-card rounded-4 p-4 border border-white border-opacity-10 shadow-2xl">
-            <div className="row g-4 align-items-center">
-
-              <div className="col-xl-8 col-lg-7">
-                <div className="d-flex flex-column flex-sm-row align-items-start gap-3">
-                  <div className="sla-badge-shield d-flex align-items-center gap-2 px-3 py-2 rounded-3 bg-info bg-opacity-10 border border-info border-opacity-20 flex-shrink-0">
-                    <ShieldCheck size={20} className="text-info pulse-animation" />
-                    <span className="small fw-black text-info tracking-wider text-uppercase">100% Certified</span>
-                  </div>
-                  <div>
-                    <h4 className="text-white h6 fw-bold mb-2 tracking-tight">
-                      System Verification Standard
-                    </h4>
-                    <p className="text-high-contrast-body small mb-0">
-                      All low-voltage cable plants deployed by <span className="text-info fw-bold">eCROWN Technologies</span> undergo strict validation routing. Every lifecycle deployment is completed alongside comprehensive Fluke performance analytical mapping sheets charting exact return loss parameters and path layout fields.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-xl-4 col-lg-5 text-lg-end">
-                <div className="d-flex flex-column gap-2">
-                  <button className="btn btn-premium-cyan fw-bold px-4 py-3 rounded-3 text-uppercase small tracking-wider d-inline-flex align-items-center justify-content-center gap-2 w-100 shadow-sm">
-                    <FileText size={16} /> Sync Infrastructure Ledger
-                  </button>
-                  <div className="text-center text-lg-end px-2">
-                    <span className="font-monospace text-muted" style={{ fontSize: '10px' }}>SECURE ACCESS CORE // PORT: 443</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+        {/* ── EXPERT ASSISTANCE SECTION ── */}
+        <section style={{ padding: '0 24px 120px', maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ background: 'linear-gradient(135deg, rgba(0, 51, 153, 0.15) 0%, rgba(2, 6, 23, 0.7) 100%)', border: '1px solid rgba(37, 99, 235, 0.25)', borderRadius: '20px', padding: '60px 40px', textAlign: 'center' }}>
+            <span style={{ color: '#2563eb', fontSize: '11px', fontWeight: '800', letterSpacing: '3px', textTransform: 'uppercase' }}>
+              EXPERT INFRASTRUCTURE ASSISTANCE
+            </span>
+            <h2 style={{ fontSize: '2.4rem', fontWeight: 900, marginTop: '12px', marginBottom: '16px' }}>
+              Ready to Engineer Your Structured Pathway Plan?
+            </h2>
+            <p style={{ color: '#94a3b8', maxWidth: '600px', margin: '0 auto 36px auto', fontSize: '15px', lineHeight: 1.6 }}>
+              Connect directly with our engineering technical desk to receive structural pathway reviews, precise load evaluations, and end-to-end framework calculations.
+            </p>
+            <a href="mailto:support@ecrown.com" className="btn-flyer-primary" style={{ display: 'inline-block' }}>
+              Contact System Architecture Desk
+            </a>
           </div>
         </section>
 
-        {/* Embedded CSS Module Engine */}
         <style>{`
-          .modern-low-voltage-viewport {
-            background-color: #040810;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            overflow-x: hidden;
+        .viewport-root {
+          background-color: #030712;
+          font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+          color: #ffffff;
+          overflow-x: hidden;
+        }
+
+        /* Ambient Flows using Flyer Brand Palette */
+        .ambient-glow {
+          position: fixed;
+          width: 600px; 
+          height: 600px;
+          border-radius: 50%;
+          filter: blur(140px);
+          opacity: 0.14;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        /* Hero Layout - Centered Engineering */
+        .hero-wrap {
+          position: relative;
+          min-height: 95vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          background: linear-gradient(155deg, rgba(3,7,18,0.96) 0%, rgba(0,51,153,0.15) 50%, rgba(3,7,18,0.98) 100%), 
+                      url('https://high-techprojectmanagement.com/wp-content/uploads/2025/04/Blog-Thumbnail-19-1024x669.png') center/cover no-repeat;
+        }
+        
+        .cyber-grid {
+          position: absolute;
+          inset: 0;
+          background-image: linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px), 
+                            linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+          background-size: 32px 32px;
+          pointer-events: none;
+        }
+
+        .flyer-badge-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(0, 51, 153, 0.15);
+          border: 1.5px solid #2563eb;
+          color: #ffffff;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 2px;
+          padding: 8px 20px;
+          border-radius: 50px;
+          margin: 0 auto 28px auto;
+          text-transform: uppercase;
+        }
+
+        .text-brand-gradient {
+          background: linear-gradient(135deg, #ffffff 30%, #2563eb 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .pulse-dot {
+          width: 8px; 
+          height: 8px;
+          background: #00ff7f;
+          border-radius: 50%;
+          display: inline-block;
+          animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+          0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(0,255,127,0.6); }
+          70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(0,255,127,0); }
+          100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(0,255,127,0); }
+        }
+
+        .btn-flyer-primary {
+          background: #003399;
+          color: #ffffff;
+          padding: 16px 36px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 14px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          transition: all 0.25s ease;
+        }
+        .btn-flyer-primary:hover {
+          background: #2563eb;
+          box-shadow: 0 0 25px rgba(37, 99, 235, 0.45);
+          transform: translateY(-1px);
+        }
+
+        .sla-matrix-banner {
+          background: linear-gradient(135deg, rgba(0, 51, 153, 0.12) 0%, rgba(3, 7, 18, 0.6) 100%);
+          border: 1px solid rgba(37, 99, 235, 0.25);
+          border-radius: 20px;
+          padding: 50px 45px;
+        }
+
+        /* Showcase Layout Classes */
+        .showcase-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+          margin-bottom: 100px;
+        }
+        @media (max-width: 768px) {
+          .showcase-row {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
           }
-          .ambient-blur-glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.12;
-            pointer-events: none;
+          .showcase-row.reverse {
+            direction: ltr;
           }
-          @media(min-width: 768px) {
-            .ambient-blur-glow { width: 500px; height: 500px; filter: blur(140px); }
+          .showcase-row.reverse .showcase-text-block {
+            order: 2;
           }
-          .top-left-light { top: -10%; left: -5%; background-color: #0d6efd; }
-          .bottom-right-light { bottom: 15%; right: -5%; background-color: #00ff7f; }
-          .bg-header-glass {
-            background: rgba(4, 8, 16, 0.9);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            z-index: 1060;
+          .showcase-row.reverse .showcase-image-block {
+            order: 1;
           }
-          .backdrop-blur { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-          .bg-glass-card {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-          }
-          .bg-premium-sla-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 240, 255, 0.12) !important;
-          }
-          .bg-deep-slate-panel { background: rgba(6, 12, 24, 0.85); }
-          .fw-black { font-weight: 900; }
-          .fw-extrabold { font-weight: 800; }
-          .brand-logo-sphere { width: 38px; height: 38px; font-size: 18px; }
-          @media(min-width: 768px) {
-            .brand-logo-sphere { width: 45px; height: 45px; font-size: 22px; }
-          }
-          .brand-tagline { font-size: 10px; margin-top: -2px; }
-          .text-gradient-cyan {
-            background: linear-gradient(135deg, #00ffff 0%, #0d6efd 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          }
-          .badge-modern-pill {
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            color: #00ffff;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            padding: 6px 12px;
-            border-radius: 30px;
-          }
-          .text-high-contrast { color: #ffffff !important; line-height: 1.65; opacity: 0.95; }
-          .text-high-contrast-body { color: #ffffff !important; line-height: 1.5; opacity: 0.9; }
-          .text-cyan-solid { color: #00ffff !important; }
-          .text-high-contrast-tag { font-size: 11px; color: #00ffff; letter-spacing: 3px; }
-          .low-voltage-txt-shadow { text-shadow: 0px 2px 8px rgba(0,0,0,0.9); }
-          .hero-sub-layer {
-            background: linear-gradient(145deg, #040810 0%, #091a36 100%);
-            min-height: 60vh;
-          }
-          .cyber-grid-pattern {
-            position: absolute;
-            inset: 0;
-            opacity: 0.03;
-            pointer-events: none;
-            background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
-            background-size: 24px 24px;
-          }
-          .telemetry-live-fallback {
-            background: linear-gradient(135deg, #07152e 0%, #0b0f19 100%);
-            border: 1px dashed rgba(0, 240, 255, 0.25);
-            min-height: 200px;
-            position: relative;
-          }
-          .cctv-termination-fallback {
-            background: linear-gradient(135deg, #05203a 0%, #050b14 100%);
-            border: 1px dashed rgba(13, 110, 253, 0.3);
-            min-height: 200px;
-            position: relative;
-          }
-          .telemetry-grid-overlay, .cctv-grid-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(rgba(18, 53, 114, 0.1) 50%, transparent 50%), linear-gradient(90deg, rgba(18, 53, 114, 0.1) 50%, transparent 50%);
-            background-size: 10px 10px;
-          }
-          .live-pulse-dot {
-            width: 7px;
-            height: 7px;
-            background-color: #00ff7f;
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(0, 255, 127, 0.5);
-            animation: criticalPulse 2s infinite;
-          }
-          .video-status-overlay {
-            background: rgba(4, 8, 16, 0.85);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            z-index: 5;
-          }
-          @keyframes criticalPulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 127, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 255, 127, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 127, 0); }
-          }
-          .pulse-animation { animation: iconGlowPulse 2.5s infinite ease-in-out; }
-          @keyframes iconGlowPulse {
-            0%, 100% { opacity: 0.7; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); filter: drop-shadow(0 0 8px rgba(0,240,255,0.6)); }
-          }
-          .icon-wrapper {
-            width: 28px; height: 28px; border-radius: 6px;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-          }
-          .alert-concept-box {
-            background: rgba(0, 240, 255, 0.05);
-            border: 1px solid rgba(0, 240, 255, 0.15);
-          }
-          .card-img-wrapper { overflow: hidden; }
-          .card-img-overlay-shade {
-            position: absolute; inset: 0;
-            background: linear-gradient(to bottom, transparent 30%, #040810 100%);
-          }
-          .table-dark-matrix {
-            background: rgba(4, 8, 16, 0.85) !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
-          }
-          .table-dark-matrix th {
-            background: rgba(0, 240, 255, 0.15) !important;
-            color: #00ffff !important;
-            font-size: 11px; font-weight: 800; letter-spacing: 0.5px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-          }
-          .table-dark-matrix td {
-            color: #cbd5e1 !important; font-weight: 500;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-            font-size: 11px;
-          }
-          .btn-premium-cyan {
-            background: #0284c7; color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.25s ease;
-          }
-          .btn-premium-cyan:hover {
-            background: #00ffff; color: #040810;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 255, 255, 0.3);
-          }
-          .btn-hover-effect { transition: all 0.25s ease; }
-          .btn-hover-effect:hover {
-            background-color: #0284c7 !important;
-            border-color: #0284c7 !important;
-            color: #ffffff !important;
-          }
-          .grid-item-hover { transition: all 0.25s ease; }
-          .grid-item-hover:hover {
-            background: rgba(255, 255, 255, 0.08) !important;
-            border-color: rgba(0, 240, 255, 0.2) !important;
-          }
-          .row-hover-transition { transition: all 0.2s ease; }
-          .row-hover-transition:hover {
-            background: rgba(255, 255, 255, 0.05) !important;
-            transform: translateX(2px);
-          }
-          @media (min-width: 768px) {
-            .border-md-end-custom { border-right: 1px solid rgba(255, 255, 255, 0.1) !important; }
-            .h4-md { font-size: 1.5rem; }
-            .display-4-md { font-size: 3.5rem; }
-            .h5-md { font-size: 1.25rem; }
-          }
-          @media (max-width: 576px) {
-            .h6-mobile-fix { font-size: 1.1rem !important; }
-            .text-wrap-break { font-size: 9px !important; letter-spacing: 1.5px !important; }
-          }
-          .ecrown-img-frame-height { height: 320px; }
-          @media (min-width: 768px) { .ecrown-img-frame-height { height: 400px; } }
-          .ecrown-carousel-dark-mask {
-            position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(4, 8, 16, 0.95) 0%, rgba(4, 8, 16, 0.4) 100%);
-            display: flex; align-items: center; justify-content: center;
-          }
-          .text-wrap-none { white-space: nowrap; }
-          .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); }
-          .z-index-2 { z-index: 2; }
-          .z-index-3 { z-index: 3; }
-        `}</style>
+        }
+
+        .showcase-img {
+          width: 100%;
+          height: 380px;
+          object-fit: cover;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+          transition: border-color 0.3s ease;
+        }
+        .showcase-img:hover {
+          border-color: #2563eb;
+        }
+
+        .showcase-tag {
+          color: #2563eb;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          margin-bottom: 8px;
+          display: block;
+        }
+
+        .showcase-title {
+          font-size: 1.8rem;
+          font-weight: 800;
+          margin: 0 0 16px 0;
+          color: #ffffff;
+        }
+
+        .showcase-desc {
+          color: #94a3b8;
+          font-size: 14.5px;
+          line-height: 1.7;
+          margin: 0 0 20px 0;
+        }
+
+        .showcase-spec-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        .showcase-spec-list li {
+          font-size: 13.5px;
+          color: #cbd5e1;
+          margin-bottom: 8px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .showcase-spec-list li::before {
+          content: "—";
+          color: #2563eb;
+          font-weight: bold;
+        }
+
+        .matrix-image-frame {
+          width: 100%;
+          height: 320px;
+          object-fit: cover;
+          border-radius: 12px;
+          border: 1px solid rgba(37, 99, 235, 0.25);
+          box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .stats-strip {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          max-width: 1200px;
+          margin: 0 auto;
+          text-align: center;
+        }
+      `}</style>
+
+        <Footer />
+        <Button />
       </div>
-      <Footer />
-      <Button />
+
+
     </>
   );
-}
+};
 
-export default LowVoltageService;
+export default LowVoltage;

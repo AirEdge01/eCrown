@@ -1,52 +1,21 @@
 import React from 'react';
+import * as Lucide from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Dash from '../components/Dash';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const Avdigital = () => {
 
-  // const [isAuthorized, setIsAuthorized] = useState(false);
-  //   const [isLoading, setIsLoading] = useState(true);
-  
-  //   useEffect(() => {
-  //     const rawData = localStorage.getItem('userData');
-      
-  //     // Catch null strings or uncreated storage items
-  //     if (!rawData || rawData === 'null' || rawData === 'undefined') {
-  //       window.location.replace('/error');
-  //       return;
-  //     }
-  
-  //     try {
-  //       const parsed = JSON.parse(rawData);
-  
-  //       // CHANGE 'token' TO YOUR REAL LOGIN SPECIFIC KEY (e.g., parsed.email or parsed.id)
-  //       if (!parsed || !parsed.token) { 
-  //         console.warn("Security Breach: Missing inner validation token.");
-  //         localStorage.removeItem('userData'); // Wipe bad data
-  //         window.location.replace('/error');
-  //         return;
-  //       }
-  
-  //       // If key exists, grant page visibility
-  //       setIsAuthorized(true);
-  //       setIsLoading(false);
-  //     } catch (e) {
-  //       localStorage.removeItem('userData');
-  //       window.location.replace('/error');
-  //     }
-  //   }, []);
-  
-  //   if (isLoading || !isAuthorized) {
-  //     return null; // Absolute white screen protection while checking
-  //   }
-  
+
+
   return (
     <>
-      <Navbar />  
+      <Navbar />
+      
       <div className="bg-light text-dark min-vh-screen" style={{ fontFamily: 'sans-serif' }}>
-
+        <Dash />
         {/* 1. HERO SECTION (Premium Glassmorphism & High-Impact Visual Layout) */}
         <section className="bg-deep-slate text-white position-relative overflow-hidden py-5 d-flex align-items-center" style={{ minHeight: '85vh' }}>
 
@@ -81,16 +50,16 @@ const Avdigital = () => {
                   </p>
                   <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
                     <Link to="/contact" className="text-decoration-none">
-                    <a className="btn btn-hero-primary px-4 py-3 fw-bold rounded-3 shadow-lg">
-                      Request Consultation
-                    </a>
+                      <a className="btn btn-hero-primary px-4 py-3 fw-bold rounded-3 shadow-lg">
+                        Request Consultation
+                      </a>
                     </Link>
 
                     <Link to="/" className="text-decoration-none">
-                    <a href="" className="btn btn-hero-outline px-4 py-3 fw-bold rounded-3">
-                      Explore Services
-                    </a>
-                    
+                      <a href="" className="btn btn-hero-outline px-4 py-3 fw-bold rounded-3">
+                        Explore Services
+                      </a>
+
                     </Link>
                   </div>
                 </div>
@@ -105,7 +74,7 @@ const Avdigital = () => {
                   {/* Main Display Image */}
                   <div className="position-relative overflow-hidden rounded-5 shadow-2xl border border-white border-opacity-10 style-hero-frame" style={{ zIndex: 2 }}>
                     <img
-                      src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80"
+                      src="https://static.wixstatic.com/media/df4657_d6e1bdaf1d114891b09efb5d7af9e46e~mv2.jpg/v1/fill/w_592,h_352,fp_0.52_0.53,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/FBP00435.jpg"
                       alt="Bright, modern Supermarket Interior Display Environment"
                       className="w-100 object-fit-cover transition-img hero-main-img"
                     />
@@ -131,6 +100,7 @@ const Avdigital = () => {
         >
           Technology <span className="mx-3 text-primary opacity-50">|</span> Innovation <span className="mx-3 text-primary opacity-50">|</span> Excellence
         </div>
+
 
         {/* 2. CORE EXPLANATORY SECTION */}
         <section id="explainers" className="container py-5 my-4">
@@ -161,7 +131,7 @@ const Avdigital = () => {
             <div className="col-md-6">
               <div className="img-hover-container">
                 <img
-                  src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=800&q=80"
+                  src="https://www.hblive.com/hubfs/Audio%20Visual%20Equipment%20Guide/HBL_GuideToAVEquipment_Cover_v1%20(1).jpg"
                   alt="Professional A/V Conference Room Integration Setup"
                   className="img-fluid custom-img-height"
                 />
@@ -174,7 +144,7 @@ const Avdigital = () => {
             <div className="col-md-6 order-2 order-md-1">
               <div className="img-hover-container">
                 <img
-                  src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80"
+                  src="https://www.densitron.com/files/library/images/News%20&%20Case%20Studies/Digital%20Signage%20With%20Datapath_1460x400.png"
                   alt="Modern Commercial Digital Signage System Array"
                   className="img-fluid custom-img-height"
                 />
@@ -214,7 +184,7 @@ const Avdigital = () => {
               <div className="col-lg-6">
                 <div className="img-hover-container shadow">
                   <img
-                    src="https://images.unsplash.com/photo-1548625361-155defe219fa?auto=format&fit=crop&w=1200&q=80"
+                    src="https://viboled.com/wp-content/uploads/2025/09/LED-display-for-Church.jpg"
                     alt="Worship Center Large Display Installation"
                     className="img-fluid custom-workspace-big-img"
                   />
@@ -280,7 +250,7 @@ const Avdigital = () => {
               <div className="col-lg-6 order-1 order-lg-2">
                 <div className="img-hover-container shadow">
                   <img
-                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"
+                    src="https://onediversified.com/hs-fs/hubfs/2024_04_04_NelSim10_A%20(1).jpg?width=2500&height=1875&name=2024_04_04_NelSim10_A%20(1).jpg"
                     alt="Corporate Office Unified Boardroom Setup"
                     className="img-fluid custom-workspace-big-img"
                   />
@@ -435,7 +405,7 @@ const Avdigital = () => {
                   </div>
                   <div className="p-4">
                     <h5 className="fw-bold text-white mb-2">Interactive Kiosks</h5>
-                    <p className="small mb-0" style={{ color: '#94a3b8' }}>Capacitive touchscreen structures calibrated perfectly for consumer maps, shopping centers, and airport hubs.</p>
+                    <p className="small mb-0" s tyle={{ color: '#94a3b8' }}>Capacitive touchscreen structures calibrated perfectly for consumer maps, shopping centers, and airport hubs.</p>
                   </div>
                 </div>
               </div>
@@ -488,7 +458,7 @@ const Avdigital = () => {
         <section className="container py-5 my-2">
           <div className="text-center mx-auto mb-5" style={{ maxWidth: '700px' }}>
             <h2 className="fw-bold text-dark">Why Partner With eCROWN?</h2>
-            <p className="text-muted">We execute your system development start to finish—from initial line drops to custom hardware integrations.</p>
+            <p className="text-muted">We execute your system development start to finish from initial line drops to custom hardware integrations.</p>
           </div>
 
           <div className="row g-4">
@@ -523,60 +493,9 @@ const Avdigital = () => {
           </div>
         </section>
 
-        {/* 8. CONTACT & REQUEST CALLBACK FORM */}
-        <section id="contact" className="bg-light-blue-strip py-5 border-top">
-          <div className="container">
-            <div className="mx-auto shadow-lg rounded-4 overflow-hidden bg-white" style={{ maxWidth: '900px' }}>
-              <div className="row g-0">
+       
 
-                {/* Information Accent Banner */}
-                <div className="col-md-5 bg-deep-slate p-5 text-white d-flex flex-column justify-content-between">
-                  <div>
-                    <h3 className="fw-bold mb-3 text-white">Ready to Start?</h3>
-                    <p className="small mb-0" style={{ color: '#cbd5e1', lineHeight: '1.6' }}>
-                      Connect with our engineering lead to map out infrastructure layouts or system distribution requirements.
-                    </p>
-                  </div>
-                  <div className="mt-5 small" style={{ color: '#94a3b8' }}>
-                    <p className="mb-1"><strong className="text-white">Scope:</strong> Commercial Digital Signage Integration</p>
-                    <p className="mb-0"><strong className="text-white">Quality:</strong> Excellence at its peak</p>
-                  </div>
-                </div>
 
-                {/* Form Input Elements */}
-                <div className="col-md-7 p-5">
-                  <form onSubmit={(e) => e.preventDefault()}>
-                    <h4 className="fw-bold text-dark mb-4">Technical Request Form</h4>
-                    <div className="row g-3 mb-3">
-                      <div className="col-sm-6">
-                        <label className="form-label text-muted small fw-bold text-uppercase" style={{ letterSpacing: '0.05em', fontSize: '0.75rem' }}>Your Name</label>
-                        <input type="text" placeholder="e.g. John Doe" className="form-control py-2 text-sm" required />
-                      </div>
-                      <div className="col-sm-6">
-                        <label className="form-label text-muted small fw-bold text-uppercase" style={{ letterSpacing: '0.05em', fontSize: '0.75rem' }}>Company</label>
-                        <input type="text" placeholder="Acme Corporation" className="form-control py-2 text-sm" />
-                      </div>
-                    </div>
-                    <div className="mb-3">
-                      <label className="form-label text-muted small fw-bold text-uppercase" style={{ letterSpacing: '0.05em', fontSize: '0.75rem' }}>Email Address</label>
-                      <input type="email" placeholder="dev@company.com" className="form-control py-2 text-sm" required />
-                    </div>
-                    <div className="mb-4">
-                      <label className="form-label text-muted small fw-bold text-uppercase" style={{ letterSpacing: '0.05em', fontSize: '0.75rem' }}>Project Space Specifications</label>
-                      <textarea rows="3" placeholder="Provide layout context (e.g., number of screens, audio requirements, property style...)" className="form-control py-2 text-sm"></textarea>
-                    </div>
-                    <button type="submit" className="btn btn-primary w-100 py-2.5 fw-bold shadow-sm" style={{ backgroundColor: '#2563eb', border: 'none' }}>
-                      Submit Project Specifications
-                    </button>
-                  </form>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </section>
-
-        
       </div>
 
       {/* Embedded High-Contrast UI Layout CSS Styles */}
@@ -745,7 +664,7 @@ const Avdigital = () => {
           animation: pulse 3s infinite;
         }
       `}</style>
-      <Footer/>
+      <Footer />
     </>
   );
 };

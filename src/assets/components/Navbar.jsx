@@ -19,13 +19,6 @@ const Navbar = () => {
         }
     };
 
-    const handleAboutClick = (event) => {
-        if (!isAuthenticated()) {
-            event.preventDefault();
-            navigate('/error', { replace: true });
-        }
-    };
-
     return (
         <>
             <nav className="navbar navbar-expand-lg fixed-top premium-glass-navbar py-3" id="main-nav">
@@ -46,7 +39,7 @@ const Navbar = () => {
                             </li>
 
                             <li className="nav-item premium-nav-item">
-                                <Link to="/about" onClick={handleAboutClick} className="nav-link px-3">ABOUT</Link>
+                                <Link to="/about" className="nav-link px-3">ABOUT</Link>
                             </li>
 
                             <li className="nav-item dropdown premium-nav-item">
@@ -70,10 +63,19 @@ const Navbar = () => {
                                 <Link to="/contact" className="nav-link px-3">CONTACT</Link>
                             </li>
 
+                            {/* ── ACTION INTERACTIVE CALL BLOCK ── */}
                             <li className="nav-item ms-lg-4 mt-3 mt-lg-0 d-flex flex-column flex-lg-row gap-2 w-100 w-lg-auto align-items-center">
-                                <Link to="/request" className="text-decoration-none">
-                                    <button className="btn btn-nav-outline d-flex align-items-center justify-content-center px-3 py-2 fw-semibold small">
-                                        Request RFP
+                                {/* Admin Product Inventory Portal */}
+                                <Link to="/order" className="text-decoration-none w-100 w-lg-auto">
+                                    <button className="btn btn-nav-solid d-flex align-items-center justify-content-center gap-2 px-3 py-2 fw-semibold small w-100">
+                                        <Lucide.ShoppingBag size={14} /> Browse Products
+                                    </button>
+                                </Link>
+
+                                {/* Structural Installation Request */}
+                                <Link to="/install" className="text-decoration-none w-100 w-lg-auto">
+                                    <button className="btn btn-nav-outline d-flex align-items-center justify-content-center px-3 py-2 fw-semibold small w-100">
+                                        Request Service
                                     </button>
                                 </Link>
                             </li>
@@ -111,7 +113,6 @@ const Navbar = () => {
             z-index: 1030;
         }
         
-        /* ... rest of your existing CSS ... */
         .nav-menu-rounded { margin-left: auto; gap: 0.25rem; }
         @media (min-width: 992px) {
             .nav-menu-rounded {
@@ -128,15 +129,42 @@ const Navbar = () => {
         .premium-dropdown { background: #ffffff !important; border: 1px solid rgba(10, 22, 34, 0.06) !important; border-radius: 12px !important; padding: 10px; box-shadow: 0 12px 36px rgba(10, 22, 34, 0.1) !important; }
         .premium-dropdown .dropdown-item { font-weight: 500; font-size: 14px; color: #0A1622; border-radius: 8px; transition: all 0.2s ease; }
         .premium-dropdown .dropdown-item:hover { background-color: rgba(13, 110, 253, 0.06) !important; color: #0D6EFD !important; transform: translateX(4px); }
-        .btn-nav-outline { border: 1.5px solid #0A1622; color: #0A1622; background: transparent; border-radius: 24px !important; transition: all 0.3s ease; }
-        .btn-nav-outline:hover { background: rgba(10, 22, 34, 0.05); }
+        
+        /* --- Premium Dual Buttons System --- */
+        .btn-nav-outline { 
+            border: 1.5px solid #0A1622; 
+            color: #0A1622; 
+            background: transparent; 
+            border-radius: 24px !important; 
+            transition: all 0.3s ease; 
+            white-space: nowrap;
+        }
+        .btn-nav-outline:hover { 
+            background: rgba(10, 22, 34, 0.05); 
+        }
+
+        .btn-nav-solid {
+            background: #0A1622;
+            color: #ffffff;
+            border: 1.5px solid #0A1622;
+            border-radius: 24px !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            white-space: nowrap;
+        }
+        .btn-nav-solid:hover {
+            background: #0D6EFD;
+            border-color: #0D6EFD;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+        }
+
         @media (min-width: 992px) {
             .nav-item.dropdown:hover .dropdown-menu { display: block; margin-top: 8px; opacity: 1; visibility: visible; }
             .dropdown-menu { display: block; opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); transform: translateY(10px); }
             .nav-item.dropdown:hover .dropdown-menu { transform: translateY(0); }
         }
 
-        /* Ensure collapse doesn't push content when hidden and sits above content when open */
         .navbar-collapse { position: relative; }
         .navbar-collapse.show { z-index: 1040; }
         `}

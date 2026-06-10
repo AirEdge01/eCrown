@@ -1,778 +1,751 @@
-// // import React from 'react';
-// import * as Lucide from 'lucide-react';
-// import Navbar from '../components/Navbar.jsx';
-// import Footer from '../components/Footer.jsx';
-// import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import * as Lucide from 'lucide-react';
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+import { Link } from 'react-router-dom';
 
-// const OrderPage = () => {
+const OrderPage = () => {
+    // Structured object state to track individual quantities per product ID { [id]: quantity }
+    const [cart, setCart] = useState({});
+    const [wishlist, setWishlist] = useState({});
+    // State to toggle the visibility of the shopping cart review drawer
+    const [isCartOpen, setIsCartOpen] = useState(false);
+    // State to toggle the visibility of the help channels dropdown panel
+    const [isHelpOpen, setIsHelpOpen] = useState(false);
 
+    const products = [
+        {
+            id: 'zosi-5182',
+            name: 'ZOSI 1080P 2K Full HD WiFi Security Camera C5182 IP Camera',
+            price: 32032,
+            oldPrice: 76000,
+            discount: '-58%',
+            image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80',
+            isExpress: true
+        },
+        {
+            id: 'zosi-680',
+            name: 'ZOSI C680 NEW 3MP 2K Window Camera for Home Security Multi-Node',
+            price: 32175,
+            oldPrice: 102810,
+            discount: '-69%',
+            image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=500&q=80',
+            isExpress: true
+        },
+        {
+            id: 'zosi-518',
+            name: 'ZOSI C518 4K 8MP Indoor Security Camera 2.4GHz & 5GHz WiFi Node',
+            price: 39039,
+            oldPrice: 121600,
+            discount: '-68%',
+            image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=500&q=80',
+            isExpress: true
+        },
+        {
+            id: 'v380-solar',
+            name: 'V380 TRIPLE LENS PTZ SOLAR FIELD CAMERA AI Human Tracking Outbound',
+            price: 55450,
+            oldPrice: 110900,
+            discount: '-50%',
+            image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=500&q=80',
+            isExpress: false
+        },
+        {
+            id: 'zosi-5182-duplicate-1',
+            name: 'ZOSI 1080P 2K Full HD WiFi Security Camera C5182 IP Camera',
+            price: 32032,
+            oldPrice: 76000,
+            discount: '-58%',
+            image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80',
+            isExpress: true
+        },
+        {
+            id: 'zosi-680-duplicate-1',
+            name: 'ZOSI C680 NEW 3MP 2K Window Camera for Home Security Multi-Node',
+            price: 32175,
+            oldPrice: 102810,
+            discount: '-69%',
+            image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=500&q=80',
+            isExpress: true
+        },
+        {
+            id: 'zosi-518-duplicate-1',
+            name: 'ZOSI C518 4K 8MP Indoor Security Camera 2.4GHz & 5GHz WiFi Node',
+            price: 39039,
+            oldPrice: 121600,
+            discount: '-68%',
+            image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=500&q=80',
+            isExpress: true
+        },
+        {
+            id: 'v380-solar-duplicate-1',
+            name: 'V380 TRIPLE LENS PTZ SOLAR FIELD CAMERA AI Human Tracking Outbound',
+            price: 55450,
+            oldPrice: 110900,
+            discount: '-50%',
+            image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=500&q=80',
+            isExpress: false
+        },
+        {
+            id: 'zosi-5182-duplicate-2',
+            name: 'ZOSI 1080P 2K Full HD WiFi Security Camera C5182 IP Camera',
+            price: 32032,
+            oldPrice: 76000,
+            discount: '-58%',
+            image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80',
+            isExpress: true
+        },
+        {
+            id: 'zosi-680-duplicate-2',
+            name: 'ZOSI C680 NEW 3MP 2K Window Camera for Home Security Multi-Node',
+            price: 32175,
+            oldPrice: 102810,
+            discount: '-69%',
+            image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=500&q=80',
+            isExpress: true
+        },
+        {
+            id: 'zosi-518-duplicate-2',
+            name: 'ZOSI C518 4K 8MP Indoor Security Camera 2.4GHz & 5GHz WiFi Node',
+            price: 39039,
+            oldPrice: 121600,
+            discount: '-68%',
+            image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=500&q=80',
+            isExpress: true
+        },
+        {
+            id: 'v380-solar-duplicate-2',
+            name: 'V380 TRIPLE LENS PTZ SOLAR FIELD CAMERA AI Human Tracking Outbound',
+            price: 55450,
+            oldPrice: 110900,
+            discount: '-50%',
+            image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=500&q=80',
+            isExpress: false
+        }
+    ];
 
+    const toggleWishlist = (id) => {
+        setWishlist(prev => ({ ...prev, [id]: !prev[id] }));
+    };
 
-// const Cctv = () => {
+    const addToCart = (id) => {
+        setCart(prev => ({
+            ...prev,
+            [id]: (prev[id] || 0) + 1
+        }));
+    };
 
-// //  
-  
-  
-//   return (
-//     <>
-//     <Navbar/>
-//     <div className="bg-light text-dark min-vh-screen d-flex flex-column" style={{ fontFamily: 'sans-serif' }}>
-      
-     
+    const removeFromCart = (id) => {
+        setCart(prev => {
+            const updatedCart = { ...prev };
+            if (updatedCart[id] > 1) {
+                updatedCart[id] -= 1;
+            } else {
+                delete updatedCart[id];
+            }
+            return updatedCart;
+        });
+    };
 
-//       {/* Main content wrapper */}
-//       <div className="flex-grow-1">
-        
-//         {/* 2. HERO SECTION (Premium Glassmorphism Deep Layout) */}
-//         <section className="position-relative text-white py-5 px-4 overflow-hidden bg-deep-slate" 
-//                  style={{ background: 'linear-gradient(135deg, #090d16 0%, #1e3a8a 100%)', minHeight: '60vh', dFlex: 'align-items-center' }}>
-          
-//           {/* Ambient High-Tech Glow Effects */}
-//           <div className="position-absolute rounded-circle opacity-20" style={{ top: '-20%', right: '10%', width: '500px', height: '500px', background: 'radial-gradient(circle, #3b82f6 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none' }}></div>
-          
-//           <div className="container py-5 position-relative" style={{ zIndex: 2 }}>
-//             <div className="row align-items-center g-5">
-//               <div className="col-lg-7 text-center text-lg-start">
-//                 <span className="badge px-3 py-2 text-uppercase fw-bold tracking-wider mb-3" 
-//                       style={{ backgroundColor: 'rgba(37, 99, 235, 0.25)', border: '1px solid rgba(147, 197, 253, 0.3)', color: '#60a5fa' }}>
-//                   🛡️ Enterprise Security Solutions
-//                 </span>
-//                 <h2 className="display-4 fw-bold mt-2 mb-3 tracking-tight text-white" style={{ lineHeight: '1.15' }}>
-//                   CCTV & Smart IP Camera <br />
-//                   <span className="text-gradient-hero">Surveillance Topologies</span>
-//                 </h2>
-//                 <p className="lead text-slate-300 mb-4 mx-auto mx-lg-0" style={{ opacity: 0.85, maxWidth: '620px', color: '#cbd5e1' }}>
-//                   State-of-the-art closed circuit and internet-protocol hardware deployment. We engineer uncompressed environmental coverage, continuous data-rack logging, and real-time security management.
-//                 </p>
-//                 <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-//                   <Link to="/request" className="text-decoration-none">
-//                   <a href="#quote-form" className="btn btn-hero-primary px-4 py-2.5 fw-bold rounded-3 shadow-lg text-decoration-none">
-//                     Request Security Architecture
-//                   </a>
-//                   </Link>
-//                 </div>
-//               </div>
-              
-//               <div className="col-lg-5 d-none d-lg-block">
-//                 <div className="position-relative hero-img-wrapper">
-//                   <div className="position-absolute bg-primary opacity-10 rounded-4 custom-frame-deco" style={{ top: '15px', left: '15px', width: '100%', height: '100%', zIndex: 1 }}></div>
-//                   <div className="position-relative overflow-hidden rounded-4 shadow-2xl border border-white border-opacity-10" style={{ zIndex: 2 }}>
-//                     <img 
-//                       src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" 
-//                       className="w-100 object-fit-cover transition-img" 
-//                       style={{ height: '360px' }}
-//                       alt="Industrial High Definition Security Node Matrix"
-//                     />
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
+    // Total item quantity inside the cart
+    const totalCartCount = Object.values(cart).reduce((sum, currentQty) => sum + currentQty, 0);
 
-//         {/* 3. CORE SERVICES DATA GRID */}
-//         <main className="container position-relative" style={{ marginTop: '-40px', zIndex: 3 }}>
-//           <div className="row g-4">
-//             <div className="col-md-6 col-lg-3">
-//               <div className="card h-100 border-0 shadow-lg rounded-4 p-4 bg-white custom-product-card">
-//                 <div className="h3 mb-2 text-primary">📹</div>
-//                 <h6 className="fw-bold text-dark mb-2">High-Def IP Networks</h6>
-//                 <p className="text-muted small mb-0">Crystal-clear digital streams with optical Power-over-Ethernet system maps.</p>
-//               </div>
-//             </div>
-//             <div className="col-md-6 col-lg-3">
-//               <div className="card h-100 border-0 shadow-lg rounded-4 p-4 bg-white custom-product-card">
-//                 <div className="h3 mb-2 text-primary">💾</div>
-//                 <h6 className="fw-bold text-dark mb-2">Storage Integrations</h6>
-//                 <p className="text-muted small mb-0">Robust NVR/DVR builds backed by localized server backup mirroring layouts.</p>
-//               </div>
-//             </div>
-//             <div className="col-md-6 col-lg-3">
-//               <div className="card h-100 border-0 shadow-lg rounded-4 p-4 bg-white custom-product-card">
-//                 <div className="h3 mb-2 text-primary">🌐</div>
-//                 <h6 className="fw-bold text-dark mb-2">Wireless Access Links</h6>
-//                 <p className="text-muted small mb-0">Secure remote networking protocols enabling mobile global stream viewing.</p>
-//               </div>
-//             </div>
-//             <div className="col-md-6 col-lg-3">
-//               <div className="card h-100 border-0 shadow-lg rounded-4 p-4 bg-white custom-product-card">
-//                 <div className="h3 mb-2 text-primary">🔌</div>
-//                 <h6 className="fw-bold text-dark mb-2">Structured Cabling</h6>
-//                 <p className="text-muted small mb-0">Clean low-voltage pathways built inside protective weatherproof housing.</p>
-//               </div>
-//             </div>
-//           </div>
-//         </main>
+    // Sum financial subtotal estimation
+    const subtotal = products.reduce((acc, item) => acc + (cart[item.id] || 0) * item.price, 0);
 
-//         {/* 4. INDUSTRIAL SYSTEM VALUE & ADVANCED TELEMETRY */}
-//         <section className="container my-5 pt-5">
-//           <div className="p-4 p-md-5 rounded-4 border bg-white shadow-lg bg-light-blue-strip" style={{ borderColor: '#bfdbfe' }}>
-//             <div className="row align-items-center g-5">
-//               <div className="col-lg-7 order-2 order-lg-1">
-//                 <span className="badge bg-primary text-uppercase px-3 py-2 mb-3 tracking-wide text-white" style={{ fontSize: '11px', fontWeight: '700' }}>
-//                   Operational Scope
-//                 </span>
-//                 <h3 className="fw-bold text-dark display-6 mb-3">
-//                   Complete Real-Time Environmental Domination
-//                 </h3>
-//                 <p className="text-secondary fs-6 mb-3" style={{ lineHeight: '1.7' }}>
-//                   Our integrated video networks execute round-the-clock environmental defense. We eliminate blind spots by running industrial low-voltage trunks down structural frames, mounting active anti-vandal observation nodes precisely calculated to monitor massive commercial floors, processing centers, and high-liability pathways.
-//                 </p>
-//                 <div className="row g-3 mt-2">
-//                   <div className="col-sm-6 d-flex align-items-start gap-2">
-//                     <span className="text-primary fw-bold">✓</span>
-//                     <p className="small text-muted mb-0"><strong>Live Environment Tracking:</strong> Instant continuous feeds mapping sensitive zones asset by asset.</p>
-//                   </div>
-//                   <div className="col-sm-6 d-flex align-items-start gap-2">
-//                     <span className="text-primary fw-bold">✓</span>
-//                     <p className="small text-muted mb-0"><strong>Shielded Business Continuity:</strong> Drastically mitigates internal inventory leakage and commercial liabilities.</p>
-//                   </div>
-//                 </div>
-//               </div>
-//               <div className="col-lg-5 order-1 order-lg-2 text-center">
-//                 <div className="img-hover-container border-0 rounded-4 shadow-lg overflow-hidden">
-//                   <img 
-//                     src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" 
-//                     alt="Industrial commercial property tracking camera array" 
-//                     className="img-fluid object-fit-cover w-100 custom-section-img"
-//                   />
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
+    // Dynamic WhatsApp url generator using encoded string
+    const whatsappMessage = encodeURIComponent("HI,GOODDAY,I NEED HELP REGARDING MY RECENT ORDER");
 
-//         {/* 5. REAL-TIME SMARTPHONE REMOTE SYNCHRONIZATION */}
-//         <section className="container my-5 py-2">
-//           <div className="row align-items-center g-5">
-//             <div className="col-lg-5 text-center">
-//               <div className="img-hover-container border-0 rounded-4 shadow-lg overflow-hidden">
-//                 <img 
-//                   src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80" 
-//                   alt="Smartphone running mobile remote security applications" 
-//                   className="img-fluid object-fit-cover w-100 custom-section-img"
-//                 />
-//               </div>
-//             </div>
-//             <div className="col-lg-7">
-//               <span className="text-primary fw-bold tracking-wider text-uppercase small"> SMART ACCESS PROTOCOLS</span>
-//               <h3 className="fw-bold text-dark display-6 mt-1 mb-3">Global Stream Matrix on Personal Smart Devices</h3>
-//               <p className="text-secondary" style={{ lineHeight: '1.7' }}>
-//                 Distance is no longer a vulnerability. Our network division configures secure, authenticated cloud-access links allowing property stakeholders to view high-fidelity stream groupings live from anywhere across the globe.
-//               </p>
-//               <p className="text-secondary small" style={{ lineHeight: '1.7' }}>
-//                 Whether logging in through a laptop console or a mobile smartphone interface, administrators receive instantaneous pushes during motion threshold violations. The underlying video pipelines use end-to-end cryptographic streams to prevent external packet intercepts.
-//               </p>
-//               <div className="p-3 bg-white border rounded-3 shadow-sm d-flex align-items-center gap-3 mt-3">
-//                 <div className="h3 mb-0 text-warning">📱</div>
-//                 <div>
-//                   <h6 className="fw-bold text-dark mb-0">Instant Mobile Sync</h6>
-//                   <p className="small text-muted mb-0">Receive high-priority frame captures the millisecond an entry lock line is crossed.</p>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
+    // Support lines with direct WhatsApp numbers for immediate DM
+    const supportLines = [
+        {
+            title: 'Support Line 1',
+            subtitle: 'General Enquiries',
+            number: '2348103965118'
+        },
+        {
+            title: 'Support Line 2',
+            subtitle: 'Order & Logistics',
+            number: '2349035327526'
+        },
+        {
+            title: 'Support Line 3',
+            subtitle: 'Technical Help',
+            number: '2348034567890'
+        }
+    ];
 
-//         {/* 6. VISUAL EXPLANATION: CAMERA HARDWARE & PHYSICS SPREAD */}
-//         <section className="container my-5 pt-4">
-//           <div className="text-center mb-5 mx-auto" style={{ maxWidth: '700px' }}>
-//             <h2 className="fw-bold text-dark display-6">Camera Mechanics & Technology Overview</h2>
-//             <p className="text-muted">We deploy application-specific hardware form factors depending on your structural environmental limits.</p>
-//           </div>
+    return (
+        <>
+            <Navbar />
+            <div className="order-page-wrapper">
 
-//           <div className="row align-items-center g-5 mb-5">
-//             <div className="col-md-6">
-//               <span className="text-primary fw-bold tracking-wider text-uppercase small">Form Factors Explained</span>
-//               <h3 className="fw-bold text-dark mt-1 mb-3">Dome Cameras vs. Bullet Security Arrays</h3>
-//               <p className="text-muted small" style={{ lineHeight: '1.7' }}>
-//                 <strong>Dome Form Factors</strong> feature an impact-resistant, low-profile outer vandal shield. These are highly optimized for indoor common spaces, close-proximity retail counters, and office lobbies because their optical target tracking path is covertly masked.
-//               </p>
-//               <p className="text-muted small" style={{ lineHeight: '1.7' }}>
-//                 <strong>Bullet Form Factors</strong> deliver robust, long-range directional zoom mechanics. Equipped with extended weatherproof sun-shields, these are engineered for exterior fence lines, long entry driveways, and specialized license-plate capture zones.
-//               </p>
-//             </div>
-//             <div className="col-md-6">
-//               <div className="img-hover-container rounded-4 shadow">
-//                 <img 
-//                   src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80" 
-//                   className="img-fluid w-100" 
-//                   style={{ height: '320px', objectFit: 'cover' }} 
-//                   alt="Security surveillance optics breakdown"
-//                 />
-//               </div>
-//             </div>
-//           </div>
+                {/* Header Row Segment */}
+                <header className="order-hero">
+                    <div className="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-4">
+                        <div className="text-center text-md-start">
+                            <span className="badge bg-brand-soft text-primary px-3 py-2 rounded-pill fw-bold mb-2 small tracking-wide">
+                                ECROWN LOGISTICS HARDWARE
+                            </span>
+                            <h1 className="font-display fw-bold mb-1 text-brand-dark fs-2">
+                                Enterprise Security Hardware Center
+                            </h1>
+                            <p className="text-muted small mb-0 max-w-2xl">
+                                Configure individual surveillance elements, low-voltage nodes, and high-performance hardware modules instantly.
+                            </p>
+                        </div>
 
-//           <div className="row align-items-center g-5 pt-4">
-//             <div className="col-md-6 order-md-2">
-//               <span className="text-primary fw-bold tracking-wider text-uppercase small">Network Protocols</span>
-//               <h3 className="fw-bold text-dark mt-1 mb-3">Traditional Coaxial Analog vs. Modern Digital IP</h3>
-//               <p className="text-muted small" style={{ lineHeight: '1.7' }}>
-//                 Our setups focus entirely on modern digital transition pathways. Traditional <strong>CCTV Analog Systems</strong> downscale incoming feeds via old coaxial physical pipelines. Conversely, <strong>Digital IP (Internet Protocol) Systems</strong> process compression algorithms inside the digital camera frame itself, pushing uncompressed high-definition data packets across integrated Category 6 lines.
-//               </p>
-              
-//               <div className="table-responsive mt-4">
-//                 <table className="table table-sm table-bordered bg-white text-muted small mb-0 shadow-sm align-middle">
-//                   <thead>
-//                     <tr className="bg-dark text-white">
-//                       <th className="p-2">Metric Check</th>
-//                       <th className="p-2">Analog Systems</th>
-//                       <th className="p-2">eCROWN IP Systems</th>
-//                     </tr>
-//                   </thead>
-//                   <tbody>
-//                     <tr><td className="p-2 fw-bold">Image Definition</td><td className="p-2">Static 1080p Interlaced</td><td className="p-2 text-primary fw-bold">4K Ultra-HD Crisp Progressions</td></tr>
-//                     <tr><td className="p-2 fw-bold">Line Infrastructure</td><td className="p-2">Separate Data & Power Pipes</td><td className="p-2 text-primary fw-bold">Single Ethernet PoE Cord Delivery</td></tr>
-//                     <tr><td className="p-2 fw-bold">Security Shielding</td><td className="p-2">Vulnerable Analog Signals</td><td className="p-2 text-primary fw-bold">End-to-End Cryptographic Streams</td></tr>
-//                   </tbody>
-//                 </table>
-//               </div>
-//             </div>
-//             <div className="col-md-6 order-md-1">
-//               <div className="img-hover-container rounded-4 shadow">
-//                 <img 
-//                   src="https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=800&q=80" 
-//                   className="img-fluid w-100" 
-//                   style={{ height: '350px', objectFit: 'cover' }} 
-//                   alt="Electronic infrastructure networking diagnostics"
-//                 />
-//               </div>
-//             </div>
-//           </div>
-//         </section>
+                        {/* Interactive Widget Control Suite (Help & Cart) */}
+                        <div className="d-flex align-items-center gap-3 execution-controls-suite position-relative">
 
-//         {/* 7. SYSTEM ARCHITECTURE FLOW MATRIX */}
-//         <section className="bg-white py-5 border-top border-bottom my-5">
-//           <div className="container">
-//             <div className="row align-items-center g-5">
-//               <div className="col-lg-5">
-//                 <span className="badge bg-primary px-3 py-1.5 text-uppercase mb-2 text-white">Network Topology</span>
-//                 <h3 className="fw-bold text-dark">Data Storage & Power Routing Schemes</h3>
-//                 <p className="text-muted small mb-3" style={{ lineHeight: '1.7' }}>
-//                   Our infrastructure designs isolate your secure data tracking streams on closed sub-networks. Camera endpoints feed uncompressed imagery matrices directly into dedicated high-capacity localized Network Video Recorders (NVRs). 
-//                 </p>
-//                 <p className="text-muted small" style={{ lineHeight: '1.7' }}>
-//                   This internal loop keeps running even during external internet service blackouts, safely backing up and synchronizing file records with remote mirror nodes once the connection recovers.
-//                 </p>
-//               </div>
-//               <div className="col-lg-7">
-//                 <div className="img-hover-container rounded-4 shadow">
-//                   <img 
-//                     src="https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&w=900&q=80" 
-//                     className="img-fluid w-100" 
-//                     style={{ height: '340px', objectFit: 'cover' }} 
-//                     alt="System connectivity schematic visualization"
-//                   />
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
+                            {/* Help Desk Popover Anchor */}
+                            <div className="position-relative">
+                                <div
+                                    className={`live-help-widget d-flex align-items-center gap-3 p-3 rounded-3 shadow-sm bg-white border border-light interactive-widget ${isHelpOpen ? 'help-active-border' : ''}`}
+                                    onClick={() => setIsHelpOpen(!isHelpOpen)}
+                                    role="button"
+                                    tabIndex={0}
+                                >
+                                    <div className="help-widget-icon bg-brand-soft text-primary rounded-2 d-flex align-items-center justify-content-center">
+                                        <Lucide.HelpCircle size={20} />
+                                    </div>
+                                    <div className="d-none d-sm-block">
+                                        <div className="text-muted extra-small fw-bold text-uppercase tracking-wider">Assistance</div>
+                                        <div className="text-brand-dark fw-bold font-display">Get Help</div>
+                                    </div>
+                                </div>
 
-//         {/* 8. RECENT SITE INSTALLATIONS GALLERY */}
-//         <section className="container my-5">
-//           <div className="text-center mb-5">
-//             <h3 className="fw-bold text-dark display-6 mb-1">Operational Visual Deployments</h3>
-//             <p className="text-muted small">Real monitoring nodes managed by eCROWN tech frameworks.</p>
-//           </div>
+                                {/* Modern Glassmorphism-touch Support Dropdown Menu */}
+                                {isHelpOpen && (
+                                    <>
+                                        <div className="help-menu-backdrop" onClick={() => setIsHelpOpen(false)} />
+                                        <div className="help-dropdown-menu bg-white rounded-3 shadow-lg p-2 position-absolute end-0 mt-2 border border-light z-3">
+                                            <div className="px-2.5 py-1.5 border-bottom border-light mb-1">
+                                                <span className="extra-small fw-bold text-muted text-uppercase tracking-wider">Contact Channels</span>
+                                            </div>
+                                            {supportLines.map((line, index) => (
+                                                <a
+                                                    key={index}
+                                                    href={`https://wa.me/${line.number}?text=${whatsappMessage}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="help-channel-item d-flex align-items-center gap-3 p-2 rounded-2 text-decoration-none transition-all"
+                                                    onClick={() => setIsHelpOpen(false)}
+                                                >
+                                                    <div className="channel-icon-avatar rounded-circle d-flex align-items-center justify-content-center bg-success-soft text-success">
+                                                        <Lucide.MessageSquare size={16} />
+                                                    </div>
+                                                    <div className="d-flex flex-column min-w-0">
+                                                        <span className="small text-brand-dark fw-bold line-height-tight">{line.title}</span>
+                                                        <span className="extra-small text-muted">{line.subtitle}</span>
+                                                    </div>
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
+                            </div>
 
-//           <div className="row g-4">
-//             <div className="col-sm-6 col-lg-4">
-//               <div className="card border-0 shadow-lg overflow-hidden h-100 bg-white custom-product-card">
-//                 <img 
-//                   src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" 
-//                   className="card-img-top" 
-//                   style={{ height: '220px', objectFit: 'cover' }} 
-//                   alt="Industrial structural surveillance deployment" 
-//                 />
-//                 <div className="card-body p-4">
-//                   <span className="badge bg-light text-primary mb-2 px-2.5 py-1.5 font-weight-bold">Logistics Hub</span>
-//                   <h6 className="card-title fw-bold text-dark mb-2">Multi-Angle Dome Array</h6>
-//                   <p className="card-text text-muted small mb-0">Full perimeter industrial area protection paired with PoE server layouts.</p>
-//                 </div>
-//               </div>
-//             </div>
+                            {/* Clickable Master Live Queue Widget Trigger Button */}
+                            <div
+                                className="live-cart-widget d-flex align-items-center gap-3 p-3 rounded-3 shadow-sm bg-white border border-light interactive-widget"
+                                onClick={() => setIsCartOpen(true)}
+                                role="button"
+                                tabIndex={0}
+                            >
+                                <div className="cart-widget-icon position-relative bg-brand-soft text-primary rounded-2 d-flex align-items-center justify-content-center">
+                                    <Lucide.ShoppingCart size={20} />
+                                    {totalCartCount > 0 && (
+                                        <span className="widget-badge-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {totalCartCount}
+                                        </span>
+                                    )}
+                                </div>
+                                <div>
+                                    <div className="text-muted extra-small fw-bold text-uppercase tracking-wider">Selected Queue</div>
+                                    <div className="text-brand-dark fw-bold font-display">{totalCartCount} Order Items</div>
+                                </div>
+                            </div>
 
-//             <div className="col-sm-6 col-lg-4">
-//               <div className="card border-0 shadow-lg overflow-hidden h-100 bg-white custom-product-card">
-//                 <img 
-//                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" 
-//                   className="card-img-top" 
-//                   style={{ height: '220px', objectFit: 'cover' }} 
-//                   alt="Modern corporate property monitoring perimeter" 
-//                 />
-//                 <div className="card-body p-4">
-//                   <span className="badge bg-light text-primary mb-2 px-2.5 py-1.5 font-weight-bold">Corporate Spaces</span>
-//                   <h6 className="card-title fw-bold text-dark mb-2">4K Bullet Intelligence Systems</h6>
-//                   <p className="card-text text-muted small mb-0">High-precision outdoor lenses tracking entryways with integrated AI motion alarms.</p>
-//                 </div>
-//               </div>
-//             </div>
+                        </div>
+                    </div>
+                </header>
 
-//             <div className="col-sm-6 col-lg-4">
-//               <div className="card border-0 shadow-lg overflow-hidden h-100 bg-white custom-product-card">
-//                 <img 
-//                   src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" 
-//                   className="card-img-top" 
-//                   style={{ height: '220px', objectFit: 'cover' }} 
-//                   alt="Main data rack system storage" 
-//                 />
-//                 <div className="card-body p-4">
-//                   <span className="badge bg-light text-primary mb-2 px-2.5 py-1.5 font-weight-bold">Data Storage Vaults</span>
-//                   <h6 className="card-title fw-bold text-dark mb-2">NVR Storage Server Cluster</h6>
-//                   <p className="card-text text-muted small mb-0">High-capacity disk drive assemblies configured for multi-week video history retention.</p>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
+                {/* Main Product Shelf Catalog Layout */}
+                <div className="container pb-5">
+                    <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 justify-content-center">
+                        {products.map((item) => {
+                            const currentQty = cart[item.id] || 0;
 
-//         {/* 9. TRUSTED CORPORATE IMPLEMENTATIONS (AUTOMATED INTERACTION SLIDER) */}
-//         <section className="bg-light py-5 my-5 border-top border-bottom position-relative overflow-hidden">
-//           <div className="position-absolute right-0 bottom-0 top-0 w-50 h-100 bg-white opacity-50" 
-//                style={{ transform: 'translateX(15%) skewX(-12deg)', zIndex: 1, pointerEvents: 'none' }}></div>
+                            return (
+                                <div key={item.id} className="col">
+                                    <div className="card h-100 market-product-card border-0 position-relative">
 
-//           <div className="container py-4 position-relative" style={{ zIndex: 2 }}>
-//             <div className="row">
-//               <div className="col-lg-8 mb-4 text-center text-lg-start">
-//                 <span className="badge px-3 py-2 text-uppercase fw-bold tracking-wider mb-3" 
-//                       style={{ backgroundColor: 'rgba(13, 110, 253, 0.1)', border: '1px solid rgba(13, 110, 253, 0.25)', color: '#0d6efd' }}>
-//                   Enterprise Case Studies
-//                 </span>
-//                 <h2 className="display-5 fw-bold text-dark mt-2 mb-3">
-//                   Trusted Corporate Implementations
-//                 </h2>
-//                 <p className="lead text-muted fs-6" style={{ maxWidth: '700px' }}>
-//                   Surveillance infrastructure architectures deployed across premier commercial sectors. Our systems defend high-liability pipelines, financial cores, and sprawling fulfillment networks.
-//                 </p>
-//               </div>
-//             </div>
-//           </div>
+                                        {/* Image Frame Block Layout */}
+                                        <div className="position-relative overflow-hidden market-img-frame d-flex align-items-center justify-content-center bg-white">
+                                            <img
+                                                src={item.image}
+                                                alt={item.name}
+                                                className="product-display-img object-fit-contain p-2"
+                                            />
 
-//           {/* AUTOMATED BOOTSTRAP SLIDER STRUCTURE WITH ENRICHED ENTERPRISE DATA NODES */}
-//           <div className="container mt-2 position-relative" style={{ zIndex: 2 }}>
-//             <div id="corporateSurveillanceCarousel" className="carousel slide carousel-fade shadow-2xl rounded-4 overflow-hidden" 
-//                  data-bs-ride="carousel" data-bs-interval="3000" style={{ minHeight: '440px' }}>
-              
-//               {/* Indicators Navigation dots */}
-//               <div className="carousel-indicators" style={{ zIndex: 5 }}>
-//                 <button type="button" data-bs-target="#corporateSurveillanceCarousel" data-bs-slide-to="0" className="active"></button>
-//                 <button type="button" data-bs-target="#corporateSurveillanceCarousel" data-bs-slide-to="1"></button>
-//                 <button type="button" data-bs-target="#corporateSurveillanceCarousel" data-bs-slide-to="2"></button>
-//                 <button type="button" data-bs-target="#corporateSurveillanceCarousel" data-bs-slide-to="3"></button>
-//               </div>
+                                            {/* Floating Wishlist Heart Control Element */}
+                                            <button
+                                                className="btn wishlist-float-trigger position-absolute border-0 p-0 d-flex align-items-center justify-content-center"
+                                                onClick={() => toggleWishlist(item.id)}
+                                                aria-label="Save item"
+                                            >
+                                                <Lucide.Heart
+                                                    size={20}
+                                                    className={wishlist[item.id] ? "heart-filled" : "heart-outline"}
+                                                />
+                                            </button>
+                                        </div>
 
-//               {/* Slider Active Nodes */}
-//               <div className="carousel-inner h-100">
+                                        {/* Details Matrix Structure Block */}
+                                        <div className="card-body p-3 d-flex flex-column justify-content-between">
+                                            <div>
+                                                <h2 className="product-title-text mb-2">
+                                                    {item.name}
+                                                </h2>
+
+                                                {/* Price Presentation Setup Block */}
+                                                <div className="price-matrix mb-2">
+                                                    <span className="main-price-display d-block font-display fw-bold">
+                                                        ₦ {item.price.toLocaleString()}
+                                                    </span>
+                                                    <div className="d-flex align-items-center gap-2 mt-0.5">
+                                                        <span className="old-strike-price text-muted text-decoration-line-through">
+                                                            ₦ {item.oldPrice.toLocaleString()}
+                                                        </span>
+                                                        <span className="discount-ratio-tag px-1.5 py-0.5 rounded-1 fw-bold">
+                                                            {item.discount}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                {/* Secondary Meta Tags Sub-Panel Line */}
+                                                <div className="d-flex align-items-center justify-content-between gap-1 mb-3 pt-1">
+                                                    {item.isExpress ? (
+                                                        <div className="express-delivery-badge fw-extrabold italic-text">
+                                                            ECROWN <span className="express-sub text-primary">EXPRESS</span>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="express-placeholder"></div>
+                                                    )}
+                                                    <div className="sponsored-tag text-muted d-inline-flex align-items-center gap-0.5">
+                                                        Sponsored <Lucide.Info size={11} className="info-icon-meta" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Dual Action Controller Node Area */}
+                                            <div className="action-button-block mt-auto">
+                                                {currentQty > 0 ? (
+                                                    <div className="qty-selector-container d-flex align-items-center justify-content-between rounded-2 p-1 bg-light border">
+                                                        <button
+                                                            className="btn qty-action-btn d-flex align-items-center justify-content-center rounded-2"
+                                                            onClick={() => removeFromCart(item.id)}
+                                                            aria-label="Reduce quantity by one"
+                                                        >
+                                                            <Lucide.Minus size={14} strokeWidth={2.5} />
+                                                        </button>
+                                                        <span className="fw-bold text-brand-dark qty-display-text">
+                                                            {currentQty}
+                                                        </span>
+                                                        <button
+                                                            className="btn qty-action-btn d-flex align-items-center justify-content-center rounded-2"
+                                                            onClick={() => addToCart(item.id)}
+                                                            aria-label="Increase quantity by one"
+                                                        >
+                                                            <Lucide.Plus size={14} strokeWidth={2.5} />
+                                                        </button>
+                                                    </div>
+                                                ) : (
+                                                    <button
+                                                        className="btn btn-brand-checkout w-100 py-2 fw-bold text-white d-flex align-items-center justify-content-center gap-2 transition-all"
+                                                        onClick={() => addToCart(item.id)}
+                                                    >
+                                                        <Lucide.ShoppingCart size={16} /> Add to cart
+                                                    </button>
+                                                )}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+
+            {/* --- Cart Slide-out Drawer Overlay View Panel --- */}
+            <div
+                className={`cart-drawer-overlay ${isCartOpen ? 'active' : ''}`}
+                onClick={() => setIsCartOpen(false)}
+            >
+                <div
+                    className="cart-drawer bg-white shadow-lg d-flex flex-column"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {/* Drawer Header Layout */}
+                    <div className="drawer-header p-3 d-flex align-items-center justify-content-between border-bottom">
+                        <div className="d-flex align-items-center gap-2 text-brand-dark fw-bold font-display fs-5">
+                            <Lucide.ShoppingCart size={20} className="text-primary" />
+                            <span>Your Order Queue</span>
+                        </div>
+                        <button
+                            className="btn p-1 border-0 text-muted drawer-close-trigger"
+                            onClick={() => setIsCartOpen(false)}
+                        >
+                            <Lucide.X size={22} />
+                        </button>
+                    </div>
+
+                    {/* Drawer Content Area */}
+                    <div className="drawer-body p-3 flex-grow-1 overflow-y-auto">
+                        {totalCartCount === 0 ? (
+                            <div className="text-center py-5 my-4 text-muted">
+                                <Lucide.ShoppingBag size={48} className="mx-auto mb-3 opacity-25 text-brand-dark" />
+                                <p className="fw-bold mb-1 text-brand-dark">Your queue is empty</p>
+                                <small className="text-muted">Add hardware elements from the main display panel shelf.</small>
+                            </div>
+                        ) : (
+                            products.filter(item => cart[item.id] > 0).map(item => (
+                                <div key={`cart-item-${item.id}`} className="cart-drawer-item d-flex gap-3 p-2 mb-3 rounded border border-light bg-white shadow-sm">
+                                    <img
+                                        src={item.image}
+                                        alt={item.name}
+                                        className="cart-item-img object-fit-contain rounded bg-light"
+                                    />
+                                    <div className="flex-grow-1 min-w-0 d-flex flex-column justify-content-between">
+                                        <div>
+                                            <h4 className="cart-item-title mb-1 text-truncate">{item.name}</h4>
+                                            <div className="text-muted extra-small fw-medium">Unit Price: ₦ {item.price.toLocaleString()}</div>
+                                        </div>
+                                        <div className="d-flex align-items-center justify-content-between mt-2">
+                                            {/* Micro-Adjustment Quantities Modification Element Matrix */}
+                                            <div className="qty-selector-container d-flex align-items-center justify-content-between rounded-2 p-0.5 bg-light border custom-qty-sm">
+                                                <button
+                                                    className="btn qty-action-btn-sm d-flex align-items-center justify-content-center rounded-1"
+                                                    onClick={() => removeFromCart(item.id)}
+                                                >
+                                                    <Lucide.Minus size={11} strokeWidth={2.5} />
+                                                </button>
+                                                <span className="fw-bold extra-small text-brand-dark px-2">{cart[item.id]}</span>
+                                                <button
+                                                    className="btn qty-action-btn-sm d-flex align-items-center justify-content-center rounded-1"
+                                                    onClick={() => addToCart(item.id)}
+                                                >
+                                                    <Lucide.Plus size={11} strokeWidth={2.5} />
+                                                </button>
+                                            </div>
+                                            <div className="text-primary small fw-bold font-display">
+                                                ₦ {((cart[item.id] || 0) * item.price).toLocaleString()}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </div>
+
+                    {/* Drawer Dynamic Financial Summary Footer Frame */}
+                    {totalCartCount > 0 && (
+                        <div className="drawer-footer p-3 bg-light border-top mt-auto">
+                            <div className="d-flex align-items-center justify-content-between mb-3">
+                                <span className="text-muted small fw-bold text-uppercase tracking-wider">Subtotal Value</span>
+                                <span className="text-brand-dark fw-bold font-display fs-4">₦ {subtotal.toLocaleString()}</span>
+                            </div>
+                            <button className="btn btn-brand-checkout w-100 py-2.5 text-white fw-bold d-flex align-items-center justify-content-center gap-2 shadow-sm">
+                                Proceed to Verification <Lucide.ArrowRight size={16} />
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            <style>
+                {`
+                .order-page-wrapper {
+                    background: #f8fafe;
+                    min-height: 100vh;
+                    padding-top: 90px;
+                    font-family: 'Inter', system-ui, sans-serif;
+                }
+
+                .order-hero {
+                    padding: 2.5rem 1rem;
+                    background: #ffffff;
+                    border-bottom: 1px solid rgba(10, 22, 34, 0.06);
+                    margin-bottom: 2rem;
+                }
+
+                .max-w-2xl { max-width: 42rem; }
+                .text-brand-dark { color: #0A1622; }
+                .bg-brand-soft { background-color: rgba(13, 110, 253, 0.06); }
+                .bg-success-soft { background-color: rgba(25, 135, 84, 0.08); }
                 
-//                 {/* Slide 1 */}
-//                 <div className="carousel-item active position-relative ecrown-carousel-height">
-//                   <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" className="d-block w-100 h-100 object-fit-cover" alt="Financial Headquarter Area" />
-//                   <div className="ecrown-carousel-overlay">
-//                     <div className="text-center px-4">
-//                       <h3 className="fw-bold text-white mb-2">Financial Central Headquarters</h3>
-//                       <span className="badge bg-primary px-3 py-1.5 text-uppercase text-white">Enterprise Network Isolation</span>
-//                     </div>
-//                   </div>
-//                 </div>
+                .live-cart-widget, .live-help-widget {
+                    min-width: 160px;
+                    border: 1px solid rgba(10, 22, 34, 0.05) !important;
+                    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                @media (min-width: 576px) {
+                    .live-cart-widget { min-width: 200px; }
+                }
+                .interactive-widget {
+                    cursor: pointer;
+                    user-select: none;
+                }
+                .interactive-widget:hover {
+                    border-color: rgba(13, 110, 253, 0.2) !important;
+                    box-shadow: 0 6px 16px rgba(10, 22, 34, 0.05) !important;
+                    transform: translateY(-1px);
+                }
+                .help-active-border {
+                    border-color: rgba(13, 110, 253, 0.25) !important;
+                    background-color: #fafbfe !important;
+                }
+                .cart-widget-icon, .help-widget-icon {
+                    width: 42px;
+                    height: 42px;
+                }
+                .widget-badge-count {
+                    font-size: 10px;
+                    padding: 0.25em 0.5em;
+                }
 
-//                 {/* Slide 2 */}
-//                 <div className="carousel-item position-relative ecrown-carousel-height">
-//                   <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80" className="d-block w-100 h-100 object-fit-cover" alt="Logistics Center Fulfillment Map" />
-//                   <div className="ecrown-carousel-overlay">
-//                     <div className="text-center px-4">
-//                       <h3 className="fw-bold text-white mb-2">Logistics & Supply Fulfillment Centers</h3>
-//                       <span className="badge bg-success px-3 py-1.5 text-uppercase text-white">Multi-Tier Loading Bay Grid</span>
-//                     </div>
-//                   </div>
-//                 </div>
+                /* Help Dropdown System Layout */
+                .help-dropdown-menu {
+                    width: 240px;
+                    border: 1px solid rgba(10, 22, 34, 0.06) !important;
+                    transform-origin: top right;
+                    animation: popoverScaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                .help-menu-backdrop {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    z-index: 2;
+                    background: transparent;
+                }
+                .help-channel-item {
+                    background: transparent;
+                }
+                .help-channel-item:hover {
+                    background-color: #f1f5f9;
+                }
+                .channel-icon-avatar {
+                    width: 32px;
+                    height: 32px;
+                    flex-shrink: 0;
+                }
+                .line-height-tight { line-height: 1.25; }
 
-//                 {/* Slide 3 */}
-//                 <div className="carousel-item position-relative ecrown-carousel-height">
-//                   <img src="https://images.unsplash.com/photo-1542744094-3a31f103e35f?auto=format&fit=crop&w=1200&q=80" className="d-block w-100 h-100 object-fit-cover" alt="Data Core Infrastructure Server Vault" />
-//                   <div className="ecrown-carousel-overlay">
-//                     <div className="text-center px-4">
-//                       <h3 className="fw-bold text-white mb-2">Data Server Core Vault Infrastructure</h3>
-//                       <span className="badge bg-warning text-dark px-3 py-1.5 text-uppercase">Biometric Entry Perimeter Scans</span>
-//                     </div>
-//                   </div>
-//                 </div>
-
-//                 {/* Slide 4 */}
-//                 <div className="carousel-item position-relative ecrown-carousel-height">
-//                   <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80" className="d-block w-100 h-100 object-fit-cover" alt="Industrial Complex Labs" />
-//                   <div className="ecrown-carousel-overlay">
-//                     <div className="text-center px-4">
-//                       <h3 className="fw-bold text-white mb-2">Industrial Engineering Complexes</h3>
-//                       <span className="badge bg-info text-dark px-3 py-1.5 text-uppercase">High-Temperature Thermal Analytics</span>
-//                     </div>
-//                   </div>
-//                 </div>
-
-//               </div>
-
-//               {/* Manual Shift Vectors */}
-//               <button className="carousel-control-prev" type="button" data-bs-target="#corporateSurveillanceCarousel" data-bs-slide="prev">
-//                 <span className="carousel-control-prev-icon"></span>
-//               </button>
-//               <button className="carousel-control-next" type="button" data-bs-target="#corporateSurveillanceCarousel" data-bs-slide="next">
-//                 <span className="carousel-control-next-icon"></span>
-//               </button>
-
-//             </div>
-//           </div>
-//         </section>
-
-//         {/* 10. LIFECYCLE COMPLIANCE & MAINTENANCE CONTRACTS (SLA) */}
-//         <section className="container my-5">
-//           <div className="p-4 p-md-5 rounded-4 shadow-lg text-white bg-deep-slate" style={{ background: 'linear-gradient(135deg, #1e293b 0%, #090d16 100%)' }}>
-//             <div className="row align-items-center g-4">
-//               <div className="col-lg-8">
-//                 <h4 className="fw-bold text-warning mb-3">Proactive System Maintenance & Service Level Agreements</h4>
-//                 <p className="small text-light opacity-75 mb-0" style={{ lineHeight: '1.7' }}>
-//                   Surveillance arrays degrade due to lens dust buildup, storage drive exhaustion, or environmental weathering. eCROWN protects your system's uptime through automated health scanning, periodic physical cleaning, camera angle re-calibration, and critical firmware updates.
-//                 </p>
-//               </div>
-//               <div className="col-lg-4">
-//                 <div className="p-4 rounded-3 border border-secondary text-start text-light small" style={{ backgroundColor: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.1) !important' }}>
-//                   <strong className="d-block mb-2 text-warning">Support Options Available:</strong>
-//                   <div className="mt-1 text-muted-custom">• Quarterly Lens Maintenance Checks</div>
-//                   <div className="text-muted-custom">• NVR Hard Drive Lifetime Scans</div>
-//                   <div className="text-muted-custom">• 24/7 Urgent Field Tech Dispatch</div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
-
-//       </div>
-
-//       {/* 11. FLOATING FIXED STABLE ACTION BUTTON (FAB) - CENTERED */}
-//       {/* Positioned at the exact horizontal center of the viewport screen */}
-//       <div className="position-fixed bottom-0 start-50 translate-middle-x pb-4 text-center w-auto px-3" style={{ zIndex: 1090 }}>
-//         <a 
-//           href="mailto:Info@ecrowntechnologies.net" 
-//           className="btn btn-primary rounded-pill shadow-2xl px-4 py-3 fw-bold tracking-wide d-flex align-items-center gap-2 border border-white border-opacity-20 hover-scale-up text-decoration-none text-white transition-all"
-//           style={{ 
-//             background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
-//             backdropFilter: 'blur(8px)',
-//             whiteSpace: 'nowrap'
-//           }}
-//         >
-//           <span className="fs-5">📋</span> Request Architecture Quote
-//         </a>
-//       </div>
-
-      
-
-//       {/* Integrated Style Sheet Block */}
-//       <style>{`
-//         .text-gradient-hero {
-//           background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
-//           -webkit-background-clip: text;
-//           -webkit-text-fill-color: transparent;
-//         }
-//         .bg-deep-slate {
-//           background-color: #090d16 !important;
-//         }
-//         .bg-light-blue-strip {
-//           background-color: #eff6ff !important;
-//         }
-//         .text-muted-custom {
-//           color: #94a3b8;
-//         }
-//         .shadow-2xl {
-//           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-//         }
-//         .btn-hero-primary {
-//           background: #2563eb;
-//           color: #ffffff;
-//           border: 1px solid #2563eb;
-//           transition: all 0.3s ease;
-//         }
-//         .btn-hero-primary:hover {
-//           background: #1d4ed8;
-//           transform: translateY(-2px);
-//           box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
-//         }
-//         .custom-frame-deco {
-//           border-radius: 16px;
-//           transform: translate(8px, 8px);
-//           background: linear-gradient(135deg, #2563eb, transparent) !important;
-//         }
-//         .img-hover-container {
-//           overflow: hidden;
-//           border: 1px solid #e2e8f0;
-//         }
-//         .custom-section-img {
-//           height: 350px;
-//           object-fit: cover;
-//         }
-//         .custom-product-card {
-//           transition: transform 0.3s ease, box-shadow 0.3s ease;
-//           border: 1px solid #e2e8f0 !important;
-//         }
-//         .custom-product-card:hover {
-//           transform: translateY(-5px);
-//           box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1) !important;
-//         }
-//         .ecrown-carousel-height {
-//           height: 440px;
-//         }
-//         @media (max-width: 768px) {
-//           .ecrown-carousel-height {
-//             height: 320px;
-//           }
-//         }
-//         .ecrown-carousel-overlay {
-//           position: absolute;
-//           bottom: 0;
-//           left: 0;
-//           right: 0;
-//           top: 0;
-//           background: linear-gradient(to top, rgba(9, 13, 22, 0.95) 0%, rgba(9, 13, 22, 0.3) 70%, transparent 100%);
-//           display: flex;
-//           align-items: center;
-//           justify-content: center;
-//         }
-//         .ecrown-carousel-overlay h3 {
-//           font-size: 1.8rem;
-//           text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-//         }
-//         .transition-link:hover {
-//           text-decoration: underline !important;
-//         }
-//         .hover-scale-up {
-//           transition: transform 0.2s ease, box-shadow 0.2s ease;
-//         }
-//         .hover-scale-up:hover {
-//           transform: translateX(-50%) scale(1.04) !important; /* Preserves Bootstrap's centering math while scaling up */
-//           box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4) !important;
-//           color: #ffffff !important;
-//         }
-//         .transition-all {
-//           transition: all 0.2s ease-in-out;
-//         }
-//       `}</style>
-//     </div>
-//     <Footer/>
-//     </>
-
-//   );
-// }
-
-// export default Cctv;
-    
-//     // Array of hardware modules, CCTV portfolios, and products managed dynamically
-//     const products = [
-//         {
-//             id: 'cctv-01',
-//             name: 'Premium 4K IP Dome Camera',
-//             price: 149.99,
-//             image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=500&q=80',
-//             description: 'Ultra-HD night vision weatherproof camera with AI human tracking and POE structural setup.',
-//             badge: 'Best Seller'
-//         },
-//         {
-//             id: 'cctv-02',
-//             name: 'Pro Bullet Security Camera',
-//             price: 129.99,
-//             image: 'https://images.unsplash.com/photo-1524143180609-62da1cd4d144?auto=format&fit=crop&w=500&q=80',
-//             description: 'Long-range thermal night vision bullet camera. Engineered for harsh commercial outdoor perimeters.',
-//             badge: 'Weatherproof'
-//         },
-//         {
-//             id: 'cctv-03',
-//             name: '360° PTZ Speed Dome',
-//             price: 289.99,
-//             image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=500&q=80',
-//             description: 'Pan-Tilt-Zoom field camera featuring 30x optical zoom and automated smart patrol tracks.',
-//             badge: 'Pro Tier'
-//         },
-//         {
-//             id: 'srv-01',
-//             name: 'Low-Voltage Structured Cabling Drop',
-//             price: 599.00,
-//             image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=500&q=80',
-//             description: 'Professional Cat6/Cat6A structured infrastructure installation. Tested and deployment certified.',
-//             badge: 'Structured Runs'
-//         },
-//         {
-//             id: 'srv-02',
-//             name: 'Smart Retail Self-Checkout Suite',
-//             price: 1499.00,
-//             image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=500&q=80',
-//             description: 'Integrated POS hardware bundle with terminal screens, multi-class scanners, and weight trays.',
-//             badge: 'POS Systems'
-//         },
-//         {
-//             id: 'srv-03',
-//             name: 'Digital Signage Network Hub',
-//             price: 249.99,
-//             image: 'https://images.unsplash.com/photo-1542744094-3a31f103e35f?auto=format&fit=crop&w=500&q=80',
-//             description: 'Multi-display hardware media driver box optimized for seamless crisp business presentation schedules.',
-//             badge: 'A/V Signage'
-//         }
-//     ];
-
-//     // Formatted handler function triggering order validation
-//     const triggerOrderAlert = (name, price) => {
-//         alert(`Redirecting to payment window for: ${name} ($${price.toFixed(2)})`);
-//     };
-
-//     return (
-//         <>
-//         <Navbar/>
-//             <div className="order-page-wrapper">
-//                 {/* Hero Headers */}
-//                 <header className="order-hero text-center text-brand-dark">
-//                     <div className="container">
-//                         <span className="badge bg-primary-soft text-primary px-3 py-2 rounded-pill fw-bold mb-3 small tracking-wide">
-//                             ECROWN NETWORK INTEGRATIONS
-//                         </span>
-//                         <h1 className="font-display fw-bold mb-3 display-5 text-dark-custom">
-//                             Enterprise Deployment Marketplace
-//                         </h1>
-//                         <p className="mx-auto text-muted max-w-2xl text-md">
-//                             Directly configure and buy individual security units, low-voltage components, and smart point of sale technology deliverables.
-//                         </p>
-//                     </div>
-//                 </header>
-
-//                 <div className="container pb-5">
-//                     {/* Catalog Layout */}
-//                     <div className="row g-4 justify-content-center">
-//                         {products.map((item) => (
-//                             <div key={item.id} className="col-12 col-md-6 col-lg-4">
-//                                 <div className="card h-100 product-card border-0">
-//                                     {/* Image Block with Float Badging */}
-//                                     <div className="position-relative overflow-hidden card-img-container">
-//                                         <span className="position-absolute top-0 start-0 m-3 badge product-badge py-2 px-3 fw-semibold">
-//                                             {item.badge}
-//                                         </span>
-//                                         <img 
-//                                             src={item.image} 
-//                                             alt={item.name} 
-//                                             className="card-img-top object-fit-cover w-100 h-100 product-img"
-//                                         />
-//                                     </div>
-
-//                                     {/* Product Meta */}
-//                                     <div className="card-body p-4 d-flex flex-column justify-content-between">
-//                                         <div>
-//                                             <h3 className="h5 fw-bold text-brand-dark mb-2 line-clamp-1">
-//                                                 {item.name}
-//                                             </h3>
-//                                             <p className="card-text small text-muted line-clamp-3 mb-4">
-//                                                 {item.description}
-//                                             </p>
-//                                         </div>
-
-//                                         {/* Purchase Controls */}
-//                                         <div className="d-flex align-items-center justify-content-between pt-3 border-top border-light mt-auto">
-//                                             <div>
-//                                                 <span className="text-muted d-block small fw-medium">Unit Price</span>
-//                                                 <span className="h4 fw-bold text-brand-dark mb-0">${item.price.toFixed(2)}</span>
-//                                             </div>
-//                                             <button 
-//                                                 className="btn btn-buy d-flex align-items-center gap-2 px-4 py-2 fw-semibold btn-sm"
-//                                                 onClick={() => triggerOrderAlert(item.name, item.price)}
-//                                             >
-//                                                 Buy Now <Lucide.ArrowRight size={16} />
-//                                             </button>
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         ))}
-//                     </div>
-//                 </div>
-//             </div>
-
-//             {/* Premium Theme Layout Context */}
-//             <style>
-//                 {`
-//                 .order-page-wrapper {
-//                     background: #f8fafe;
-//                     min-height: 100vh;
-//                     padding-top: 110px; /* Aligns smoothly under your custom premium-glass navbar */
-//                     font-family: 'Inter', system-ui, sans-serif;
-//                 }
-
-//                 .order-hero {
-//                     padding: 4rem 1rem 3.5rem 1rem;
-//                 }
-
-//                 .max-w-2xl { max-width: 42rem; }
-//                 .text-brand-dark { color: #0A1622; }
-//                 .text-md { font-size: 1.05rem; line-height: 1.6; }
-
-//                 .bg-primary-soft {
-//                     background-color: rgba(13, 110, 253, 0.08);
-//                 }
-
-//                 /* --- Structural Card Layouts --- */
-//                 .product-card {
-//                     background: #ffffff;
-//                     border-radius: 20px !important;
-//                     box-shadow: 0 10px 30px rgba(10, 22, 34, 0.03);
-//                     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-//                     overflow: hidden;
-//                 }
+                .market-product-card {
+                    background: #ffffff;
+                    border-radius: 12px !important;
+                    box-shadow: 0 4px 15px rgba(10, 22, 34, 0.02);
+                    border: 1px solid rgba(10, 22, 34, 0.03) !important;
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                    overflow: hidden;
+                }
                 
-//                 .product-card:hover {
-//                     transform: translateY(-6px);
-//                     box-shadow: 0 20px 40px rgba(10, 22, 34, 0.08);
-//                 }
+                .market-product-card:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 12px 24px rgba(10, 22, 34, 0.06);
+                }
 
-//                 .card-img-container {
-//                     height: 220px;
-//                     background: #f1f5f9;
-//                 }
+                .market-img-frame {
+                    width: 100%;
+                    aspect-ratio: 1 / 1;
+                    border-bottom: 1px solid rgba(10, 22, 34, 0.04);
+                }
                 
-//                 .product-img {
-//                     transition: transform 0.5s ease;
-//                 }
-                
-//                 .product-card:hover .product-img {
-//                     transform: scale(1.04);
-//                 }
+                .product-display-img {
+                    width: 100%;
+                    height: 100%;
+                }
 
-//                 .product-badge {
-//                     background: rgba(255, 255, 255, 0.92);
-//                     backdrop-filter: blur(4px);
-//                     color: #0A1622;
-//                     border: 1px solid rgba(10, 22, 34, 0.05);
-//                     border-radius: 30px;
-//                     font-size: 11px;
-//                     letter-spacing: 0.5px;
-//                     text-transform: uppercase;
-//                 }
+                .wishlist-float-trigger {
+                    bottom: 12px;
+                    right: 12px;
+                    background: transparent;
+                    color: #0D6EFD;
+                    z-index: 5;
+                    cursor: pointer;
+                    transition: transform 0.15s ease;
+                }
+                .wishlist-float-trigger:hover {
+                    transform: scale(1.15);
+                }
+                .heart-outline { stroke: #0D6EFD; fill: transparent; }
+                .heart-filled { fill: #0D6EFD; stroke: #0D6EFD; }
 
-//                 /* --- Action Controls --- */
-//                 .btn-buy {
-//                     background: #0D6EFD;
-//                     color: #ffffff;
-//                     border: none;
-//                     border-radius: 12px;
-//                     transition: all 0.2s ease;
-//                 }
-                
-//                 .btn-buy:hover {
-//                     background: #0b5ed7;
-//                     color: #ffffff;
-//                     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
-//                 }
+                .product-title-text {
+                    font-size: 13.5px;
+                    font-weight: 500;
+                    line-height: 1.4;
+                    color: #0A1622;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    height: 38px;
+                }
 
-//                 /* Safety utilities for responsive layouts */
-//                 .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
-//                 .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-//                 `}
-//             </style>
-//             <Footer/>
-//         </>
-//     );
-// };
+                .main-price-display {
+                    font-size: 17px;
+                    color: #0A1622;
+                }
 
-// export default OrderPage;
+                .old-strike-price {
+                    font-size: 12.5px;
+                    color: #64748b !important;
+                }
+
+                .discount-ratio-tag {
+                    font-size: 11px;
+                    background-color: rgba(13, 110, 253, 0.08);
+                    color: #0D6EFD;
+                }
+
+                .express-delivery-badge {
+                    font-size: 10px;
+                    font-weight: 900;
+                    color: #0A1622;
+                    letter-spacing: -0.2px;
+                }
+                .italic-text { font-style: italic; }
+                .express-sub { font-weight: 900; }
+                .express-placeholder { height: 15px; }
+
+                .sponsored-tag {
+                    font-size: 11px;
+                    color: #94a3b8 !important;
+                }
+                .info-icon-meta { stroke-width: 2.5; }
+
+                .btn-brand-checkout {
+                    background-color: #0D6EFD;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 13.5px;
+                    letter-spacing: 0.1px;
+                    height: 38px;
+                }
+
+                .btn-brand-checkout:hover {
+                    background-color: #0b5ed7;
+                    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+                }
+
+                .qty-selector-container {
+                    height: 38px;
+                    border-color: rgba(10, 22, 34, 0.08) !important;
+                    background-color: #f1f5f9 !important;
+                }
+                .qty-action-btn {
+                    width: 30px;
+                    height: 30px;
+                    padding: 0;
+                    background-color: #ffffff;
+                    border: 1px solid rgba(10, 22, 34, 0.06);
+                    color: #0A1622;
+                    transition: all 0.15s ease;
+                }
+                .qty-action-btn:hover {
+                    background-color: #0D6EFD;
+                    color: #ffffff;
+                    border-color: #0D6EFD;
+                }
+                .qty-display-text {
+                    font-size: 14px;
+                    min-width: 24px;
+                    text-align: center;
+                }
+
+                /* --- Slide-Out Cart Review Drawer Panel Framework --- */
+                .cart-drawer-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(10, 22, 34, 0.3);
+                    backdrop-filter: blur(4px);
+                    z-index: 2000;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 0.25s ease;
+                }
+                .cart-drawer-overlay.active {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+                .cart-drawer {
+                    position: absolute;
+                    top: 0;
+                    right: -420px;
+                    width: 100%;
+                    max-width: 400px;
+                    height: 100%;
+                    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                .cart-drawer-overlay.active .cart-drawer {
+                    right: 0;
+                }
+                .drawer-close-trigger {
+                    transition: color 0.15s ease;
+                }
+                .drawer-close-trigger:hover {
+                    color: #0D6EFD !important;
+                }
+                .cart-item-img {
+                    width: 60px;
+                    height: 60px;
+                    padding: 4px;
+                    background-color: #f8fafe;
+                }
+                .cart-item-title {
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: #0A1622;
+                }
+                .custom-qty-sm {
+                    height: 28px !important;
+                    padding: 2px !important;
+                }
+                .qty-action-btn-sm {
+                    width: 22px;
+                    height: 22px;
+                    padding: 0;
+                    background-color: #ffffff;
+                    border: 1px solid rgba(10, 22, 34, 0.06);
+                    color: #0A1622;
+                    transition: all 0.1s ease;
+                }
+                .qty-action-btn-sm:hover {
+                    background-color: #0D6EFD;
+                    color: #ffffff;
+                    border-color: #0D6EFD;
+                }
+
+                .extra-small { font-size: 10px; }
+
+                @keyframes popoverScaleIn {
+                    from { opacity: 0; transform: scale(0.95) translateY(-6px); }
+                    to { opacity: 1; transform: scale(1) translateY(0); }
+                }
+                `}
+            </style>
+            <Footer />
+        </>
+    );
+};
+
+export default OrderPage;

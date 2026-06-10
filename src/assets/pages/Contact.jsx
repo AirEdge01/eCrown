@@ -1,354 +1,364 @@
 import React from 'react';
-import { Mail, MapPin, MessageSquare, ArrowRight, ShieldCheck, Cpu } from 'lucide-react';
+import { Mail, MapPin, ArrowRight, PhoneCall } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+
+const WhatsappLogo = ({ size = 24 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M12.01 2.18c-5.42 0-9.82 4.4-9.82 9.82 0 1.73.46 3.42 1.32 4.9L2 22.5l5.84-1.53c1.44.79 3.06 1.2 4.69 1.2 5.42 0 9.82-4.4 9.82-9.82 0-5.42-4.4-9.82-9.82-9.82Zm5.47 14.8c-.24.7-1.45 1.34-2.04 1.42-.54.08-1.2.13-4.19-1.05-3.64-1.44-5.97-5.22-6-5.3-.03-.08-.25-.72-.25-1.36 0-.64.33-.96.45-1.09.12-.12.26-.13.35-.13.09 0 .18 0 .26 0 .09 0 .22-.03.34.25.12.27.44.93.48 1 .05.1.08.22 0 .35-.08.12-.12.2-.24.32-.12.12-.24.26-.35.35-.12.1-.25.22-.1.43.15.21.67 1.1 1.45 1.77.99.87 1.82 1.15 2.09 1.28.28.12.44.1.61-.06.17-.16.73-.85.9-1.15.17-.3.35-.24.61-.18.25.06 1.6.75 1.87.89.27.14.45.21.52.33.07.12.07.43 0 .63Zm0 0" />
+  </svg>
+);
 
 const Contact = () => {
   const deploymentChannels = [
     {
-      icon: <ShieldCheck size={22} />,
-      label: "CCTV, IP Camera & AV Solutions",
-      platform: "Request Surveillance Setup",
-      actionText: "Initiate project quote",
-      url: "#",
-      gradient: "linear-gradient(135deg, #0A1622 0%, #0D6EFD 100%)",
-      glowColor: "rgba(13, 110, 253, 0.15)"
+      icon: <MapPin size={24} />,
+      label: "Physical Operations Command Center",
+      platform: "Our Head Office Address",
+      contact: "1305 28th Street, Orlando, FL 32805",
+      actionText: "Open in Google Maps",
+      url: "https://maps.google.com?q=1305+28th+Street+Orlando+FL+32805",
+      accent: "#0d6efd",
+      bgClass: "channel-address"
     },
     {
-      icon: <Cpu size={22} />,
-      label: "Network Infrastructure & Cabling",
-      platform: "Low Voltage Engineering",
-      actionText: "Request infrastructure audit",
-      url: "#",
-      gradient: "linear-gradient(135deg, #0D6EFD 0%, #00d4ff 100%)",
-      glowColor: "rgba(0, 212, 255, 0.15)"
-    },
-    {
-      icon: <MessageSquare size={22} />,
-      label: "Instant Deployment Helpdesk",
-      platform: "WhatsApp Operations",
-      actionText: "Open engineering chat",
-      url: "#",
-      gradient: "linear-gradient(135deg, #25d366 0%, #00ff7f 100%)",
-      glowColor: "rgba(37, 211, 102, 0.15)"
-    },
-    {
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-          <rect x="2" y="9" width="4" height="12"></rect>
-          <circle cx="4" cy="4" r="2"></circle>
-        </svg>
-      ),
-      label: "Enterprise Networks B2B",
-      platform: "LinkedIn Corporate",
-      actionText: "Connect with us",
-      url: "#",
-      gradient: "linear-gradient(135deg, #0077b5 0%, #00a0dc 100%)",
-      glowColor: "rgba(0, 160, 220, 0.12)"
-    },
-    {
-      icon: <Mail size={22} />,
-      label: "Secure Transmission Gateway",
-      platform: "Corporate Email Systems",
-      actionText: "Transmit system specifications",
+      icon: <Mail size={24} />,
+      label: "Secure Data Communications",
+      platform: "Official Email Dispatch",
+      contact: "engineering@ecrowntechnologieso2.com",
+      actionText: "Open inbox",
       url: "mailto:engineering@ecrowntechnologieso2.com",
-      gradient: "linear-gradient(135deg, #111111 0%, #444444 100%)",
-      glowColor: "rgba(17, 17, 17, 0.1)"
+      accent: "#00d4ff",
+      bgClass: "channel-email"
+    },
+    {
+      icon: <WhatsappLogo size={24} />,
+      label: "Instant Deployment Helpdesk",
+      platform: "WhatsApp Operations Chat",
+      contact: "+234 801 234 5678",
+      actionText: "Chat on WhatsApp",
+      url: "https://wa.me/2348012345678",
+      accent: "#25d366",
+      bgClass: "channel-whatsapp"
+    },
+    {
+      icon: <PhoneCall size={24} />,
+      label: "Direct Voice Telephony Ring",
+      platform: "24/7 Priority Voice Line",
+      contact: "+234 801 234 5678",
+      actionText: "Call now",
+      url: "tel:+2348012345678",
+      accent: "#ff9f43",
+      bgClass: "channel-phone"
     }
   ];
 
   return (
     <>
+      <Navbar />
+      <div className="premium-contact-viewport min-vh-100 py-5">
+        {/* Crisp Spatial Light Backdrops */}
+        <div className="radial-light-glow light-blue"></div>
+        <div className="radial-light-glow light-cyan"></div>
+        <div className="matrix-grid-overlay"></div>
 
-    <Navbar/>
-    <div className="modern-contact-viewport min-vh-100 d-flex align-items-center py-5">
-      {/* Background Glow Ambience */}
-      <div className="absolute-blur-glow top-left"></div>
-      <div className="absolute-blur-glow bottom-right"></div>
-      
-      <div className="container position-relative z-index-3">
-        <div className="row g-4 m-0 bg-glass-container rounded-4 overflow-hidden align-items-stretch shadow-lg">
-          
-          {/* --- LEFT PANEL: BRAND AND IDENTITY --- */}
-          <div className="col-lg-5 p-4 p-md-5 bg-deep-slate text-white d-flex flex-column justify-content-between position-relative overflow-hidden">
-            {/* Tech line background accent */}
-            <div className="tech-grid-bg"></div>
-            
-            <div className="position-relative z-index-2">
-              <div className="badge-modern-pill mb-4 d-inline-block text-uppercase">
-                <span>⚡</span> SYSTEM GATEWAYS
-              </div>
-              
-              <h1 className="display-5 fw-extrabold tracking-tight mb-3 text-white">
-                Engineering <br />
-                <span className="text-gradient-cyan">Excellence At Its Peak.</span>
-              </h1>
-              
-              <div className="brand-pillars-minimal d-flex align-items-center gap-2 text-uppercase tracking-wider mb-4 opacity-75">
-                <span>Technology</span>
-                <span className="dot-divider"></span>
-                <span>Innovation</span>
-                <span className="dot-divider"></span>
-                <span>Excellence</span>
-              </div>
-
-              <div className="rainbow-connector-bar mb-4"></div>
-
-              <p className="text-slate-300 small mb-0">
-                Deploy high-end hardware infrastructure subsystems. From low-voltage structured cabling, modern A/V systems, and smart CCTV networks to custom enterprise server storage configurations. Connect directly into our operations desk.
-              </p>
+        <div className="container position-relative z-index-10 mt-5 pt-4">
+          {/* ── CENTRAL HERO HEADER ── */}
+          <div className="text-center max-w-3xl mx-auto mb-5">
+            <div className="badge-modern-pill mb-3 text-uppercase">
+              <span>⚡</span> System Gateways Active
             </div>
-
-            <div className="pt-4 border-top border-white border-opacity-10 mt-5 position-relative z-index-2">
-              <div className="d-flex flex-column gap-3">
-                <div className="d-flex align-items-center gap-3 text-white small">
-                  <div className="icon-badge-static d-flex align-items-center justify-content-center"> 
-                    <MapPin size={15} className="text-info" /> 
-                  </div>
-                  <span className="fw-medium text-slate-200">Technology Hub & Enterprise Command Center</span>
-                </div>
-                <div className="d-flex align-items-center gap-2 tracking-wider index-system-text">
-                  <span className="pulse-indicator-dot"></span>
-                  <span className="text-uppercase fw-bold text-info opacity-75">"...excellence at its peak" ACTIVE RESPONSE</span>
-                </div>
-              </div>
+            <h1 className="display-4 fw-extrabold tracking-tight text-slate-900 mb-3">
+              Engineering <span className="text-gradient-blue">Excellence At Its Peak.</span>
+            </h1>
+            <p className="fs-6 mx-auto text-secondary mb-4" style={{ maxWidth: '640px', lineHeight: '1.7' }}>
+              Deploy high-end hardware infrastructure subsystems. Connect directly into our operational gateway for custom low-voltage configurations and enterprise server architectures.
+            </p>
+            <div className="d-flex align-items-center justify-content-center gap-3 custom-telemetry-strip p-2 px-3 mx-auto rounded-5">
+              <span className="pulse-indicator-dot"></span>
+              <span className="text-uppercase fw-bold text-primary small tracking-wider" style={{ fontSize: '11px' }}>
+                Active Response Engineering Node
+              </span>
+            </div>
+            <div className="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mt-4 contact-quick-links">
+              <a href="mailto:engineering@ecrowntechnologieso2.com?subject=Contact%20Request&body=Hello%20eCROWN%20Team%2C%0D%0A%0D%0AI%20would%20like%20to%20inquire%20about%20..." className="contact-link-pill text-decoration-none">
+                <Mail size={16} className="me-2" /> engineering@ecrowntechnologieso2.com
+              </a>
+              <a href="tel:+2348012345678" className="contact-link-pill text-decoration-none">
+                <PhoneCall size={16} className="me-2" /> +234 801 234 5678
+              </a>
+              <a href="https://wa.me/2348012345678" target="_blank" rel="noopener noreferrer" className="contact-link-pill text-decoration-none">
+                <WhatsappLogo size={16} className="me-2" /> WhatsApp Chat
+              </a>
             </div>
           </div>
 
-          {/* --- RIGHT PANEL: INTERACTIVE CHANNELS --- */}
-          <div className="col-lg-7 p-4 p-md-5 bg-white-glass d-flex align-items-center">
-            <div className="w-100 d-flex flex-column gap-3">
-              {deploymentChannels.map((channel, index) => (
-                <a 
-                  key={index} 
-                  href={channel.url} 
-                  className="modern-channel-row text-decoration-none d-flex align-items-center justify-content-between p-3 rounded-3"
-                  style={{ '--hover-glow': channel.glowColor }}
+          {/* ── CORE GRID MATRIX ── */}
+          <div className="row g-4 m-0 justify-content-center">
+            {deploymentChannels.map((channel, index) => (
+              <div key={index} className="col-md-6 col-lg-3">
+                <a
+                  href={channel.url}
+                  target={channel.url.startsWith('http') ? "_blank" : "_self"}
+                  rel="noopener noreferrer"
+                  className={`modern-matrix-card ${channel.bgClass} text-decoration-none d-flex flex-column justify-content-between h-100 p-4`}
                 >
-                  <div className="d-flex align-items-center gap-3">
-                    <div 
-                      className="modern-icon-frame d-flex align-items-center justify-content-center shadow-sm" 
-                      style={{ background: channel.gradient }}
-                    >
+                  <div>
+                    <div className="icon-wrapper shadow-sm mb-4 d-flex align-items-center justify-content-center" style={{ color: channel.accent }}>
                       {channel.icon}
                     </div>
-                    <div>
-                      <span className="text-muted-tag tracking-wider d-block mb-1 text-uppercase">
-                        {channel.label}
-                      </span>
-                      <h4 className="fw-bold text-dark h6 mb-0 tracking-tight">
-                        {channel.platform}
-                      </h4>
-                    </div>
+                    <span className="text-muted-tag tracking-wider d-block mb-1 text-uppercase">
+                      {channel.label}
+                    </span>
+                    <h4 className="fw-extrabold text-slate-900 h6 mb-2 tracking-tight">
+                      {channel.platform}
+                    </h4>
+                    <p className="mb-3 small text-slate-600">{channel.contact}</p>
                   </div>
-                  
-                  <div className="d-flex align-items-center gap-3 action-indicator">
-                    <span className="small text-primary opacity-0 action-text d-none d-sm-inline fw-semibold">
+
+                  <div className="d-flex align-items-center justify-content-between pt-3 card-action-footer">
+                    <span className="small text-primary fw-bold action-label-text">
                       {channel.actionText}
                     </span>
-                    <div className="arrow-box d-flex align-items-center justify-content-center rounded-circle bg-light border">
-                      <ArrowRight size={16} className="arrow-icon text-secondary" />
+                    <div className="arrow-circle shadow-sm bg-white border d-flex align-items-center justify-content-center rounded-circle">
+                      <ArrowRight size={16} className="arrow-icon-element text-secondary" />
                     </div>
                   </div>
                 </a>
-              ))}
+              </div>
+            ))}
+          </div>
+
+          ── SECURE TRANSMISSION SECURE ANCHOR (EMAIL GATEWAY) ──
+          <div className="row m-0 mt-4 justify-content-center">
+            <div className="col-lg-12">
+              <a
+                href="mailto:engineering@ecrowntechnologieso2.com"
+                className="secure-gateway-bar text-decoration-none d-flex flex-column flex-md-row align-items-center justify-content-between p-4"
+              >
+                <div className="d-flex align-items-center gap-4 mb-3 mb-md-0">
+                  <div className="secure-badge-icon d-flex align-items-center justify-content-center rounded-3 bg-white border shadow-sm">
+                    <Mail size={22} className="text-slate-800" />
+                  </div>
+                  <div>
+                    <span className="text-muted-tag tracking-wider d-block mb-1 text-uppercase">SECURE TRANSMISSION GATEWAY</span>
+                    <h5 className="fw-extrabold text-slate-900 h6 mb-0">Transmit system specifications directly to: engineering@ecrowntechnologieso2.com</h5>
+                  </div>
+                </div>
+                {/* <div className="d-flex align-items-center gap-3 px-3 py-2 rounded-3 bg-slate-900 text-white font-bold small tracking-wide shadow-sm button-accent-block">
+                  Open Secure Link <ArrowRight size={14} />
+                </div> */}
+              </a>
             </div>
+          </div>
+
+          {/* ── GEOLOCATION HUD BAR ── */}
+          <div className="d-flex align-items-center justify-content-center gap-3 mt-5 text-muted small py-3 border-top border-slate-200 border-opacity-60">
+            <MapPin size={15} className="text-primary" />
+            <span className="fw-medium text-slate-600 tracking-wide">1305 28th Street, Orlando, FL 32805</span>
           </div>
 
         </div>
       </div>
-      
-      
+      <Footer />
 
       <style>{`
-        /* Global & Scope Viewport Configs */
-        .modern-contact-viewport {
-          background-color: #060b13;
+        /* Core Ambient Viewport Base Structure */
+        .premium-contact-viewport {
+          background-color: #f8fafc;
           position: relative;
           overflow: hidden;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
-        /* Ambient Lighting Components */
-        .absolute-blur-glow {
-          position: absolute;
-          width: 450px;
-          height: 450px;
+        /* Fluid Lighting and Structure Grids */
+        .radial-light-glow {
+          position: fixed;
+          width: 600px;
+          height: 600px;
           border-radius: 50%;
-          filter: blur(130px);
-          opacity: 0.12;
+          filter: blur(140px);
+          opacity: 0.35;
           pointer-events: none;
+          z-index: 1;
         }
-        .top-left { top: -10%; left: -5%; background-color: #0d6efd; }
-        .bottom-right { bottom: -10%; right: -5%; background-color: #00ff7f; }
+        .light-blue { top: -10%; left: -5%; background-color: #dbeafe; }
+        .light-cyan { bottom: -10%; right: -5%; background-color: #e0f2fe; }
 
-        /* Structural Container Blocks */
-        .bg-glass-container {
-          background: rgba(255, 255, 255, 0.02);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .bg-deep-slate {
-          background: linear-gradient(145deg, #070d14 0%, #0d1b2a 100%);
-        }
-
-        .bg-white-glass {
-          background: rgba(255, 255, 255, 0.97);
+        .matrix-grid-overlay {
+          position: absolute;
+          inset: 0;
+          opacity: 0.02;
+          pointer-events: none;
+          background-image: linear-gradient(#003399 1px, transparent 1px), linear-gradient(90deg, #003399 1px, transparent 1px);
+          background-size: 32px 32px;
+          z-index: 2;
         }
 
-        /* Text Styles & Accent Layout Tools */
-        .fw-extrabold { font-weight: 800; }
-        .text-gradient-cyan {
-          background: linear-gradient(135deg, #38bdf8 0%, #0d6efd 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+        /* Interactive Matrix Cards Configuration */
+        .modern-matrix-card {
+          background: rgba(255, 255, 255, 0.7);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.8);
+          border-radius: 24px;
+          box-shadow: 0 10px 30px rgba(15, 23, 42, 0.02);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        .icon-wrapper {
+          width: 52px;
+          height: 52px;
+          border-radius: 14px;
+          background: #ffffff;
+          border: 1px solid #f1f5f9;
+          transition: all 0.3s ease;
+        }
+
+        .arrow-circle {
+          width: 36px;
+          height: 36px;
+          transition: all 0.3s ease;
+        }
+        .arrow-icon-element { transition: transform 0.3s ease, color 0.3s ease; }
+        .action-label-text { transition: color 0.3s ease; }
+
+        /* Symmetrical Hover Matrices Styles */
+        .modern-matrix-card:hover {
+          transform: translateY(-6px);
+          background: #ffffff;
+          box-shadow: 0 20px 40px rgba(13, 110, 253, 0.08);
+        }
+
+        .modern-matrix-card:hover .icon-wrapper {
+          color: #ffffff !important;
+        }
+        
+        .modern-matrix-card:hover .arrow-circle {
+          color: #ffffff !important;
+        }
+        .modern-matrix-card:hover .arrow-icon-element {
+          color: #ffffff !important;
+          transform: translateX(2px);
+        }
+
+        /* Micro Channels Accent Hooks */
+        .channel-address:hover { border-color: #0d6efd; box-shadow: 0 20px 40px rgba(13, 110, 253, 0.08); }
+        .channel-address:hover .icon-wrapper { background: #0d6efd; border-color: #0d6efd; }
+        .channel-address:hover .arrow-circle { background: #0d6efd !important; border-color: #0d6efd !important; }
+
+        .channel-email:hover { border-color: #00d4ff; box-shadow: 0 20px 40px rgba(0, 212, 255, 0.08); }
+        .channel-email:hover .icon-wrapper { background: #00d4ff; border-color: #00d4ff; }
+        .channel-email:hover .arrow-circle { background: #00d4ff !important; border-color: #00d4ff !important; }
+
+        .channel-whatsapp:hover { border-color: #25d366; box-shadow: 0 20px 40px rgba(37, 211, 102, 0.08); }
+        .channel-whatsapp:hover .icon-wrapper { background: #25d366; border-color: #25d366; }
+        .channel-whatsapp:hover .arrow-circle { background: #25d366 !important; border-color: #25d366 !important; }
+
+        .channel-phone:hover { border-color: #ff9f43; box-shadow: 0 20px 40px rgba(255, 159, 67, 0.08); }
+        .channel-phone:hover .icon-wrapper { background: #ff9f43; border-color: #ff9f43; }
+        .channel-phone:hover .arrow-circle { background: #ff9f43 !important; border-color: #ff9f43 !important; }
+
+        /* Secure Horizontal Anchor Strip */
+        .secure-gateway-bar {
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.8);
+          border-radius: 20px;
+          box-shadow: 0 10px 25px rgba(15, 23, 42, 0.01);
+          transition: all 0.3s ease;
+        }
+        .secure-badge-icon {
+          width: 50px;
+          height: 50px;
+        }
+        .button-accent-block { background: #0f172a; transition: background 0.25s ease; }
+        
+        .secure-gateway-bar:hover {
+          background: #ffffff;
+          border-color: rgba(13, 110, 253, 0.2);
+          box-shadow: 0 15px 30px rgba(15, 23, 42, 0.04);
+        }
+        .secure-gateway-bar:hover .button-accent-block {
+          background: #0d6efd;
+        }
+
+        /* Accent Elements Styles */
         .badge-modern-pill {
-          background: rgba(13, 110, 253, 0.15);
-          border: 1px solid rgba(13, 110, 253, 0.25);
-          color: #38bdf8;
-          font-size: 10px;
+          background: rgba(13, 110, 253, 0.06);
+          border: 1px solid rgba(13, 110, 253, 0.15);
+          color: #0d6efd;
+          font-size: 11px;
           font-weight: 700;
           letter-spacing: 1.5px;
-          padding: 6px 14px;
+          padding: 6px 16px;
           border-radius: 30px;
-        }
-
-        .brand-pillars-minimal {
-          font-size: 11px;
-          letter-spacing: 1.5px;
-          color: #94a3b8;
-        }
-
-        .dot-divider {
-          width: 4px;
-          height: 4px;
-          background-color: #38bdf8;
-          border-radius: 50%;
           display: inline-block;
         }
-
-        .rainbow-connector-bar {
-          height: 3px;
-          width: 60px;
-          background: linear-gradient(90deg, #0d6efd 0%, #38bdf8 50%, #25d366 100%);
-          border-radius: 4px;
+        .contact-quick-links {
+          gap: 0.75rem;
+          flex-wrap: wrap;
+        }
+        .contact-link-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: #ffffff;
+          border: 1px solid rgba(15, 23, 42, 0.08);
+          color: #0f172a;
+          padding: 0.9rem 1rem;
+          border-radius: 999px;
+          transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+        .contact-link-pill:hover {
+          background: #eff6ff;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+          text-decoration: none;
         }
 
-        .text-slate-300 {
-          color: #cbd5e1;
-          line-height: 1.6;
-          opacity: 0.85;
+        .custom-telemetry-strip {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          width: fit-content;
         }
 
-        .icon-badge-static {
-          width: 32px;
-          height: 32px;
-          border-radius: 8px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .index-system-text {
-          font-size: 11px;
-        }
-
-        /* Pulse Telemetry Dot */
-        .pulse-indicator-dot {
-          width: 6px;
-          height: 6px;
-          background-color: #25d366;
-          border-radius: 50%;
-          display: inline-block;
-          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
-          animation: networkPulse 2s infinite;
-        }
-
-        @keyframes networkPulse {
-          0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-          70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
-          100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        /* Grid Channels Layout Modules */
-        .modern-channel-row {
-          background-color: #ffffff;
-          border: 1px solid #f1f5f9;
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .modern-icon-frame {
-          width: 44px;
-          height: 44px;
-          border-radius: 10px;
-          color: #ffffff;
+        .text-gradient-blue {
+          background: linear-gradient(135deg, #0d6efd 30%, #00d4ff 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .text-muted-tag {
           font-size: 9px;
           font-weight: 700;
-          letter-spacing: 0.8px;
+          letter-spacing: 1px;
           color: #94a3b8;
         }
 
-        .arrow-box {
-          width: 32px;
-          height: 32px;
-          transition: all 0.25s ease;
+        .pulse-indicator-dot {
+          width: 8px;
+          height: 8px;
+          background-color: #10b981;
+          border-radius: 50%;
+          display: inline-block;
+          animation: coreNetworkPulse 2s infinite;
         }
 
-        .arrow-icon, .action-text {
-          transition: all 0.25s ease;
+        @keyframes coreNetworkPulse {
+          0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+          70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+          100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
-        .action-text {
-          transform: translateX(6px);
-        }
-
-        /* Micro Interactive States */
-        .modern-channel-row:hover {
-          transform: translateY(-2px);
-          background-color: #ffffff;
-          box-shadow: 0 12px 24px var(--hover-glow);
-          border-color: transparent;
-        }
-
-        .modern-channel-row:hover .arrow-box {
-          background-color: #060b13 !important;
-          border-color: #060b13 !important;
-        }
-
-        .modern-channel-row:hover .arrow-icon {
-          color: #ffffff !important;
-          transform: translateX(1px);
-        }
-
-        .modern-channel-row:hover .action-text {
-          opacity: 1 !important;
-          transform: translateX(0);
-        }
-
-        .tech-grid-bg {
-          position: absolute;
-          inset: 0;
-          opacity: 0.03;
-          pointer-events: none;
-          background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
-          background-size: 24px 24px;
-        }
-
-        .z-index-2 { z-index: 2; }
-        .z-index-3 { z-index: 3; }
+        .card-action-footer { border-top: 1px solid #f1f5f9; }
+        .z-index-10 { z-index: 10; }
       `}</style>
-    </div>
-
-<Footer/>
     </>
   );
-}
+};
 
 export default Contact;

@@ -35,14 +35,14 @@ const SignInPage = () => {
                 JSON.stringify({ email: userToStore.email, token: userToStore.token, loggedIn: true })
             );
 
-            console.log('Sign-in successful!');
+            alert('Login successful! WELCOME TO eCROWN TECHNOLOGIES.');
             navigate('/dashboard');
             return;
         }
 
         localStorage.removeItem('authSession');
-        console.error('Invalid email or password.');
-        navigate('/error');
+        alert('Invalid credentials. Please verify details and try again.');
+        return;
     };
 
 

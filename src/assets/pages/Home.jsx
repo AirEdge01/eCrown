@@ -11,31 +11,10 @@ const Home = () => {
 
             <Navbar />
             <div className="landing-wrapper">
-                {/* --- PREMIUM ENTERPRISE GLASS NAVBAR --- */}
+            
 
                 <main>
-                    {/* --- SECTION 0: PREMIUM ENTERPRISE HERO --- */}
-                    {/* <section className="premium-hero-static">
-                        <div className="hero-overlay"></div>
-                        <div className="container position-relative z-3 text-white d-flex flex-column align-items-center justify-content-center min-vh-100 text-center">
-                            <div className="badge-premium mb-4">INTEGRATED INFRASTRUCTURE ARCHITECTURE</div>
-                            <h1 className="hero-title fw-900 mb-3">
-                                eCROWN TECHNOLOGIES O₂<br />
-                                <span className="text-gradient-blue">...excellence at its peak.</span>
-                            </h1>
-                            <p className="hero-subtitle mb-5 opacity-90 max-w-2xl">
-                                Engineering premium low-voltage structured cabling, enterprise surveillance setups, and high-performance network infrastructures for scalable operations.
-                            </p>
-                            <div className="d-flex flex-column flex-sm-row gap-3">
-                                <button className="btn-main-primary shadow-lg shimmer-effect d-flex align-items-center justify-content-center">
-                                    Get Started Now <Lucide.ChevronRight size={24} className="ms-2" />
-                                </button>
-
-                            </div>
-                        </div>
-                    </section> */}
-
-                    {/* --- SECTION 1: SYSTEM PERFORMANCE METRICS --- */}
+                    
                     {/* One Single, Unified Section Container */}
 <div 
     id="heroBgCarousel" 
@@ -51,7 +30,7 @@ const Home = () => {
         <div className="carousel-item active position-relative min-vh-100 w-100" data-bs-interval="3000">
             {/* Background Image asset */}
             <img 
-                src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2000&q=80" 
+                src="https://sysracks.com/wp-content/uploads/2022/10/largest-data-centers-in-the-world-1024x683.jpg" 
                 className="d-block w-100 h-100 position-absolute top-0 start-0 z-1 object-fit-cover min-vh-100" 
                 alt="Enterprise Data Center Server Room" 
             />
@@ -82,7 +61,7 @@ const Home = () => {
         <div className="carousel-item position-relative min-vh-100 w-100" data-bs-interval="3000">
             {/* Background Image asset */}
             <img 
-                src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=2000&q=80" 
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTih_PiTXBLv0ICbqQ-tWRfvpK7h5uLbShg0g&s" 
                 className="d-block w-100 h-100 position-absolute top-0 start-0 z-1 object-fit-cover min-vh-100" 
                 alt="Network Structured Cabling Infrastructure" 
             />
@@ -99,7 +78,7 @@ const Home = () => {
                     <span className="text-gradient-blue fw-black">...excellence at its peak.</span>
                 </h1>
                 <p className="hero-subtitle mb-5 opacity-95 lead" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)', maxWidth: '750px' }}>
-                    Engineering premium low-voltage structured cabling, enterprise surveillance setups, and high-performance network infrastructures for scalable operations.
+                    Architecting mission-critical structured cabling, enterprise grade surveillance ecosystems, and ultra-high-capacity network backbones engineered for absolute operational scalability.
                 </p>
                 <button className="btn-main-primary shadow-lg shimmer-effect d-flex align-items-center justify-content-center px-4 py-3 border-0 rounded">
                     Get Started Now <Lucide.ChevronRight size={25} className="ms-2" />
@@ -111,7 +90,7 @@ const Home = () => {
         <div className="carousel-item position-relative min-vh-100 w-100" data-bs-interval="3000">
             {/* Background Image asset */}
             <img 
-                src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=2000&q=80" 
+                src="https://thumbs.dreamstime.com/b/security-center-monitoring-multiple-screens-showing-surveillance-cameras-footage-modern-security-control-room-showing-multiple-381096525.jpg" 
                 className="d-block w-100 h-100 position-absolute top-0 start-0 z-1 object-fit-cover min-vh-100" 
                 alt="Modern Security Surveillance Monitoring Setup" 
             />
@@ -128,7 +107,7 @@ const Home = () => {
                     <span className="text-gradient-blue fw-black">...excellence at its peak.</span>
                 </h1>
                 <p className="hero-subtitle mb-5 opacity-95 lead" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)', maxWidth: '750px' }}>
-                    Engineering premium low-voltage structured cabling, enterprise surveillance setups, and high-performance network infrastructures for scalable operations.
+                   Precision Engineering. Total Security. Dynamic Scale. eCROWN Technologies O₂ builds the structural low-voltage cabling grids, high-tier surveillance setups, and high performance network infrastructures that drive modern business automation.
                 </p>
                 <button className="btn-main-primary shadow-lg shimmer-effect d-flex align-items-center justify-content-center px-4 py-3 border-0 rounded">
                     Get Started Now <Lucide.ChevronRight size={25} className="ms-2" />
@@ -145,18 +124,18 @@ const Home = () => {
                             <div className="row align-items-center g-5">
                                 <div className="col-lg-6">
                                     <h4 className="text-brand-blue fw-bold mb-1">Your Operational Blueprint.</h4>
-                                    <h2 className="text-brand-dark display-6 fw-bold mb-4">We Handle Your Mission-Critical Hardware Infrastructure.</h2>
+                                    <h2 className="text-brand-dark display-6 fw-bold mb-4">We Handle Your Mission Critical Hardware Infrastructure.</h2>
                                     <div className="text-muted mb-4 pe-lg-5">
-                                        <p>When you partner with eCROWN TECHNOLOGIES O₂, you acquire premium low-voltage blueprints and structured frameworks designed to maximize data delivery, fortify facility protection, and sustain cross-platform efficiency.</p>
+                                        <p>When you partner with eCROWN TECHNOLOGIES O₂, you acquire premium low-voltage blueprints and structured frameworks designed to maximize data delivery, fortify facility protection, and sustain cross platform efficiency.</p>
                                     </div>
                                     <Link to="/request" className="text-decoration-none">
-                                        <button className="btn btn-brand-primary rounded-pill px-4 py-2 fw-bold">Schedule On-Site Inspection</button>
+                                        <button className="btn btn-brand-primary rounded-pill px-4 py-2 fw-bold">Request Service</button>
                                     </Link>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="row g-2">
                                         <div className="col-4">
-                                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?w=600" className="w-100 h-100 d-block object-fit-cover rounded shadow-sm minimal-image" alt="Server Infrastructure" />
+                                            <img src="https://sysracks.com/wp-content/uploads/2022/10/largest-data-centers-in-the-world-1024x683.jpg" className="w-100 h-100 d-block object-fit-cover rounded shadow-sm minimal-image" alt="Server Infrastructure" />
                                         </div>
                                         <div className="col-4">
                                             <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600" className="w-100 h-100 d-block object-fit-cover rounded shadow-sm minimal-image" alt="Data Network Nodes" />
@@ -216,7 +195,7 @@ const Home = () => {
                                             { title: "Corporate Facilities", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600" },
                                             { title: "Logistics Hubs", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600" },
                                             { title: "Medical Centers", img: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600" },
-                                            { title: "Data Command Labs", img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?w=600" }
+                                            { title: "Data Command Labs", img: "https://media.licdn.com/dms/image/v2/C4E12AQFkxH5U-lIXhg/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1520184568316?e=2147483647&v=beta&t=okVhRwhboCNVMXFK0TZIIWu0P9o8xkW5S9gqWJ6iqvY" }
                                         ].map((industry, i) => (
                                             <div key={i} className="col-md-3 col-6">
                                                 <div className="industry-card position-relative overflow-hidden rounded mb-3 shadow-sm" style={{ height: '280px' }}>
@@ -275,8 +254,12 @@ const Home = () => {
                             <p className="text-muted lead mb-5">Partner with eCROWN TECHNOLOGIES O₂ to anchor your physical network assets cleanly.</p>
                             <div className="d-flex flex-wrap justify-content-center gap-3">
 
-                                <Link to="/request" className="text-decoration-none">
-                                    <button className="btn btn-brand-primary px-5 py-3 fw-bold rounded-pill shadow">Request Systems Consultation</button>
+                                <Link to="/signup" className="text-decoration-none">
+                                    <button className="btn btn-brand-primary px-5 py-3 fw-bold rounded-pill shadow">Get Started </button>
+                                </Link>
+
+                                <Link to="/signin" className="text-decoration-none">
+                                    <button className="btn btn-brand-primary px-5 py-3 fw-bold rounded-pill shadow">Sign In</button>
                                 </Link>
                             </div>
                         </div>

@@ -3,46 +3,12 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
+import Dash from '../components/Dash';
 
 
 
 const StructuredCabling = () => {
   
-  // const [isAuthorized, setIsAuthorized] = useState(false);
-  //   const [isLoading, setIsLoading] = useState(true);
-  
-  //   useEffect(() => {
-  //     const rawData = localStorage.getItem('userData');
-      
-  //     // Catch null strings or uncreated storage items
-  //     if (!rawData || rawData === 'null' || rawData === 'undefined') {
-  //       window.location.replace('/error');
-  //       return;
-  //     }
-  
-  //     try {
-  //       const parsed = JSON.parse(rawData);
-  
-  //       // CHANGE 'token' TO YOUR REAL LOGIN SPECIFIC KEY (e.g., parsed.email or parsed.id)
-  //       if (!parsed || !parsed.token) { 
-  //         console.warn("Security Breach: Missing inner validation token.");
-  //         localStorage.removeItem('userData'); // Wipe bad data
-  //         window.location.replace('/error');
-  //         return;
-  //       }
-  
-  //       // If key exists, grant page visibility
-  //       setIsAuthorized(true);
-  //       setIsLoading(false);
-  //     } catch (e) {
-  //       localStorage.removeItem('userData');
-  //       window.location.replace('/error');
-  //     }
-  //   }, []);
-  
-  //   if (isLoading || !isAuthorized) {
-  //     return null; // Absolute white screen protection while checking
-  //   }
   
 
   return (
@@ -50,7 +16,7 @@ const StructuredCabling = () => {
       <Navbar />
     
     <div className="container-fluid p-0">
-      
+      <Dash/>
       {/* 1. HERO SECTION */}
       <section style={styles.hero}>
         <div className="container">
@@ -82,7 +48,7 @@ const StructuredCabling = () => {
           </div>
           <div className="col-md-6">
             <img 
-              src="https://images.unsplash.com/photo-1581092160607-ee2256127d14?auto=format&fit=crop&w=800&q=80" 
+              src="https://www.onnecgroup.com/app/uploads/2025/02/Image-bank-2024-3-1024x621.jpg" 
               alt="Technician managing structured cabling" 
               className="img-fluid rounded shadow-lg" 
             />
@@ -96,7 +62,7 @@ const StructuredCabling = () => {
           <h2 className="text-center" style={styles.sectionTitle}>Expert Installation Services</h2>
           <div className="row g-4 mt-3">
             {[
-              { title: "Professional Wiring", desc: "Expert routing and management of all network cables.", img: "https://images.unsplash.com/photo-1558494949-ef010bbbb317?auto=format&fit=crop&w=600&q=80" },
+              { title: "Professional Wiring", desc: "Expert routing and management of all network cables.", img: "https://envizionit.com/wp-content/uploads/2021/09/Network-Installation-Services-In-Grand-Rapids.jpg" },
               { title: "Unified Connectivity", desc: "Connecting servers, internet, phones, and devices seamlessly.", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" },
               { title: "Network Optimization", desc: "Building networks that are neat, fast, and highly reliable.", img: "https://images.unsplash.com/photo-1593642532744-d377ab507dc8?auto=format&fit=crop&w=600&q=80" }
             ].map((service, i) => (
@@ -120,7 +86,7 @@ const StructuredCabling = () => {
         <div className="row g-4">
           <div className="col-lg-6">
             <div className="card h-100 border-0 shadow-lg overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" className="card-img-top" alt="Corporate" style={styles.bigImage} />
+              <img src="https://devsdata.com/wp-content/uploads/2024/09/Top10Data_Main.webp" className="card-img-top" alt="Corporate" style={styles.bigImage} />
               <div className="card-body p-4 text-center">
                 <h3 className="fw-bold">Corporate Companies</h3>
                 <p className="text-muted">High-density data solutions for modern business operations.</p>
@@ -129,7 +95,7 @@ const StructuredCabling = () => {
           </div>
           <div className="col-lg-6">
             <div className="card h-100 border-0 shadow-lg overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80" className="card-img-top" alt="Education" style={styles.bigImage} />
+              <img src="https://cdn.prod.website-files.com/650dea2c18a075f1e106239d/673e1b69173944a2d4a33f18_How%20to%20Achieve%20Safe%20and%20Efficient%20Connectivity%20for%20Education%20with%20School%20Wi-Fi%20Solutions.jpg" className="card-img-top" alt="Education" style={styles.bigImage} />
               <div className="card-body p-4 text-center">
                 <h3 className="fw-bold">Educational Schools</h3>
                 <p className="text-muted">Safe, reliable campus-wide connectivity for students and faculty.</p>
@@ -138,7 +104,7 @@ const StructuredCabling = () => {
           </div>
           <div className="col-lg-6">
             <div className="card h-100 border-0 shadow-lg overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=1200&q=80" className="card-img-top" alt="Banking" style={styles.bigImage} />
+              <img src="https://theeconomictimes.com.ng/wp-content/uploads/2017/05/Banks-In-Nigeria.jpg" className="card-img-top" alt="Banking" style={styles.bigImage} />
               <div className="card-body p-4 text-center">
                 <h3 className="fw-bold">Banking Institutions</h3>
                 <p className="text-muted">Secure, fast, and protected networks for financial transactions.</p>
@@ -147,7 +113,7 @@ const StructuredCabling = () => {
           </div>
           <div className="col-lg-6">
             <div className="card h-100 border-0 shadow-lg overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80" className="card-img-top" alt="Hospitality" style={styles.bigImage} />
+              <img src="https://www.snetconnect.com/wp-content/uploads/2025/05/hospitality-phone-systems-3.jpg" className="card-img-top" alt="Hospitality" style={styles.bigImage} />
               <div className="card-body p-4 text-center">
                 <h3 className="fw-bold">Hospitality Hotels</h3>
                 <p className="text-muted">Seamless Wi-Fi and communication systems for guest satisfaction.</p>
@@ -187,8 +153,8 @@ const StructuredCabling = () => {
         <div className="row g-4">
           {[
             { title: "Professional Wiring", desc: "Expert network wiring and cable routing.", img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" },
-            { title: "Unified Systems", desc: "Connecting servers, internet, and phones.", img: "https://images.unsplash.com/photo-1520869562383-e7baa593845f?auto=format&fit=crop&w=600&q=80" },
-            { title: "Rack Management", desc: "High-density rack and patch management.", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" },
+            { title: "Unified Systems", desc: "Connecting servers, internet, and phones.", img: "https://www.securetech.com.ng/wp-content/uploads/2021/02/unified-access-control-explained-1.jpg" },
+            { title: "Rack Management", desc: "High-density rack and patch management.", img: "https://miro.medium.com/v2/resize:fit:1400/0*sWUx_Fa1HV0Q0G-q.jpg" },
             { title: "Scalable Infrastructure", desc: "Future-proof design for business growth.", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" }
           ].map((item, i) => (
             <div key={i} className="col-md-3">

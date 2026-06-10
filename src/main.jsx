@@ -5,7 +5,6 @@ import './index.css';
 import Home from './assets/pages/Home.jsx';
 import About from './assets/pages/About.jsx';
 import Contact from './assets/pages/Contact.jsx';
-import Request from './assets/pages/Request.jsx';
 import Avdigital from './assets/pages/Avdigital.jsx';
 import Cctv from './assets/pages/Cctv.jsx';
 import LowVoltage from './assets/pages/LowVoltage.jsx';
@@ -15,14 +14,12 @@ import SelfCheckout from './assets/pages/SelfCheckout.jsx';
 import Satellite from './assets/pages/Satellite.jsx';
 import Server from './assets/pages/Server.jsx';
 import Wireless from './assets/pages/Wireless.jsx';
-// import OrderPage from './assets/pages/OrderPage.jsx';
+import OrderPage from './assets/pages/OrderPage.jsx';
 import SignUpPage from './assets/pages/SignUpPage.jsx';
 import SignInPage from './assets/pages/SignInPage.jsx';
 import ServicesDashboard from './assets/pages/ServicesDashboard.jsx';
 import RequestInstallation from './assets/pages/RequestInstallation.jsx';
 import Error from './assets/pages/Error.jsx';
-// import Signup from './assets/pages/Signup.jsx';
-// import SignIn from './assets/pages/Signin.jsx';
 import ProtectedRoute from './assets/components/ProtectedRoute.jsx';
 
 // Sanitize stored auth on app start: remove authSession if it doesn't match a registered user
@@ -54,26 +51,21 @@ import ProtectedRoute from './assets/components/ProtectedRoute.jsx';
 })();
 
 
-
-
-
-
-
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
-  { path: '/about', element: <ProtectedRoute><About /></ProtectedRoute> },
-  { path: '/contact', element: <ProtectedRoute><Contact /></ProtectedRoute> },
+  { path: '/about', element: <About />},
+  { path: '/contact', element: <Contact /> },
   { path: '/request', element: <ProtectedRoute><Request /></ProtectedRoute> },
   { path: '/digital', element: <ProtectedRoute><Avdigital /></ProtectedRoute> },
   { path: '/cctv', element: <ProtectedRoute><Cctv /></ProtectedRoute> },
-  { path: '/low', element: <ProtectedRoute><LowVoltage /></ProtectedRoute> },
+  { path: '/low', element: <ProtectedRoute><LowVoltage /></ProtectedRoute>  },
   { path: '/structure', element: <ProtectedRoute><Structure /></ProtectedRoute> },
   { path: '/pos', element: <ProtectedRoute><Pos /></ProtectedRoute> },
   { path: '/self', element: <ProtectedRoute><SelfCheckout /></ProtectedRoute> },
   { path: '/lite', element: <ProtectedRoute><Satellite /></ProtectedRoute> },
   { path: '/server', element: <ProtectedRoute><Server /></ProtectedRoute> },
   { path: '/wireless', element: <ProtectedRoute><Wireless /></ProtectedRoute> },
-  // {path: '/order', element: <OrderPage /> },
+  {path: '/order', element: <OrderPage /> },
   { path: '/signup', element: <SignUpPage /> },
   { path: '/signin', element: <SignInPage /> },
   { path: '/Sign', element: <Navigate to="/signin" replace /> },
@@ -81,8 +73,6 @@ const router = createBrowserRouter([
   { path: '/dashboard', element: <ProtectedRoute><ServicesDashboard /></ProtectedRoute> },
   { path: '/install', element: <ProtectedRoute><RequestInstallation /></ProtectedRoute> },
   { path: '/error', element: <Error /> },
-  { path: '/register', element: <Navigate to="/signup" replace /> },
-  { path: '/login', element: <Navigate to="/signin" replace /> },
   { path: '*', element: <Navigate to="/error" replace /> },
 ]);
 
