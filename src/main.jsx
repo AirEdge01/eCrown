@@ -2,6 +2,12 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom'
+import './index.css'
+// import App from './App.jsx'
+
+
+
 import './index.css';
 import Home from './assets/pages/Home.jsx';
 import About from './assets/pages/About.jsx';
