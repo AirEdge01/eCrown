@@ -1,52 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import * as Lucide from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const About = () => {
-  // const [isAuthorized, setIsAuthorized] = useState(false);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const sessionRaw = localStorage.getItem('authSession');
-  //   const userDataRaw = localStorage.getItem('userData');
-
-  //   const isValidSession = () => {
-  //     if (!sessionRaw || sessionRaw === 'null' || sessionRaw === 'undefined') return false;
-  //     if (!userDataRaw || userDataRaw === 'null' || userDataRaw === 'undefined') return false;
-  //     try {
-  //       const session = JSON.parse(sessionRaw);
-  //       const user = JSON.parse(userDataRaw);
-  //       return (
-  //         session &&
-  //         user &&
-  //         session.loggedIn === true &&
-  //         typeof session.token === 'string' &&
-  //         session.token.length > 0 &&
-  //         typeof user.email === 'string' &&
-  //         user.email.length > 0 &&
-  //         session.email === user.email
-  //       );
-  //     } catch {
-  //       return false;
-  //     }
-  //   };
-
-  //   if (!isValidSession()) {
-  //     localStorage.removeItem('authSession');
-  //     navigate('/error', { replace: true });
-  //     return;
-  //   }
-
-  //   setIsAuthorized(true);
-  //   setIsLoading(false);
-  // }, [navigate]);
-
-  // if (isLoading || !isAuthorized) {
-  //   return null; // Absolute white screen protection while checking
-  // }
 
   return (
     <>

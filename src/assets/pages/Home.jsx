@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import logo from '../ecrowN.png';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { BrowserRouter } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -16,7 +15,6 @@ const Home = () => {
 
                 <main>
                     
-                    {/* One Single, Unified Section Container */}
 <div 
     id="heroBgCarousel" 
     className="carousel slide position-relative min-vh-100 overflow-hidden w-100" 
