@@ -33,17 +33,17 @@
 // }
 
 // export default App
-import Home from './assets/pages/Home.jsx';
+// import Home from './assets/pages/Home.jsx';
 
-export default function App() {
-    return (
-        <div className="app-root">
-            <Home />
-            <style>{`
-        .app-root {
-          min-height: 100vh;
-        }
-      `}</style>
-        </div>
-    );
-}
+// export default function App() {
+//     return (
+//         <div className="app-root">
+//             <Home />
+//             <style>{`
+//         .app-root {
+//           min-height: 100vh;
+//         }
+//       `}</style>
+//         </div>
+//     );
+// }
