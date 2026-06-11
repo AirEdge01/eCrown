@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Lucide from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../ecrowN.png';
 
 const Navbar = () => {

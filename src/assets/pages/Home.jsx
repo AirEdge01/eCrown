@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../ecrowN.png';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { BrowserRouter } from 'react-router-dom';
 
 const Home = () => {
     return (
