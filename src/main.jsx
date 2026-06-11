@@ -1,7 +1,6 @@
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import Home from './assets/pages/Home.jsx';
 import About from './assets/pages/About.jsx';
@@ -51,12 +50,10 @@ import ProtectedRoute from './assets/components/ProtectedRoute.jsx';
   }
 })();
 
-
 const router = createBrowserRouter([
   { path: '/', element: <Home /> },
   { path: '/about', element: <About />},
   { path: '/contact', element: <Contact /> },
-  { path: '/request', element: <ProtectedRoute><Request /></ProtectedRoute> },
   { path: '/digital', element: <ProtectedRoute><Avdigital /></ProtectedRoute> },
   { path: '/cctv', element: <ProtectedRoute><Cctv /></ProtectedRoute> },
   { path: '/low', element: <ProtectedRoute><LowVoltage /></ProtectedRoute>  },
@@ -66,7 +63,7 @@ const router = createBrowserRouter([
   { path: '/lite', element: <ProtectedRoute><Satellite /></ProtectedRoute> },
   { path: '/server', element: <ProtectedRoute><Server /></ProtectedRoute> },
   { path: '/wireless', element: <ProtectedRoute><Wireless /></ProtectedRoute> },
-  {path: '/order', element: <OrderPage /> },
+  { path: '/order', element: <OrderPage /> },
   { path: '/signup', element: <SignUpPage /> },
   { path: '/signin', element: <SignInPage /> },
   { path: '/Sign', element: <Navigate to="/signin" replace /> },
