@@ -13,7 +13,7 @@ const Button = () => {
             whiteSpace: 'nowrap'
           }}
         >
-          <span className="fs-5">📋</span> Request Architecture Quote
+          <span className="fs-5">📋</span> Request Service
         </a>
       </div>
     </>
