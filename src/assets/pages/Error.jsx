@@ -9,7 +9,7 @@ const Error = () => {
 
         
         <div className="error-page-wrapper">
-            <Navbar />
+            {/* <Navbar /> */}
             <div className="error-glass-card text-center">
                 {/* Icon Header */}
                 <div className="icon-container mb-4">
@@ -27,14 +27,14 @@ const Error = () => {
                 {/* Action Buttons */}
                 <div className="d-grid gap-3">
                     <button className="btn-error-primary">
-                         <Link to="/signin" className="text-decoration-none text-white d-flex align-items-center justify-content-center gap-2">
+                         <Link to="/signi" className="text-decoration-none text-white d-flex align-items-center justify-content-center gap-2">
                         <Lucide.LogIn size={20} className="me-2" /> Secure Sign In
                                 </Link>
                     </button>
 
                     <div className="d-flex gap-2">
                         <button className="btn-error-outline flex-grow-1">
-                                <Link to="/signup" className="text-decoration-none text-white d-flex align-items-center gap-1">
+                                <Link to="/signu" className="text-decoration-none text-white d-flex align-items-center gap-1">
                             <Lucide.UserPlus size={18} className="me-2" /> Register Account
                             </Link>
                         </button>

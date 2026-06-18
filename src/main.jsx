@@ -59,9 +59,9 @@ import ProtectedRoute from './assets/components/ProtectedRoute.jsx';
 
 
 const router = createBrowserRouter([
-  { path: '/', element: <Home /> },
-  { path: '/about', element: <About />},
-  { path: '/contact', element: <Contact /> },
+  { path: '/home', element:<ProtectedRoute> <Home />  </ProtectedRoute>},
+  { path: '/about', element:<ProtectedRoute> <About /> </ProtectedRoute>},
+  { path: '/contact', element:<ProtectedRoute> <Contact />  </ProtectedRoute>},
   { path: '/request', element: <ProtectedRoute><Request /></ProtectedRoute> },
   { path: '/digital', element: <ProtectedRoute><Avdigital /></ProtectedRoute> },
   { path: '/cctv', element: <ProtectedRoute><Cctv /></ProtectedRoute> },
@@ -72,14 +72,12 @@ const router = createBrowserRouter([
   { path: '/lite', element: <ProtectedRoute><Satellite /></ProtectedRoute> },
   { path: '/server', element: <ProtectedRoute><Server /></ProtectedRoute> },
   { path: '/wireless', element: <ProtectedRoute><Wireless /></ProtectedRoute> },
-  {path: '/order', element: <OrderPage /> },
-  { path: '/signup', element: <SignUpPage /> },
-  { path: '/signin', element: <SignInPage /> },
-  { path: '/Sign', element: <Navigate to="/signin" replace /> },
-  { path: '/SignUp', element: <Navigate to="/signup" replace /> },
+  {path: '/order', element:<ProtectedRoute> <OrderPage /> </ProtectedRoute>},
+  { path: '/Sign', element:<ProtectedRoute> <Navigate to="/signin" replace /> </ProtectedRoute>},
+  { path: '/SignUp', element:<ProtectedRoute> <Navigate to="/signup" replace /> </ProtectedRoute>},
   { path: '/dashboard', element: <ProtectedRoute><ServicesDashboard /></ProtectedRoute> },
   { path: '/install', element: <ProtectedRoute><RequestInstallation /></ProtectedRoute> },
-  { path: '/error', element: <Error /> },
+  { path: '/', element: <Error /> },
   { path: '*', element: <Navigate to="/error" replace /> },
 ]);
 
