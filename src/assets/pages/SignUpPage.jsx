@@ -37,7 +37,7 @@ const SignUpPage = () => {
         setLoading(true);
         try {
             const res = await axios.post(
-                "http://localhost:2000/user/signup",
+                "https://ecrownode.onrender.com/user/signup",
                 newUser
             );
             

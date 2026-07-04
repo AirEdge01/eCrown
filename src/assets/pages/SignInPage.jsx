@@ -33,7 +33,7 @@ const SignInPage = () => {
 
         try {
             const res = await axios.post(
-                'http://localhost:2000/user/signin',
+                'https://ecrownode.onrender.com/user/signin',
                 {
                     email: email.trim(),
                     password: password.trim(),
@@ -122,9 +122,9 @@ const SignInPage = () => {
                                         <div className="mb-3">
                                             <div className="d-flex justify-content-between align-items-center mb-1">
                                                 <label className="form-label small fw-semibold text-brand-dark mb-0">Password</label>
-                                                <a href="#forgot" className="text-decoration-none text-primary small fw-medium">
+                                                {/* <a href="#forgot" className="text-decoration-none text-primary small fw-medium">
                                                     Forgot Password?
-                                                </a>
+                                                </a> */}
                                             </div>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">

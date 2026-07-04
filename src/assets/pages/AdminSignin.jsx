@@ -30,7 +30,7 @@ const AdminSignin = () => {
 
         try {
             const res = await axios.post(
-                'http://localhost:2000/user/signin',
+                'https://ecrownode.onrender.com/user/signin',
                 {
                     email: email.trim(),
                     password: password.trim(),
