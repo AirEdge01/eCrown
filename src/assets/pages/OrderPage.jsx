@@ -41,7 +41,7 @@ const OrderPage = () => {
         if (!normalized) return 'https://images.unsplash.com/photo-1557672172-298e090bd0f1';
         if (normalized.startsWith('http://') || normalized.startsWith('https://') || normalized.startsWith('data:image/')) return normalized;
         if (normalized.startsWith('/')) return normalized;
-        return `https://ecrownode.onrender.com/${normalized.replace(/\\/g, '/')}`;
+        return `https://ecrownode-1.onrender.com/${normalized.replace(/\\/g, '/')}`;
     };
 
     const mergeProductsWithLocalCache = (backendProducts = []) => {
@@ -61,8 +61,8 @@ const OrderPage = () => {
     const fetchCatalogProducts = async (showLoader = false) => {
         if (showLoader) setIsLoadingProducts(true);
         const productEndpoints = [
-            'https://ecrownode.onrender.com/api/products',
-            'https://ecrownode.onrender.com/api/admin/products'
+            'https://ecrownode-1.onrender.com/api/products',
+            'https://ecrownode-1.onrender.com/api/admin/products'
         ];
 
         for (const url of productEndpoints) {
@@ -200,7 +200,7 @@ const OrderPage = () => {
         };
 
         try {
-            const response = await axios.post('https://ecrownode.onrender.com/api/orders', backendOrderPayload);
+            const response = await axios.post('https://ecrownode-1.onrender.com/api/orders', backendOrderPayload);
             const createdOrder = response.data?.order || response.data?.data || response.data;
             const targetOrderId = createdOrder?._id || createdOrder?.id;
 

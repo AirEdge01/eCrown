@@ -33,7 +33,7 @@ const SignInPage = () => {
 
         try {
             const res = await axios.post(
-                'https://ecrownode.onrender.com/user/signin',
+                'https://ecrownode-1.onrender.com/user/signin',
                 {
                     email: email.trim(),
                     password: password.trim(),

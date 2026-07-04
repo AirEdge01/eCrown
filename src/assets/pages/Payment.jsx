@@ -62,7 +62,7 @@ const PaymentPage = () => {
             }
         };
 
-        axios.post('https://ecrownode.onrender.com/pay', payload)
+        axios.post('https://ecrownode-1.onrender.com/pay', payload)
             .then((result) => {
                 const accessCode = result.data?.access_code || 
                                    result.data?.data?.access_code || 
@@ -80,7 +80,7 @@ const PaymentPage = () => {
                     onSuccess: async (response) => {
                         try {
                             // 🔄 SYNC: Safe endpoint mapping using the verified order ID value
-                            await axios.put(`https://ecrownode.onrender.com/api/admin/orders/${orderId}`, {
+                            await axios.put(`https://ecrownode-1.onrender.com/api/admin/orders/${orderId}`, {
                                 status: 'Paid',
                                 reference: response.reference
                             });

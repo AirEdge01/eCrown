@@ -50,7 +50,7 @@ const AdminPage = () => {
     const fetchAdminData = async () => {
         setIsLoadingOrders(true);
         try {
-            const response = await axios.get('https://ecrownode.onrender.com/api/admin/orders', {
+            const response = await axios.get('https://ecrownode-1.onrender.com/api/admin/orders', {
                 headers: getAdminAuthHeaders()
             });
             if (response.data && response.data.orders) {
@@ -68,8 +68,8 @@ const AdminPage = () => {
     const fetchCatalogProducts = async () => {
         setIsLoadingProducts(true);
         const productEndpoints = [
-            'https://ecrownode.onrender.com/api/products',
-            'https://ecrownode.onrender.com/admin/products'
+            'https://ecrownode-1.onrender.com/api/products',
+            'https://ecrownode-1.onrender.com/admin/products'
         ];
 
         for (const url of productEndpoints) {
@@ -154,7 +154,7 @@ const AdminPage = () => {
                 countInStock: Number(productForm.countInStock || 10)
             };
 
-            const response = await axios.post('https://ecrownode.onrender.com/api/admin/products', productPayload, {
+            const response = await axios.post('https://ecrownode-1.onrender.com/api/admin/products', productPayload, {
                 headers: {
                     ...getAdminAuthHeaders(),
                     'Content-Type': 'application/json'
@@ -220,8 +220,8 @@ const AdminPage = () => {
         }
 
         const deletionEndpoints = [
-            `https://ecrownode.onrender.com/api/admin/products/${productId}`,
-            `https://ecrownode.onrender.com/api/products/${productId}`
+            `https://ecrownode-1.onrender.com/api/admin/products/${productId}`,
+            `https://ecrownode-1.onrender.com/api/products/${productId}`
         ];
 
         let deletionSuccess = false;
@@ -250,7 +250,7 @@ const AdminPage = () => {
 
     const handleApproveOrder = async (orderId) => {
         try {
-            const response = await axios.put(`https://ecrownode.onrender.com/api/admin/orders/${orderId}`, {
+            const response = await axios.put(`https://ecrownode-1.onrender.com/api/admin/orders/${orderId}`, {
                 status: 'Processing'
             });
 
@@ -272,7 +272,7 @@ const AdminPage = () => {
         if (!normalized) return 'https://images.unsplash.com/photo-1557672172-298e090bd0f1';
         if (normalized.startsWith('http://') || normalized.startsWith('https://') || normalized.startsWith('data:image/')) return normalized;
         if (normalized.startsWith('/')) return normalized;
-        return `https://ecrownode.onrender.com/${normalized.replace(/\\/g, '/')}`;
+        return `https://ecrownode-1.onrender.com/${normalized.replace(/\\/g, '/')}`;
     };
 
     const ordersArray = Array.isArray(orders) ? orders : [];
