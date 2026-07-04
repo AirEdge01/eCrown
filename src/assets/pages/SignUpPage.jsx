@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // FIXED: Destructured imports to stop the silent "undefined" component crash
 import { User, Mail, Lock, UserPlus } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -36,7 +36,7 @@ const SignUpPage = () => {
 
         setLoading(true);
         try {
-            const res = await axios.post(
+            await axios.post(
                 "https://ecrownode-1.onrender.com/user/signup",
                 newUser
             );
@@ -89,13 +89,15 @@ const SignUpPage = () => {
 
                                         {/* First Name Input */}
                                         <div className="mb-3">
-                                            <label className="form-label small fw-semibold text-brand-dark">First Name</label>
+                                            <label htmlFor="firstNameInput" className="form-label small fw-semibold text-brand-dark">First Name</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
                                                     <User size={18} />
                                                 </span>
                                                 <input
+                                                    id="firstNameInput"
                                                     type="text"
+                                                    name="firstName"
                                                     placeholder="First Name"
                                                     required
                                                     className="w-100 custom-input py-2 px-1"
@@ -107,13 +109,15 @@ const SignUpPage = () => {
 
                                         {/* Last Name Input */}
                                         <div className="mb-3">
-                                            <label className="form-label small fw-semibold text-brand-dark">Last Name</label>
+                                            <label htmlFor="lastNameInput" className="form-label small fw-semibold text-brand-dark">Last Name</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
                                                     <User size={18} />
                                                 </span>
                                                 <input
+                                                    id="lastNameInput"
                                                     type="text"
+                                                    name="lastName"
                                                     placeholder="Last Name"
                                                     required
                                                     className="w-100 custom-input py-2 px-1"
@@ -125,13 +129,15 @@ const SignUpPage = () => {
 
                                         {/* Email Address Input */}
                                         <div className="mb-3">
-                                            <label className="form-label small fw-semibold text-brand-dark">Corporate Email</label>
+                                            <label htmlFor="emailInput" className="form-label small fw-semibold text-brand-dark">Corporate Email</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
                                                     <Mail size={18} />
                                                 </span>
                                                 <input
+                                                    id="emailInput"
                                                     type="email"
+                                                    name="email"
                                                     placeholder="Email Address"
                                                     required
                                                     className="w-100 custom-input py-2 px-1"
@@ -143,13 +149,15 @@ const SignUpPage = () => {
 
                                         {/* Password Input */}
                                         <div className="mb-3">
-                                            <label className="form-label small fw-semibold text-brand-dark">Password</label>
+                                            <label htmlFor="passwordInput" className="form-label small fw-semibold text-brand-dark">Password</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
                                                     <Lock size={18} />
                                                 </span>
                                                 <input
+                                                    id="passwordInput"
                                                     type="password"
+                                                    name="password"
                                                     placeholder="Password"
                                                     required
                                                     className="w-100 custom-input py-2 px-1"
@@ -172,11 +180,11 @@ const SignUpPage = () => {
                                             </label>
                                         </div>
 
-                                        {/* Submit Action Button */}
+                                        {/* Submit Action Button - FIXED: Changed invalid py-2.5 to py-3 */}
                                         <button
                                             type="submit"
                                             disabled={loading}
-                                            className="btn btn-submit-action w-100 py-2.5 fw-bold d-flex align-items-center justify-content-center gap-2 mb-4"
+                                            className="btn btn-submit-action w-100 py-3 fw-bold d-flex align-items-center justify-content-center gap-2 mb-4"
                                         >
                                             {loading ? 'Processing Registration...' : 'Register Account'} <UserPlus size={18} />
                                         </button>
