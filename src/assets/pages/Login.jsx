@@ -1,58 +1,35 @@
-import React, { useState, useEffect } from 'react';
-// FIXED: Destructured imports to stop the silent "undefined" component crash
-import { User, Mail, Lock, UserPlus } from 'lucide-react';
+import React, { useState } from 'react';
+import * as Lucide from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
-const SignUpPage = () => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    
+const Login = () => {
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setError("");
-
-        if (!firstName || !lastName || !email || !password) {
-            setError("Please fill in all fields");
-            return;
-        }
-
-        // FIXED: Explicitly naming payload keys as firstName and lastName 
-        // to match your backend's NodeMailer destructuring expectations.
-        const newUser = {
-            firstName: firstName.trim(),
-            lastName: lastName.trim(),
-            email: email.trim().toLowerCase(),
-            password: password.trim(),
+        const normalizedEmail = email.trim().toLowerCase();
+        const userData = {
+            firstName,
+            lastName,
+            email: normalizedEmail,
+            password,
+            token: `token_${Date.now()}`,
         };
+        console.log(userData);
 
-        setLoading(true);
-        try {
-            const res = await axios.post(
-                "http://localhost:2000/user/signup",
-                newUser
-            );
-            
-            // FIXED ALERT: Safely uses the active local hook states to 
-            // ensure the user's name is NEVER blank or undefined.
-            alert(`Successfully Registered! Welcome, ${firstName} ${lastName}.`);
-            
-            navigate("/signin"); 
-        } catch (err) {
-            console.error("Signup error:", err.response || err);
-            setError(err.response?.data?.message || "Signup failed, try again");
-        } finally {
-            setLoading(false);
-        }
-    };
+        localStorage.setItem('userData', JSON.stringify(userData));
+        localStorage.removeItem('authSession');
+
+        navigate('/signin');
+    }
 
     return (
         <>
@@ -61,6 +38,7 @@ const SignUpPage = () => {
                 <div className="container pt-0 pb-4">
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-10 col-lg-6 col-xl-5">
+                            {/* Glassmorphic Sign Up Card */}
                             <div className="card signup-card border-0 p-4 p-sm-5">
                                 <div className="card-body">
 
@@ -77,13 +55,6 @@ const SignUpPage = () => {
                                         </p>
                                     </div>
 
-                                    {/* Error Notification Alert Banner */}
-                                    {error && (
-                                        <div className="alert alert-danger small py-2 px-3 border-0 mb-4" style={{ borderRadius: '12px', background: 'rgba(220, 53, 69, 0.08)', color: '#dc3545' }}>
-                                            {error}
-                                        </div>
-                                    )}
-
                                     {/* Action Form */}
                                     <form onSubmit={handleSubmit}>
 
@@ -92,12 +63,13 @@ const SignUpPage = () => {
                                             <label className="form-label small fw-semibold text-brand-dark">First Name</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
-                                                    <User size={18} />
+                                                    <Lucide.User size={18} />
                                                 </span>
                                                 <input
                                                     type="text"
                                                     placeholder="First Name"
                                                     required
+                                                    name='firstName'
                                                     className="w-100 custom-input py-2 px-1"
                                                     value={firstName}
                                                     onChange={(e) => setFirstName(e.target.value)}
@@ -110,12 +82,13 @@ const SignUpPage = () => {
                                             <label className="form-label small fw-semibold text-brand-dark">Last Name</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
-                                                    <User size={18} />
+                                                    <Lucide.User size={18} />
                                                 </span>
                                                 <input
                                                     type="text"
                                                     placeholder="Last Name"
                                                     required
+                                                    name='lastName'
                                                     className="w-100 custom-input py-2 px-1"
                                                     value={lastName}
                                                     onChange={(e) => setLastName(e.target.value)}
@@ -128,12 +101,13 @@ const SignUpPage = () => {
                                             <label className="form-label small fw-semibold text-brand-dark">Corporate Email</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
-                                                    <Mail size={18} />
+                                                    <Lucide.Mail size={18} />
                                                 </span>
                                                 <input
                                                     type="email"
                                                     placeholder="Email Address"
                                                     required
+                                                    name='email'
                                                     className="w-100 custom-input py-2 px-1"
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
@@ -146,12 +120,13 @@ const SignUpPage = () => {
                                             <label className="form-label small fw-semibold text-brand-dark">Password</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
-                                                    <Lock size={18} />
+                                                    <Lucide.Lock size={18} />
                                                 </span>
                                                 <input
                                                     type="password"
                                                     placeholder="Password"
                                                     required
+                                                    name='password'
                                                     className="w-100 custom-input py-2 px-1"
                                                     value={password}
                                                     onChange={(e) => setPassword(e.target.value)}
@@ -175,10 +150,9 @@ const SignUpPage = () => {
                                         {/* Submit Action Button */}
                                         <button
                                             type="submit"
-                                            disabled={loading}
                                             className="btn btn-submit-action w-100 py-2.5 fw-bold d-flex align-items-center justify-content-center gap-2 mb-4"
                                         >
-                                            {loading ? 'Processing Registration...' : 'Register Account'} <UserPlus size={18} />
+                                            Register Account <Lucide.UserPlus size={18} />
                                         </button>
 
                                     </form>
@@ -274,15 +248,11 @@ const SignUpPage = () => {
                     font-size: 14px;
                     transition: all 0.25s ease;
                 }
-                .btn-submit-action:hover:not(:disabled) {
+                .btn-submit-action:hover {
                     background: #0D6EFD;
                     color: #ffffff;
                     box-shadow: 0 5px 15px rgba(13, 110, 253, 0.25);
                     transform: translateY(-1px);
-                }
-                .btn-submit-action:disabled {
-                    opacity: 0.7;
-                    cursor: not-allowed;
                 }
 
                 .hover-underline:hover {
@@ -295,4 +265,4 @@ const SignUpPage = () => {
     );
 };
 
-export default SignUpPage;
+export default Login;

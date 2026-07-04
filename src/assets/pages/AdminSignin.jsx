@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
-// FIXED: Explicitly destructure your icons to stop the undefined crash
-import { Mail, Lock, LogIn } from 'lucide-react'; 
+import { Mail, Lock, LogIn } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-const SignInPage = () => {
+const AdminSignin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [entered, setEntered] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-
     const navigate = useNavigate();
 
     useEffect(() => {
-        const t = setTimeout(() => setEntered(true), 80);
+        const t = setTimeout(() => { }, 80);
         return () => clearTimeout(t);
     }, []);
 
@@ -45,25 +42,25 @@ const SignInPage = () => {
             );
 
             if (res.status !== 200 && res.status !== 201) {
-                setError(res.data?.message || 'Signin failed');
+                setError(res.data?.message || 'Admin signin failed');
                 setLoading(false);
                 return;
             }
 
             localStorage.setItem(
-                'token',
+                'adminToken',
                 res.data?.token || res.data?.accessToken || 'logged-in'
             );
 
             localStorage.setItem(
-                'user',
+                'adminUser',
                 JSON.stringify(res.data?.user || res.data || {})
             );
 
-            navigate('/dashboard', { replace: true });
+            navigate('/admin', { replace: true });
 
         } catch (err) {
-            console.error('Signin error:', err);
+            console.error('Admin signin error:', err);
             setError('Network error, please try again');
         } finally {
             setLoading(false);
@@ -82,17 +79,17 @@ const SignInPage = () => {
 
                                     <div className="text-center mb-4">
                                         <span className="badge bg-primary-soft text-primary px-3 py-2 rounded-pill fw-bold mb-3 small tracking-wide">
-                                            SECURE ENTERPRISE GATEWAY
+                                            ADMIN SECURE GATEWAY
                                         </span>
                                         <h2 className="font-display fw-bold text-brand-dark mb-2">
-                                            Account Login
+                                            Admin Login
                                         </h2>
                                         <p className="text-muted small mb-0">
-                                            Access your network deployment dashboards and secure procurement tools.
+                                            Access your admin control panel and management dashboards.
                                         </p>
                                     </div>
 
-                                    {/* VISUAL ERROR ALERTS (Bypasses window popups) */}
+                                    {/* Error Alert */}
                                     {error && (
                                         <div className="alert alert-danger d-flex align-items-center small py-2 px-3 border-0 mb-4" style={{ borderRadius: '12px', background: 'rgba(220, 53, 69, 0.08)', color: '#dc3545' }}>
                                             {error}
@@ -102,7 +99,7 @@ const SignInPage = () => {
                                     <form onSubmit={handleSubmit}>
                                         {/* Email Input */}
                                         <div className="mb-3">
-                                            <label className="form-label small fw-semibold text-brand-dark">Enter Your Email</label>
+                                            <label className="form-label small fw-semibold text-brand-dark">Enter Your Admin Email</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
                                                     <Mail size={18} />
@@ -110,7 +107,7 @@ const SignInPage = () => {
                                                 <input
                                                     type="email"
                                                     className="custom-input w-100 p-2"
-                                                    placeholder="name@company.com"
+                                                    placeholder="admin@ecrown.tech"
                                                     required
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
@@ -146,15 +143,15 @@ const SignInPage = () => {
                                             disabled={loading}
                                             className="btn btn-submit-action w-100 py-2 fw-bold d-flex align-items-center justify-content-center gap-2 mt-4 mb-4"
                                         >
-                                            {loading ? 'Authenticating...' : 'Secure Sign In'} <LogIn size={18} />
+                                            {loading ? 'Authenticating...' : 'Admin Sign In'} <LogIn size={18} />
                                         </button>
                                     </form>
 
                                     <div className="text-center pt-2 border-top border-light">
                                         <p className="small text-muted mb-0">
-                                            New to the platform?{' '}
-                                            <Link to="/signup" className="text-decoration-none text-primary fw-bold hover-underline">
-                                                Create an Account
+                                            New admin?{' '}
+                                            <Link to="/admin/signup" className="text-decoration-none text-primary fw-bold hover-underline">
+                                                Create Admin Account
                                             </Link>
                                         </p>
                                     </div>
@@ -168,65 +165,65 @@ const SignInPage = () => {
 
             <style>
                 {`
-                .signin-page-wrapper {
-                    background: #f8fafe;
-                    min-height: auto;
-                    padding-top: 0px !important;
-                    margin-top: 0px !important;
-                    font-family: 'Inter', system-ui, sans-serif;
-                }
-                .text-brand-dark { color: #0A1622; }
-                .bg-primary-soft { background-color: rgba(13, 110, 253, 0.08); }
-                .signin-card {
-                    background: #ffffff;
-                    border-radius: 24px !important;
-                    box-shadow: 0 15px 35px rgba(10, 22, 34, 0.04);
-                }
-                .input-group-custom {
-                    position: relative;
-                    background: #fdfdfd;
-                    border: 1px solid rgba(10, 22, 34, 0.12);
-                    border-radius: 12px;
-                    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-                }
-                .input-group-custom:focus-within {
-                    border-color: #0D6EFD;
-                    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
-                }
-                .custom-input {
-                    background: transparent !important;
-                    border: none !important;
-                    box-shadow: none !important;
-                    padding-left: 10px !important;
-                    color: #0A1622 !important;
-                    font-size: 14px;
-                    font-weight: 500;
-                    outline: none;
-                }
-                .btn-submit-action {
-                    background: #0A1622;
-                    color: #ffffff;
-                    border: none;
-                    border-radius: 12px;
-                    font-size: 14px;
-                    transition: all 0.25s ease;
-                }
-                .btn-submit-action:hover:not(:disabled) {
-                    background: #0D6EFD;
-                    color: #ffffff;
-                    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.25);
-                    transform: translateY(-1px);
-                }
-                .btn-submit-action:disabled {
-                    opacity: 0.65;
-                    cursor: not-allowed;
-                }
-                .hover-underline:hover { text-decoration: underline !important; }
-                `}
+        .signin-page-wrapper {
+          background: #f8fafe;
+          min-height: auto;
+          padding-top: 0px !important;
+          margin-top: 0px !important;
+          font-family: 'Inter', system-ui, sans-serif;
+        }
+        .text-brand-dark { color: #0A1622; }
+        .bg-primary-soft { background-color: rgba(13, 110, 253, 0.08); }
+        .signin-card {
+          background: #ffffff;
+          border-radius: 24px !important;
+          box-shadow: 0 15px 35px rgba(10, 22, 34, 0.04);
+        }
+        .input-group-custom {
+          position: relative;
+          background: #fdfdfd;
+          border: 1px solid rgba(10, 22, 34, 0.12);
+          border-radius: 12px;
+          transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .input-group-custom:focus-within {
+          border-color: #0D6EFD;
+          box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+        }
+        .custom-input {
+          background: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          padding-left: 10px !important;
+          color: #0A1622 !important;
+          font-size: 14px;
+          font-weight: 500;
+          outline: none;
+        }
+        .btn-submit-action {
+          background: #0A1622;
+          color: #ffffff;
+          border: none;
+          border-radius: 12px;
+          font-size: 14px;
+          transition: all 0.25s ease;
+        }
+        .btn-submit-action:hover:not(:disabled) {
+          background: #0D6EFD;
+          color: #ffffff;
+          box-shadow: 0 5px 15px rgba(13, 110, 253, 0.25);
+          transform: translateY(-1px);
+        }
+        .btn-submit-action:disabled {
+          opacity: 0.65;
+          cursor: not-allowed;
+        }
+        .hover-underline:hover { text-decoration: underline !important; }
+        `}
             </style>
             <Footer />
         </>
     );
 };
 
-export default SignInPage;
+export default AdminSignin;

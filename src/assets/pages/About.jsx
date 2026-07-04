@@ -1,12 +1,11 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Lucide from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const About = () => {
-
+  
   return (
     <>
       <Navbar />
@@ -117,7 +116,7 @@ const About = () => {
                   icon: <Lucide.Network size={24} />,
                   title: "Low Voltage Structured Cabling",
                   desc: "High-density multi-gigabit throughput backbones mapped seamlessly to structural specifications.",
-                  image: "https://accutechcom.com/wp-content/uploads/2025/05/low-voltage-structured-cabling.jpg.webp"
+                  image: "https://images.unsplash.com/photo-1563770660941-20978e870e26?q=80&w=600"
                 },
                 {
                   icon: <Lucide.CreditCard size={24} />,
@@ -129,25 +128,25 @@ const About = () => {
                   icon: <Lucide.ScanBarcode size={24} />,
                   title: "Self-Checkout",
                   desc: "Automated kiosk network integration blueprints designed for optimal localized interface latency.",
-                  image: "https://cdn.prod.website-files.com/6863afe185d095220c05f20b/68d2441cf008d5bbd19c0cdb_AI-powered_self_checkout-p-500.jpg"
+                  image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600"
                 },
                 {
                   icon: <Lucide.Radio size={24} />,
                   title: "Satellite Networking",
                   desc: "Remote receiver configurations and terminal alignment layouts ensuring uninterrupted workspace uplinks.",
-                  image: "https://satelliteworldtoday.com/wp-content/uploads/2026/03/shutterstock_2703175175-2048x1152.jpg"
+                  image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=600"
                 },
                 {
                   icon: <Lucide.Server size={24} />,
                   title: "Server/Storage",
                   desc: "Mainframe rack infrastructure configuration, load-balanced topologies, and server data arrays.",
-                  image: "https://www.aceongroup.com/wp-content/uploads/2025/11/AdobeStock_87909563.jpg"
+                  image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070"
                 },
                 {
                   icon: <Lucide.Wifi size={24} />,
                   title: "Wireless Networking",
                   desc: "High-density enterprise access point configurations delivering uniform multi-node saturation grids.",
-                  image: "https://cdn.shopify.com/s/files/1/0106/6339/5391/files/1024x576-2_8d4af4f6-132e-4226-9653-ae51ed1e9d46_1024x1024.jpg?v=1669860558"
+                  image: "https://images.unsplash.com/photo-1563770660941-20978e870e26?q=80&w=600"
                 }
               ].map((rosterItem, index) => (
                 <div key={index} className="col-md-6 col-lg-4">

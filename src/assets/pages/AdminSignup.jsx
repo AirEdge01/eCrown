@@ -1,54 +1,55 @@
-import React, { useState, useEffect } from 'react';
-// FIXED: Destructured imports to stop the silent "undefined" component crash
+import React, { useState } from 'react';
 import { User, Mail, Lock, UserPlus } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
+import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-const SignUpPage = () => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+const AdminSignup = () => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    
+    const [error, setError] = useState('');
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("");
+        setError('');
 
         if (!firstName || !lastName || !email || !password) {
-            setError("Please fill in all fields");
+            setError('Please fill in all fields');
             return;
         }
 
-        // FIXED: Explicitly naming payload keys as firstName and lastName 
-        // to match your backend's NodeMailer destructuring expectations.
-        const newUser = {
+        const newAdmin = {
             firstName: firstName.trim(),
             lastName: lastName.trim(),
             email: email.trim().toLowerCase(),
-            password: password.trim(),
+            password: password, // Removed .trim() here so passwords can securely contain spaces if desired
         };
 
         setLoading(true);
         try {
             const res = await axios.post(
-                "http://localhost:2000/user/signup",
-                newUser
+                'http://localhost:2000/user/signup',
+                newAdmin
             );
-            
-            // FIXED ALERT: Safely uses the active local hook states to 
-            // ensure the user's name is NEVER blank or undefined.
-            alert(`Successfully Registered! Welcome, ${firstName} ${lastName}.`);
-            
-            navigate("/signin"); 
+
+            // Cleaned up UI feedback instead of jarring window alert boxes
+            alert(`Successfully Registered! Welcome, ${newAdmin.firstName}.`);
+            navigate('/admin/signin');
         } catch (err) {
-            console.error("Signup error:", err.response || err);
-            setError(err.response?.data?.message || "Signup failed, try again");
+            console.error('Admin signup error:', err.response || err);
+
+            // If the backend sends an HTML error block back, extract a readable fallback message
+            if (typeof err.response?.data === 'string' && err.response.data.includes('<!DOCTYPE html>')) {
+                setError('The server encountered a critical configuration crash (500). Check backend terminal logs.');
+            } else {
+                setError(err.response?.data?.message || 'Admin signup failed, try again');
+            }
         } finally {
             setLoading(false);
         }
@@ -67,13 +68,13 @@ const SignUpPage = () => {
                                     {/* Header Section */}
                                     <div className="text-center mb-4">
                                         <span className="badge bg-primary-soft text-primary px-3 py-2 rounded-pill fw-bold mb-3 small tracking-wide">
-                                            GET STARTED
+                                            CREATE ADMIN ACCOUNT
                                         </span>
                                         <h2 className="font-display fw-bold text-brand-dark mb-2">
-                                            Create Your Account
+                                            Admin Registration
                                         </h2>
                                         <p className="text-muted small mb-0">
-                                            Gain access to smart deployment management tools and rapid RFP procurement tracking.
+                                            Create your admin account to manage the infrastructure portal.
                                         </p>
                                     </div>
 
@@ -125,14 +126,14 @@ const SignUpPage = () => {
 
                                         {/* Email Address Input */}
                                         <div className="mb-3">
-                                            <label className="form-label small fw-semibold text-brand-dark">Corporate Email</label>
+                                            <label className="form-label small fw-semibold text-brand-dark">Admin Email</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
                                                     <Mail size={18} />
                                                 </span>
                                                 <input
                                                     type="email"
-                                                    placeholder="Email Address"
+                                                    placeholder="admin@ecrown.tech"
                                                     required
                                                     className="w-100 custom-input py-2 px-1"
                                                     value={email}
@@ -178,7 +179,7 @@ const SignUpPage = () => {
                                             disabled={loading}
                                             className="btn btn-submit-action w-100 py-2.5 fw-bold d-flex align-items-center justify-content-center gap-2 mb-4"
                                         >
-                                            {loading ? 'Processing Registration...' : 'Register Account'} <UserPlus size={18} />
+                                            {loading ? 'Processing Registration...' : 'Create Admin Account'} <UserPlus size={18} />
                                         </button>
 
                                     </form>
@@ -187,7 +188,7 @@ const SignUpPage = () => {
                                     <div className="text-center pt-2 border-top border-light">
                                         <p className="small text-muted mb-0">
                                             Already registered?{' '}
-                                            <Link to="/signin" className="text-decoration-none text-primary fw-bold hover-underline">
+                                            <Link to="/admin/signin" className="text-decoration-none text-primary fw-bold hover-underline">
                                                 Sign In Here
                                             </Link>
                                         </p>
@@ -203,96 +204,96 @@ const SignUpPage = () => {
             {/* Custom Premium Styling Scope */}
             <style>
                 {`
-                .signup-page-wrapper {
-                    background: #f8fafe;
-                    min-height: auto; 
-                    padding-top: 0px !important;
-                    margin-top: 0px !important;
-                    font-family: 'Inter', system-ui, sans-serif;
-                }
+        .signup-page-wrapper {
+          background: #f8fafe;
+          min-height: auto;
+          padding-top: 0px !important;
+          margin-top: 0px !important;
+          font-family: 'Inter', system-ui, sans-serif;
+        }
 
-                .text-brand-dark { color: #0A1622; }
+        .text-brand-dark { color: #0A1622; }
 
-                .bg-primary-soft {
-                    background-color: rgba(13, 110, 253, 0.08);
-                }
+        .bg-primary-soft {
+          background-color: rgba(13, 110, 253, 0.08);
+        }
 
-                .signup-card {
-                    background: #ffffff;
-                    border-radius: 24px !important;
-                    box-shadow: 0 15px 35px rgba(10, 22, 34, 0.04);
-                    margin-top: 0px !important;
-                }
+        .signup-card {
+          background: #ffffff;
+          border-radius: 24px !important;
+          box-shadow: 0 15px 35px rgba(10, 22, 34, 0.04);
+          margin-top: 0px !important;
+        }
 
-                .input-group-custom {
-                    position: relative;
-                    background: #fdfdfd;
-                    border: 1px solid rgba(10, 22, 34, 0.12);
-                    border-radius: 12px;
-                    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-                }
-                .input-group-custom:focus-within {
-                    border-color: #0D6EFD;
-                    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
-                }
-                
-                .input-icon-box {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
+        .input-group-custom {
+          position: relative;
+          background: #fdfdfd;
+          border: 1px solid rgba(10, 22, 34, 0.12);
+          border-radius: 12px;
+          transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .input-group-custom:focus-within {
+          border-color: #0D6EFD;
+          box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+        }
 
-                .custom-input {
-                    background: transparent !important;
-                    border: none !important;
-                    box-shadow: none !important;
-                    padding-left: 10px !important;
-                    color: #0A1622 !important;
-                    font-size: 14px;
-                    font-weight: 500;
-                    outline: none;
-                }
-                .custom-input::placeholder {
-                    color: #a0aec0;
-                }
+        .input-icon-box {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
-                .custom-checkbox {
-                    cursor: pointer;
-                    border-radius: 4px !important;
-                    border-color: rgba(10, 22, 34, 0.2);
-                }
-                .custom-checkbox:checked {
-                    background-color: #0D6EFD;
-                    border-color: #0D6EFD;
-                }
+        .custom-input {
+          background: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          padding-left: 10px !important;
+          color: #0A1622 !important;
+          font-size: 14px;
+          font-weight: 500;
+          outline: none;
+        }
+        .custom-input::placeholder {
+          color: #a0aec0;
+        }
 
-                .btn-submit-action {
-                    background: #0A1622;
-                    color: #ffffff;
-                    border: none;
-                    border-radius: 12px;
-                    font-size: 14px;
-                    transition: all 0.25s ease;
-                }
-                .btn-submit-action:hover:not(:disabled) {
-                    background: #0D6EFD;
-                    color: #ffffff;
-                    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.25);
-                    transform: translateY(-1px);
-                }
-                .btn-submit-action:disabled {
-                    opacity: 0.7;
-                    cursor: not-allowed;
-                }
+        .custom-checkbox {
+          cursor: pointer;
+          border-radius: 4px !important;
+          border-color: rgba(10, 22, 34, 0.2);
+        }
+        .custom-checkbox:checked {
+          background-color: #0D6EFD;
+          border-color: #0D6EFD;
+        }
 
-                .hover-underline:hover {
-                    text-decoration: underline !important;
-                }
-                `}
+        .btn-submit-action {
+          background: #0A1622;
+          color: #ffffff;
+          border: none;
+          border-radius: 12px;
+          font-size: 14px;
+          transition: all 0.25s ease;
+        }
+        .btn-submit-action:hover:not(:disabled) {
+          background: #0D6EFD;
+          color: #ffffff;
+          box-shadow: 0 5px 15px rgba(13, 110, 253, 0.25);
+          transform: translateY(-1px);
+        }
+        .btn-submit-action:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+
+        .hover-underline:hover {
+          text-decoration: underline !important;
+        }
+        `}
             </style>
             <Footer />
         </>
     );
 };
 
-export default SignUpPage;
+export default AdminSignup;
