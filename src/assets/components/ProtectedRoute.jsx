@@ -1,12 +1,24 @@
 // assets/components/ProtectedRoute.jsx
-import { Navigate, Outlet } from 'react-router-dom';
+import React from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 const ProtectedRoute = () => {
-  // Replace this with your actual authentication logic (e.g., checking localStorage, context, or Redux)
-  const isAuthenticated = !!localStorage.getItem('token'); 
+  const location = useLocation();
+  
+  // Checks for your authentication token in local storage
+  const token = localStorage.getItem('token');
+  const isAuthenticated = !!token; 
 
-  // If authenticated, render the child routes (via Outlet). Otherwise, redirect to signup.
-  return isAuthenticated ? <Outlet /> : <Navigate to="/error" replace />;
+  // DEBUG LOG: Helps you trace exactly why a route blocks or allows access in the console
+  console.log(`[ProtectedRoute] Path: ${location.pathname} | Authenticated: ${isAuthenticated}`);
+
+  // If authenticated, render the children routes (e.g., /dashboard)
+  // If NOT authenticated, redirect them to the error/signup fallback route
+  return isAuthenticated ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/error" state={{ from: location }} replace />
+  );
 };
 
 export default ProtectedRoute;
