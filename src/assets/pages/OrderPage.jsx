@@ -5,6 +5,8 @@ import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 import axios from 'axios';
 
+
+
 const OrderPage = () => {
     const navigate = useNavigate();
     const [cart, setCart] = useState([]);
@@ -12,6 +14,7 @@ const OrderPage = () => {
     const [isLoadingProducts, setIsLoadingProducts] = useState(true);
     const [isCreatingOrder, setIsCreatingOrder] = useState(false);
     const [isManifestOpen, setIsManifestOpen] = useState(false);
+
 
     const hardwareSections = [
         { id: 'cctv', name: 'Surveillance & CCTV Systems' },
@@ -35,6 +38,7 @@ const OrderPage = () => {
         }
         return '';
     };
+    
 
     const formatProductImageSource = (imagePath) => {
         const normalized = normalizeProductImageValue(imagePath);
@@ -55,6 +59,29 @@ const OrderPage = () => {
             seen.add(key);
             return true;
         });
+
+        const navigate = useNavigate();
+          const [isLoading, setIsLoading] = useState(true);
+        
+          useEffect(() => {
+            // Look for the exact keys set during your registration/login process
+            const storedToken = localStorage.getItem('token');
+            const storedUser = localStorage.getItem('user') || localStorage.getItem('userData');
+        
+            if (!storedToken || !storedUser) {
+              // Unregistered or unauthenticated; boot immediately to error route
+              navigate('/error', { replace: true });
+            } else {
+              // Session exists and keys are verified
+              setIsLoading(false);
+            }
+          }, [navigate]);
+        
+          // Hard blocker preventing any structural visual flashes while evaluating auth status
+          if (isLoading) {
+            return null;
+          }
+        
     };
 
     // Read asset indices from active server clusters

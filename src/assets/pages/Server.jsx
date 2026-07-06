@@ -6,6 +6,8 @@ import Dash from '../components/Dash';
 import { Link } from 'react-router-dom';
 
 const servicesData = [
+
+  
   {
     title: "On-Premise Server Hubs",
     desc: "We build the physical brain of your business, ensuring your data lives exactly where you can control it.",
@@ -39,6 +41,27 @@ const SectionHeading = ({ title, subtitle }) => (
 
 const Server = () => {
 
+const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Look for the exact keys set during your registration/login process
+    const storedToken = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user') || localStorage.getItem('userData');
+
+    if (!storedToken || !storedUser) {
+      // Unregistered or unauthenticated; boot immediately to error route
+      navigate('/error', { replace: true });
+    } else {
+      // Session exists and keys are verified
+      setIsLoading(false);
+    }
+  }, [navigate]);
+
+  // Hard blocker preventing any structural visual flashes while evaluating auth status
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <>

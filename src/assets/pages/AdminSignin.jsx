@@ -5,6 +5,9 @@ import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+
+
+
 const AdminSignin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -24,6 +27,29 @@ const AdminSignin = () => {
         if (!email || !password) {
             setError('Please fill in all fields');
             return;
+
+            const navigate = useNavigate();
+              const [isLoading, setIsLoading] = useState(true);
+            
+              useEffect(() => {
+                // Look for the exact keys set during your registration/login process
+                const storedToken = localStorage.getItem('token');
+                const storedUser = localStorage.getItem('user') || localStorage.getItem('userData');
+            
+                if (!storedToken || !storedUser) {
+                  // Unregistered or unauthenticated; boot immediately to error route
+                  navigate('/error', { replace: true });
+                } else {
+                  // Session exists and keys are verified
+                  setIsLoading(false);
+                }
+              }, [navigate]);
+            
+              // Hard blocker preventing any structural visual flashes while evaluating auth status
+              if (isLoading) {
+                return null;
+              }
+            
         }
 
         setLoading(true);
