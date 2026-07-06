@@ -32,6 +32,8 @@ const SignInPage = () => {
         setLoading(true);
 
         try {
+            // FIXED: Removed the status override constraint wrapper so that 
+            // 400/401/500 errors route natively into our robust catch processor.
             const res = await axios.post(
                 'https://ecrownode-1.onrender.com/user/signin',
                 {
@@ -39,32 +41,38 @@ const SignInPage = () => {
                     password: password.trim(),
                 },
                 {
-                    headers: { 'Content-Type': 'application/json' },
-                    validateStatus: () => true,
+                    headers: { 'Content-Type': 'application/json' }
                 }
             );
 
-            if (res.status !== 200 && res.status !== 201) {
-                setError(res.data?.message || 'Signin failed');
-                setLoading(false);
-                return;
+            // VERIFICATION CRITERIA: Ensure a valid production cryptographic authorization token was actually returned
+            if (res.data && (res.data.token || res.data.accessToken)) {
+                
+                // 1. Commit actual valid access signature safely to disk structure
+                const activeToken = res.data.token || res.data.accessToken;
+                localStorage.setItem('token', activeToken);
+
+                // 2. Map current context account data profiles cleanly
+                localStorage.setItem(
+                    'user',
+                    JSON.stringify(res.data.user || res.data)
+                );
+
+                // 3. Navigate directly to your secure dashboard control matrix panel
+                navigate('/dashboard', { replace: true });
+            } else {
+                setError('The authentication handshake completed, but no system token was issued.');
             }
 
-            localStorage.setItem(
-                'token',
-                res.data?.token || res.data?.accessToken || 'logged-in'
-            );
-
-            localStorage.setItem(
-                'user',
-                JSON.stringify(res.data?.user || res.data || {})
-            );
-
-            navigate('/dashboard', { replace: true });
-
         } catch (err) {
-            console.error('Signin error:', err);
-            setError('Network error, please try again');
+            console.error('Signin process network breakdown log:', err);
+            
+            // CAPTURES REAL ERROR MESSAGES: Pulls messages directly from your Node backend response models cleanly
+            if (err.response && err.response.data) {
+                setError(err.response.data.message || 'Invalid email credentials or account password context mapping.');
+            } else {
+                setError('Network engine failure. Verify backend server nodes are operational.');
+            }
         } finally {
             setLoading(false);
         }

@@ -32,18 +32,19 @@ function App() {
     <>
       <Routes>
         {/* ================= PUBLIC ROUTES ================= */}
+        {/* Open paths accessible to any web client without authorization tokens */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         
-        {/* Admin Public Onboarding */}
+        {/* Admin Public Authentication Portals */}
         <Route path="/admin/signup" element={<AdminSignup />} />
         <Route path="/admin/signin" element={<AdminSignin />} />
 
-        {/* ================= PROTECTED CUSTOMER ZONE ================= */}
-        {/* Authenticated users pass through smoothly; unauthenticated users bounce to /error */}
+        {/* ================= PROTECTED ZONE ================= */}
+        {/* Everything inside this wrapper strictly checks for a valid, clean token */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<ServicesDashboard />} />
           <Route path="/payment" element={<Payment />} />
@@ -51,7 +52,7 @@ function App() {
           <Route path="/request" element={<RequestInstallation />} /> 
           <Route path="/install" element={<RequestInstallation />} />
           
-          {/* Engineering Sub-modules */}
+          {/* Engineering Feature Interfaces */}
           <Route path="/digital" element={<Avdigital />} />
           <Route path="/cctv" element={<Cctv />} />
           <Route path="/low" element={<LowVoltage />} />
@@ -62,7 +63,7 @@ function App() {
           <Route path="/server" element={<Server />} />
           <Route path="/wireless" element={<Wireless />} />
           
-          {/* Protected Administrative Core */}
+          {/* Management Console Interface */}
           <Route path="/admin" element={<Admin />} />
         </Route>
         
