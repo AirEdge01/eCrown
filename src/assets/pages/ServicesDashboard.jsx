@@ -6,23 +6,26 @@ import Footer from '../components/Footer';
 
 const ServicesDashboard = () => {
     const navigate = useNavigate(); 
-  
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const storedUserData = JSON.parse(localStorage.getItem('userData'));
-  useEffect(() => {
-    
-    if (!storedUserData) {
-      navigate('/error');
+    useEffect(() => {
+        // Match the exact keys saved during SignInPage execution
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
+        
+        if (!token || !user) {
+            // Redirect unauthenticated guests to the sign-in portal
+            navigate('/signin', { replace: true });
+        } else {
+            setIsAuthenticated(true);
+        }
+    }, [navigate]);
+
+    // Prevent rendering layout fragments flashing briefly before the redirect complete
+    if (!isAuthenticated) {
+        return null;
     }
-  },
-   [storedUserData, navigate]);
 
-  
-  if (!storedUserData) {
-    return null;
-  }
-
-    // Array definition mapping updated eCrown core tech titles, icons, and dynamic target routes
     const ecrownServices = [
         {
             title: "A/v & Digital Signage",
@@ -170,7 +173,7 @@ const ServicesDashboard = () => {
                                                 </p>
                                             </div>
 
-                                            {/* Action Bar: Modernized View Link + Call for Installation Service Button Trigger */}
+                                            {/* Action Bar: Modernized View Link + Call Button Trigger */}
                                             <div className="pt-3 border-top border-light-soft d-flex align-items-center justify-content-between gap-2">
                                                 <Link
                                                     to={service.path}
@@ -181,9 +184,9 @@ const ServicesDashboard = () => {
 
                                                 <Link 
                                                     to="/install" 
-                                                    className="btn btn-Installation Service-action py-1.5 px-3 rounded-3 small fw-bold d-inline-flex align-items-center gap-1 text-decoration-none shadow-sm"
+                                                    className="btn btn-installation-action py-1.5 px-3 rounded-3 small fw-bold d-inline-flex align-items-center gap-1 text-decoration-none shadow-sm"
                                                 >
-                                                    <Lucide.PhoneCall size={13} /> Installation Service
+                                                    <Lucide.PhoneCall size={13} /> Installation
                                                 </Link>
                                             </div>
 
@@ -193,7 +196,7 @@ const ServicesDashboard = () => {
                             ))}
                         </div>
 
-                        {/* --- Commercial Procurement & Field Installation Service Action Hub --- */}
+                        {/* --- Commercial Procurement & Field Action Hub --- */}
                         <div className="procurement-cta-section card border-0 p-4 p-md-5 rounded-4 position-relative overflow-hidden mb-4">
                             <div className="row align-items-center relative-box position-relative z-1">
                                 <div className="col-12 col-xl-7 mb-4 mb-xl-0">
@@ -221,7 +224,7 @@ const ServicesDashboard = () => {
                                         to="/install"
                                         className="btn btn-outline-dark btn-field-call py-3 px-4 rounded-3 d-inline-flex align-items-center justify-content-center gap-2 fw-bold bg-white text-brand-dark border shadow-sm text-decoration-none"
                                     >
-                                        <Lucide.PhoneCall size={17} />  Installation Service 
+                                        <Lucide.PhoneCall size={17} /> Installation Service 
                                     </Link>
                                 </div>
                             </div>
@@ -301,7 +304,7 @@ const ServicesDashboard = () => {
                 .service-glass-card {
                     background: #ffffff;
                     border-radius: 20px !important;
-                    box-shadow: 0 4px 18px rgba(10, 22, 34, 0.02);
+                    box-shadow: 0 4px 18 rgba(10, 22, 34, 0.02);
                     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
                 }
                 
@@ -331,7 +334,7 @@ const ServicesDashboard = () => {
                     transform: translateX(2px);
                 }
 
-                .btn-Request Installation Service Service-action {
+                .btn-installation-action {
                     background: #0A1622;
                     color: #ffffff;
                     border: none;
@@ -339,7 +342,7 @@ const ServicesDashboard = () => {
                     font-weight: 600;
                     transition: all 0.2s ease;
                 }
-                .btn-Request Installation Service Service-action:hover {
+                .btn-installation-action:hover {
                     background: #0D6EFD;
                     color: #ffffff;
                     transform: scale(1.02);
