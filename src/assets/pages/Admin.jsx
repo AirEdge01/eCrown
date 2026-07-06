@@ -69,7 +69,7 @@ const AdminPage = () => {
         setIsLoadingProducts(true);
         const productEndpoints = [
             'https://ecrownode-1.onrender.com/api/products',
-            'https://ecrownode-1.onrender.com/admin/products'
+            'https://ecrownode-1.onrender.com/api/admin/products'
         ];
 
         for (const url of productEndpoints) {

@@ -32,37 +32,39 @@ const SignInPage = () => {
         setLoading(true);
 
         try {
-            // FIXED: Removed validateStatus configuration so Axios natively handles error blocks
             const res = await axios.post(
                 'https://ecrownode-1.onrender.com/user/signin',
                 {
-                    email: email.trim().toLowerCase(),
+                    email: email.trim(),
                     password: password.trim(),
                 },
                 {
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json' },
+                    validateStatus: () => true,
                 }
             );
 
-            // Save Token safely
+            if (res.status !== 200 && res.status !== 201) {
+                setError(res.data?.message || 'Signin failed');
+                setLoading(false);
+                return;
+            }
+
             localStorage.setItem(
                 'token',
                 res.data?.token || res.data?.accessToken || 'logged-in'
             );
 
-            // Save User profile safely
             localStorage.setItem(
                 'user',
                 JSON.stringify(res.data?.user || res.data || {})
             );
 
-            // Redirect user to their dashboard page
             navigate('/dashboard', { replace: true });
 
         } catch (err) {
-            console.error('Signin error:', err.response || err);
-            // FIXED: Neatly grabs the real error message coming from your node backend API
-            setError(err.response?.data?.message || 'Invalid email or password. Please try again.');
+            console.error('Signin error:', err);
+            setError('Network error, please try again');
         } finally {
             setLoading(false);
         }
@@ -90,7 +92,7 @@ const SignInPage = () => {
                                         </p>
                                     </div>
 
-                                    {/* VISUAL ERROR ALERTS */}
+                                    {/* VISUAL ERROR ALERTS (Bypasses window popups) */}
                                     {error && (
                                         <div className="alert alert-danger d-flex align-items-center small py-2 px-3 border-0 mb-4" style={{ borderRadius: '12px', background: 'rgba(220, 53, 69, 0.08)', color: '#dc3545' }}>
                                             {error}
@@ -100,15 +102,13 @@ const SignInPage = () => {
                                     <form onSubmit={handleSubmit}>
                                         {/* Email Input */}
                                         <div className="mb-3">
-                                            <label htmlFor="signinEmail" className="form-label small fw-semibold text-brand-dark">Enter Your Email</label>
+                                            <label className="form-label small fw-semibold text-brand-dark">Enter Your Email</label>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
                                                     <Mail size={18} />
                                                 </span>
                                                 <input
-                                                    id="signinEmail"
                                                     type="email"
-                                                    name="email"
                                                     className="custom-input w-100 p-2"
                                                     placeholder="name@company.com"
                                                     required
@@ -121,16 +121,17 @@ const SignInPage = () => {
                                         {/* Password Input */}
                                         <div className="mb-3">
                                             <div className="d-flex justify-content-between align-items-center mb-1">
-                                                <label htmlFor="signinPassword" className="form-label small fw-semibold text-brand-dark mb-0">Password</label>
+                                                <label className="form-label small fw-semibold text-brand-dark mb-0">Password</label>
+                                                <a href="#forgot" className="text-decoration-none text-primary small fw-medium">
+                                                    Forgot Password?
+                                                </a>
                                             </div>
                                             <div className="input-group-custom d-flex align-items-center">
                                                 <span className="input-icon-box text-muted ps-3">
                                                     <Lock size={18} />
                                                 </span>
                                                 <input
-                                                    id="signinPassword"
                                                     type="password"
-                                                    name="password"
                                                     className="custom-input w-100 p-2"
                                                     placeholder="••••••••"
                                                     required
@@ -143,7 +144,7 @@ const SignInPage = () => {
                                         <button
                                             type="submit"
                                             disabled={loading}
-                                            className="btn btn-submit-action w-100 py-2.5 fw-bold d-flex align-items-center justify-content-center gap-2 mt-4 mb-4"
+                                            className="btn btn-submit-action w-100 py-2 fw-bold d-flex align-items-center justify-content-center gap-2 mt-4 mb-4"
                                         >
                                             {loading ? 'Authenticating...' : 'Secure Sign In'} <LogIn size={18} />
                                         </button>
@@ -191,11 +192,6 @@ const SignInPage = () => {
                 .input-group-custom:focus-within {
                     border-color: #0D6EFD;
                     box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
-                }
-                .input-icon-box {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
                 }
                 .custom-input {
                     background: transparent !important;
