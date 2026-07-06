@@ -33,34 +33,37 @@ function App() {
       <Routes>
         {/* ================= PUBLIC ROUTES ================= */}
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         
+        {/* Admin Public Onboarding */}
         <Route path="/admin/signup" element={<AdminSignup />} />
         <Route path="/admin/signin" element={<AdminSignin />} />
 
-        {/* ================= PROTECTED CUSTOMER ROUTES ================= */}
-        {/* Wrapped in ProtectedRoute: Unauthenticated users will bounce to /signup */}
+        {/* ================= PROTECTED CUSTOMER ZONE ================= */}
+        {/* Authenticated users pass through smoothly; unauthenticated users bounce to /error */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/about" element={<About/>} />
-          <Route path="/contact" element={<Contact/>} />
-          <Route path="/request" element={<RequestInstallation/>} /> 
-          <Route path="/digital" element={<Avdigital/>} />
-          <Route path="/cctv" element={<Cctv/>} />
-          <Route path="/low" element={<LowVoltage/>} />
-          <Route path="/structure" element={<Structure/>} />
-          <Route path="/pos" element={<Pos/>} />
-          <Route path="/self" element={<SelfCheckout/>} />
-          <Route path="/lite" element={<Satellite/>} />
-          <Route path="/server" element={<Server/>} />
-          <Route path="/wireless" element={<Wireless/>} />
-          <Route path="/dashboard" element={<ServicesDashboard/>} />
-          <Route path="/payment" element={<Payment/>} />
-          <Route path="/install" element={<RequestInstallation/>} />
-          <Route path="/order" element={<OrderPage/>} />
+          <Route path="/dashboard" element={<ServicesDashboard />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/order" element={<OrderPage />} />
+          <Route path="/request" element={<RequestInstallation />} /> 
+          <Route path="/install" element={<RequestInstallation />} />
           
-          {/* Protected Admin Dashboard */}
-          <Route path="/admin" element={<Admin/>} />
+          {/* Engineering Sub-modules */}
+          <Route path="/digital" element={<Avdigital />} />
+          <Route path="/cctv" element={<Cctv />} />
+          <Route path="/low" element={<LowVoltage />} />
+          <Route path="/structure" element={<Structure />} />
+          <Route path="/pos" element={<Pos />} />
+          <Route path="/self" element={<SelfCheckout />} />
+          <Route path="/lite" element={<Satellite />} />
+          <Route path="/server" element={<Server />} />
+          <Route path="/wireless" element={<Wireless />} />
+          
+          {/* Protected Administrative Core */}
+          <Route path="/admin" element={<Admin />} />
         </Route>
         
         {/* ================= FALLBACKS ================= */}
