@@ -5,20 +5,26 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const ServicesDashboard = () => {
-    
-  const navigate = useNavigate();
-  const storedUser = localStorage.getItem('user');
+    const navigate = useNavigate();
+  
+  // Real-time immediate evaluate intercept
+  const token = localStorage.getItem('token');
+  const user = localStorage.getItem('user');
+  
+  const isUserValid = token && token !== 'null' && token !== 'undefined' && token.trim() !== '' &&
+                      user && user !== 'null' && user !== 'undefined';
 
   useEffect(() => {
-    // Ultimate defensive fallback measure
-    if (!storedUser || storedUser === 'null' || storedUser === 'undefined') {
-      console.warn("[SECURITY ALERT] Unauthorized access footprint captured on node layout. Routing to /error.");
+    if (!isUserValid) {
+      console.error("[FATAL INTERCEPT] Unregistered entity detected on dashboard context. Bouncing.");
+      localStorage.clear(); // Wipes any corrupted testing string fragments completely clean
       navigate('/error', { replace: true });
     }
-  }, [storedUser, navigate]);
+  }, [isUserValid, navigate]);
 
-  if (!storedUser || storedUser === 'null' || storedUser === 'undefined') {
-    return null; // Don't paint a single pixel of your dashboard interface on the screen
+  // CRITICAL PROTECTION WALL: If unauthorized, freeze rendering entirely right here
+  if (!isUserValid) {
+    return null;
   }
     // Array definition mapping updated eCrown core tech titles, icons, and dynamic target routes
     const ecrownServices = [

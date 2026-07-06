@@ -1,4 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import './index.css';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Page Imports
 import Home from './assets/pages/Home.jsx';
@@ -19,54 +21,74 @@ import SignInPage from './assets/pages/SignInPage.jsx';
 import ServicesDashboard from './assets/pages/ServicesDashboard.jsx';
 import RequestInstallation from './assets/pages/RequestInstallation.jsx';
 import Error from './assets/pages/Error.jsx';
-import ProtectedRoute from './assets/components/ProtectedRoute.jsx';
 import Payment from './assets/pages/Payment.jsx';
 import Admin from './assets/pages/Admin.jsx';
 import AdminSignup from './assets/pages/AdminSignup.jsx';
 import AdminSignin from './assets/pages/AdminSignin.jsx';
 
+// =========================================================================
+// 1. THE BOUNCER (ProtectedRoute) DEFINITION
+// =========================================================================
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('token');
+  const user = localStorage.getItem('user');
+
+  // Verify that both a valid token and user profile exist in storage
+  const isVerified = token && token !== 'null' && token !== 'undefined' && token.trim() !== '' &&
+                     user && user !== 'null' && user !== 'undefined';
+
+  console.log(`[ROUTE GUARD] Checking authorization. Access Granted: ${!!isVerified}`);
+
+  // If verified, show the page. If unregistered/not signed in, bounce to /error
+  return isVerified ? children : <Navigate to="/error" replace />;
+};
+
+// =========================================================================
+// 2. MAIN APPLICATION COMPONENT
+// =========================================================================
 function App() {
   return (
-    <Routes>
-      {/* ================= 1. PUBLIC ZONE ================= */}
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/signin" element={<SignInPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      
-      {/* Admin Public Portals */}
-      <Route path="/admin/signup" element={<AdminSignup />} />
-      <Route path="/admin/signin" element={<AdminSignin />} />
+    <>
+      <Routes>
+        {/* ================= PUBLIC ZONE ================= */}
+        {/* Open paths accessible to any web client without verification */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        
+        {/* Admin Public Authentication Portals */}
+        <Route path="/admin/signup" element={<AdminSignup />} />
+        <Route path="/admin/signin" element={<AdminSignin />} />
 
-      {/* ================= 2. STRICTLY PROTECTED ZONE ================= */}
-      {/* If any user tries to access these paths without a real token, the wrapper boots them instantly */}
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<ServicesDashboard />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/order" element={<OrderPage />} />
-        <Route path="/request" element={<RequestInstallation />} /> 
-        <Route path="/install" element={<RequestInstallation />} />
+        {/* ================= INLINE PROTECTED CORES ================= */}
+        {/* Every private route here is strictly wrapped in the execution guard */}
+        <Route path="/dashboard" element={<ProtectedRoute><ServicesDashboard /></ProtectedRoute>} />
+        <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+        <Route path="/order" element={<ProtectedRoute><OrderPage /></ProtectedRoute>} />
+        <Route path="/request" element={<ProtectedRoute><RequestInstallation /></ProtectedRoute>} />
+        <Route path="/install" element={<ProtectedRoute><RequestInstallation /></ProtectedRoute>} />
         
-        {/* Core Sub-Module Infrastructure */}
-        <Route path="/digital" element={<Avdigital />} />
-        <Route path="/cctv" element={<Cctv />} />
-        <Route path="/low" element={<LowVoltage />} />
-        <Route path="/structure" element={<Structure />} />
-        <Route path="/pos" element={<Pos />} />
-        <Route path="/self" element={<SelfCheckout />} />
-        <Route path="/lite" element={<Satellite />} />
-        <Route path="/server" element={<Server />} />
-        <Route path="/wireless" element={<Wireless />} />
+        {/* Engineering Module Routing */}
+        <Route path="/digital" element={<ProtectedRoute><Avdigital /></ProtectedRoute>} />
+        <Route path="/cctv" element={<ProtectedRoute><Cctv /></ProtectedRoute>} />
+        <Route path="/low" element={<ProtectedRoute><LowVoltage /></ProtectedRoute>} />
+        <Route path="/structure" element={<ProtectedRoute><Structure /></ProtectedRoute>} />
+        <Route path="/pos" element={<ProtectedRoute><Pos /></ProtectedRoute>} />
+        <Route path="/self" element={<ProtectedRoute><SelfCheckout /></ProtectedRoute>} />
+        <Route path="/lite" element={<ProtectedRoute><Satellite /></ProtectedRoute>} />
+        <Route path="/server" element={<ProtectedRoute><Server /></ProtectedRoute>} />
+        <Route path="/wireless" element={<ProtectedRoute><Wireless /></ProtectedRoute>} />
         
-        {/* Management Core Panel */}
-        <Route path="/admin" element={<Admin />} />
-      </Route>
-      
-      {/* ================= 3. FALLBACKS ================= */}
-      <Route path="/error" element={<Error />} />
-      <Route path="*" element={<Error />} />
-    </Routes>
+        {/* Protected Administrative Dashboard Core */}
+        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+
+        {/* ================= FALLBACKS ================= */}
+        <Route path="/error" element={<Error />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </>
   );
 }
 
