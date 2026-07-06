@@ -6,25 +6,30 @@ import Footer from '../components/Footer';
 
 const ServicesDashboard = () => {
     const navigate = useNavigate();
-  
-  // Real-time immediate evaluate intercept
-  const token = localStorage.getItem('token');
-  const user = localStorage.getItem('user');
-  
-  const isUserValid = token && token !== 'null' && token !== 'undefined' && token.trim() !== '' &&
-                      user && user !== 'null' && user !== 'undefined';
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
-  useEffect(() => {
-    if (!isUserValid) {
-      console.error("[FATAL INTERCEPT] Unregistered entity detected on dashboard context. Bouncing.");
-      localStorage.clear(); // Wipes any corrupted testing string fragments completely clean
+  // useLayoutEffect fires synchronously BEFORE the browser paints anything to the screen
+  useLayoutEffect(() => {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+
+    // Strict absolute evaluation
+    const isValid = token && token !== 'null' && token !== 'undefined' && token.trim() !== '' &&
+                    user && user !== 'null' && user !== 'undefined';
+
+    if (!isValid) {
+      console.error("[CRITICAL] Intruder blocked! Redirecting directly to /error");
+      localStorage.clear(); // Flush corrupt data fragments
       navigate('/error', { replace: true });
+    } else {
+      setIsAuthorized(true);
     }
-  }, [isUserValid, navigate]);
+  }, [navigate]);
 
-  // CRITICAL PROTECTION WALL: If unauthorized, freeze rendering entirely right here
-  if (!isUserValid) {
-    return null;
+  // BLOCK RENDERING COMPLETELY: If not authenticated, output blank space 
+  // so an unregistered user sees absolutely nothing before getting kicked out.
+  if (!isAuthorized) {
+    return null; 
   }
     // Array definition mapping updated eCrown core tech titles, icons, and dynamic target routes
     const ecrownServices = [
