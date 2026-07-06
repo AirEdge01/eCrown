@@ -5,22 +5,22 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const ServicesDashboard = () => {
-    const navigate = useNavigate(); 
+//     const navigate = useNavigate(); 
   
 
-  const storedUserData = JSON.parse(localStorage.getItem('userData'));
-  useEffect(() => {
+//   const storedUserData = JSON.parse(localStorage.getItem('userData'));
+//   useEffect(() => {
     
-    if (!storedUserData) {
-      navigate('/error');
-    }
-  },
-   [storedUserData, navigate]);
+//     if (!storedUserData) {
+//       navigate('/error');
+//     }
+//   },
+//    [storedUserData, navigate]);
 
   
-  if (!storedUserData) {
-    return null;
-  }
+//   if (!storedUserData) {
+//     return null;
+//   }
 
     // Array definition mapping updated eCrown core tech titles, icons, and dynamic target routes
     const ecrownServices = [
