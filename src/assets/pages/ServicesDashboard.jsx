@@ -5,32 +5,23 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const ServicesDashboard = () => {
-    const navigate = useNavigate();
-  const [isAuthorized, setIsAuthorized] = useState(false);
+    const navigate = useNavigate(); 
+  
 
-  // useLayoutEffect fires synchronously BEFORE the browser paints anything to the screen
-  useLayoutEffect(() => {
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
-
-    // Strict absolute evaluation
-    const isValid = token && token !== 'null' && token !== 'undefined' && token.trim() !== '' &&
-                    user && user !== 'null' && user !== 'undefined';
-
-    if (!isValid) {
-      console.error("[CRITICAL] Intruder blocked! Redirecting directly to /error");
-      localStorage.clear(); // Flush corrupt data fragments
-      navigate('/error', { replace: true });
-    } else {
-      setIsAuthorized(true);
+  const storedUserData = JSON.parse(localStorage.getItem('userData'));
+  useEffect(() => {
+    
+    if (!storedUserData) {
+      navigate('/error');
     }
-  }, [navigate]);
+  },
+   [storedUserData, navigate]);
 
-  // BLOCK RENDERING COMPLETELY: If not authenticated, output blank space 
-  // so an unregistered user sees absolutely nothing before getting kicked out.
-  if (!isAuthorized) {
-    return null; 
+  
+  if (!storedUserData) {
+    return null;
   }
+
     // Array definition mapping updated eCrown core tech titles, icons, and dynamic target routes
     const ecrownServices = [
         {

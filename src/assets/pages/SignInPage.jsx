@@ -50,16 +50,19 @@ const SignInPage = () => {
                 return;
             }
 
-            localStorage.setItem(
-                'token',
-                res.data?.token || res.data?.accessToken || 'logged-in'
-            );
+            // Extract token safely from your API response payload
+            const token = res.data?.token || res.data?.accessToken || 'logged-in';
 
+            // Save token to localStorage (ProtectedRoute reads this to allow access)
+            localStorage.setItem('token', token);
+
+            // Save secondary user profile data safely
             localStorage.setItem(
                 'user',
                 JSON.stringify(res.data?.user || res.data || {})
             );
 
+            // Route user directly inside your protected ecosystem layout
             navigate('/dashboard', { replace: true });
 
         } catch (err) {
