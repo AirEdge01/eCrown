@@ -6,26 +6,35 @@ import Footer from '../components/Footer';
 
 const ServicesDashboard = () => {
     const navigate = useNavigate(); 
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        // Match the exact keys saved during SignInPage execution
-        const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user');
-        
-        if (!token || !user) {
-            // Redirect unauthenticated guests to the sign-in portal
-            navigate('/signin', { replace: true });
+        // Look for the exact keys set during your registration/login process
+        const storedToken = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user') || localStorage.getItem('userData');
+
+        if (!storedToken || !storedUser) {
+            // Unregistered or unauthenticated; boot to login or error
+            navigate('/error', { replace: true });
         } else {
-            setIsAuthenticated(true);
+            try {
+                // Safely parse the verified user session payload
+                setUser(typeof storedUser === 'string' ? JSON.parse(storedUser) : storedUser);
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Session parsing failed:", error);
+                navigate('/error', { replace: true });
+            }
         }
     }, [navigate]);
 
-    // Prevent rendering layout fragments flashing briefly before the redirect complete
-    if (!isAuthenticated) {
-        return null;
+    // Hard blocker preventing any visual flashes or route bypasses while verifying auth
+    if (isLoading) {
+        return null; 
     }
 
+    // --- The 9 Enterprise Technology Pillars ---
     const ecrownServices = [
         {
             title: "A/v & Digital Signage",
@@ -122,10 +131,10 @@ const ServicesDashboard = () => {
                                         <span className="text-white-50 extra-small fw-bold tracking-wider uppercase">CENTRAL ARCHITECTURE CONSOLE</span>
                                     </div>
                                     <h2 className="text-white fw-bold font-display mb-3 fs-3">
-                                        Welcome to your Integrated Technology Infrastructure Command
+                                        Welcome back, {user?.name || user?.username || 'Operator'}
                                     </h2>
                                     <p className="text-white-50 small hero-para mb-0">
-                                        This workspace consolidates the **9 critical deployment pillars** of eCrown Technologies into a unified interface. Engineered as a centralized business intelligence layer, it allows administrators to orchestrate infrastructure requests, track procurement pipeline progress, evaluate operational configurations, and audit physical systems data ensuring elite performance margins from structured data cabling down to green energy storage matrix arrays.
+                                        This workspace consolidates the **9 critical deployment pillars** of eCrown Technologies into a unified interface. Engineered as a centralized business intelligence layer, it allows administrators to orchestrate infrastructure requests, track procurement pipeline progress, evaluate operational configurations, and audit physical systems data.
                                     </p>
                                 </div>
 
@@ -141,7 +150,6 @@ const ServicesDashboard = () => {
                                     </div>
                                 </div>
 
-                                {/* Subtle Background Radial Aura Accent */}
                                 <div className="hero-radial-accent position-absolute"></div>
                             </div>
                         </div>
@@ -173,7 +181,7 @@ const ServicesDashboard = () => {
                                                 </p>
                                             </div>
 
-                                            {/* Action Bar: Modernized View Link + Call Button Trigger */}
+                                            {/* Action Bar */}
                                             <div className="pt-3 border-top border-light-soft d-flex align-items-center justify-content-between gap-2">
                                                 <Link
                                                     to={service.path}
@@ -196,7 +204,7 @@ const ServicesDashboard = () => {
                             ))}
                         </div>
 
-                        {/* --- Commercial Procurement & Field Action Hub --- */}
+                        {/* --- Commercial Procurement Action Hub --- */}
                         <div className="procurement-cta-section card border-0 p-4 p-md-5 rounded-4 position-relative overflow-hidden mb-4">
                             <div className="row align-items-center relative-box position-relative z-1">
                                 <div className="col-12 col-xl-7 mb-4 mb-xl-0">
@@ -228,7 +236,6 @@ const ServicesDashboard = () => {
                                     </Link>
                                 </div>
                             </div>
-                            {/* Background structural accent loops */}
                             <div className="cta-abstract-bg position-absolute"></div>
                         </div>
 
@@ -236,7 +243,7 @@ const ServicesDashboard = () => {
                 </main>
             </div>
 
-            {/* Custom Embedded Clean CSS Stylesheet */}
+            {/* Styles */}
             <style>
                 {`
                 .dashboard-layout-wrapper {
@@ -244,12 +251,10 @@ const ServicesDashboard = () => {
                     min-height: 100vh;
                     font-family: 'Inter', system-ui, sans-serif;
                 }
-
                 .text-brand-dark { color: #0A1622; }
                 .bg-primary-soft { background-color: rgba(13, 110, 253, 0.06); }
                 .bg-light-soft { background-color: rgba(10, 22, 34, 0.02); }
                 .border-light-soft { border-top: 1px solid rgba(10, 22, 34, 0.05) !important; }
-                
                 .extra-small { font-size: 11px; }
                 .small-description {
                     font-size: 13.5px;
@@ -257,26 +262,18 @@ const ServicesDashboard = () => {
                     color: #64748b;
                     min-height: 65px;
                 }
-
-                /* --- Core Workspace Area --- */
                 .main-content-panel {
                     background: #f8fafe;
                     width: 100%;
                 }
-
-                /* --- Premium Dashboard Hero Section CSS --- */
                 .dashboard-hero-section {
                     background: linear-gradient(135deg, #0A1622 0%, #162a3d 100%);
                     border-radius: 24px !important;
                     box-shadow: 0 10px 30px rgba(10, 22, 34, 0.15);
                 }
-                .hero-para {
-                    max-width: 740px;
-                    line-height: 1.65;
-                }
+                .hero-para { max-width: 740px; line-height: 1.65; }
                 .hero-pulse-dot {
-                    width: 7px;
-                    height: 7px;
+                    width: 7px; height: 7px;
                     background-color: #38bdf8;
                     border-radius: 50%;
                     display: inline-block;
@@ -287,53 +284,32 @@ const ServicesDashboard = () => {
                     border: 1px solid rgba(255, 255, 255, 0.1);
                     min-width: 210px;
                 }
-                .metric-icon-box {
-                    width: 44px;
-                    height: 44px;
-                }
+                .metric-icon-box { width: 44px; height: 44px; }
                 .hero-radial-accent {
-                    width: 300px;
-                    height: 300px;
+                    width: 300px; height: 300px;
                     background: radial-gradient(circle, rgba(13, 110, 253, 0.15) 0%, rgba(0,0,0,0) 70%);
-                    top: -100px;
-                    right: -50px;
-                    pointer-events: none;
+                    top: -100px; right: -50px; pointer-events: none;
                 }
-
-                /* --- Modern Glassmorphic Premium Service Cards --- */
                 .service-glass-card {
                     background: #ffffff;
                     border-radius: 20px !important;
-                    box-shadow: 0 4px 18 rgba(10, 22, 34, 0.02);
+                    box-shadow: 0 4px 18px rgba(10, 22, 34, 0.02);
                     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
                 }
-                
                 .service-glass-card:hover {
                     transform: translateY(-5px);
                     box-shadow: 0 15px 30px rgba(10, 22, 34, 0.06);
                 }
-
                 .service-icon-frame {
-                    width: 48px;
-                    height: 48px;
+                    width: 48px; height: 48px;
                     background: rgba(13, 110, 253, 0.08);
                     color: #0D6EFD !important;
                 }
-
-                /* --- Micro-interactions and Actions Styles --- */
-                .hover-gap-view {
-                    transition: gap 0.2s ease;
-                }
-                .service-glass-card:hover .hover-gap-view {
-                    gap: 6px !important;
-                }
-                .arrow-icon {
-                    transition: transform 0.2s ease;
-                }
-                .service-glass-card:hover .arrow-icon {
-                    transform: translateX(2px);
-                }
-
+                .hover-gap-view { transition: gap 0.2s ease; }
+                .service-glass-card:hover .hover-gap-view { gap: 6px !important; }
+                .arrow-icon { transition: transform 0.2s ease; }
+                .service-glass-card:hover .arrow-icon { transform: translateX(2px); }
+                
                 .btn-installation-action {
                     background: #0A1622;
                     color: #ffffff;
@@ -347,41 +323,27 @@ const ServicesDashboard = () => {
                     color: #ffffff;
                     transform: scale(1.02);
                 }
-
-                /* --- Brand New Section Styles --- */
                 .procurement-cta-section {
                     background: #ffffff;
                     border: 1px solid rgba(13, 110, 253, 0.09) !important;
                     border-radius: 24px !important;
                     box-shadow: 0 12px 30px rgba(13, 110, 253, 0.02);
                 }
-                .dynamic-cta-para {
-                    max-width: 680px;
-                    line-height: 1.6;
-                }
-                .btn-procure {
-                    font-size: 14.5px;
-                    transition: all 0.25s ease;
-                }
+                .dynamic-cta-para { max-width: 680px; line-height: 1.6; }
+                .btn-procure { font-size: 14.5px; transition: all 0.25s ease; }
                 .btn-procure:hover {
                     transform: translateY(-2px);
                     box-shadow: 0 6px 20px rgba(13, 110, 253, 0.25);
                 }
-                .btn-field-call {
-                    font-size: 14.5px;
-                    transition: all 0.25s ease;
-                }
+                .btn-field-call { font-size: 14.5px; transition: all 0.25s ease; }
                 .btn-field-call:hover {
                     background: rgba(10, 22, 34, 0.03) !important;
                     transform: translateY(-2px);
                 }
                 .cta-abstract-bg {
-                    width: 250px;
-                    height: 250px;
+                    width: 250px; height: 250px;
                     background: radial-gradient(circle, rgba(13, 110, 253, 0.04) 0%, rgba(0,0,0,0) 70%);
-                    bottom: -80px;
-                    right: -40px;
-                    pointer-events: none;
+                    bottom: -80px; right: -40px; pointer-events: none;
                 }
                 `}
             </style>
