@@ -28,48 +28,73 @@ import AdminSignup from './assets/pages/AdminSignup.jsx';
 import AdminSignin from './assets/pages/AdminSignin.jsx';
 
 function App() {
+  
+  // // Sanitize stored auth safely on app mount
+  // useEffect(() => {
+  //   try {
+  //     const rawUser = localStorage.getItem('userData');
+  //     const rawSession = localStorage.getItem('authSession');
+
+  //     // 1. Guest user: No data at all. Perfectly fine.
+  //     if (!rawUser && !rawSession) return;
+
+  //     // 2. Corrupt state: Session exists but user data vanished. Wipe session.
+  //     if (!rawUser && rawSession) {
+  //       localStorage.removeItem('authSession');
+  //       return;
+  //     }
+
+  //     // 3. Evaluation when both exist
+  //     if (rawUser && rawSession) {
+  //       const user = JSON.parse(rawUser);
+  //       const session = JSON.parse(rawSession);
+        
+  //       // Ensure email configurations match up perfectly
+  //       if (!user?.email || !session?.email || session.email !== user.email) {
+  //         localStorage.removeItem('authSession');
+  //       }
+  //     }
+  //   } catch (e) {
+  //     console.error("Sanitization hook failed:", e);
+  //     localStorage.removeItem('authSession');
+  //   }
+  // }, []); 
+
   return (
     <>
       <Routes>
-        {/* ================= PUBLIC ROUTES ================= */}
-        {/* Open paths accessible to any web client without authorization tokens */}
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         
-        {/* Admin Public Authentication Portals */}
         <Route path="/admin/signup" element={<AdminSignup />} />
         <Route path="/admin/signin" element={<AdminSignin />} />
 
-        {/* ================= PROTECTED ZONE ================= */}
-        {/* Everything inside this wrapper strictly checks for a valid, clean token */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<ServicesDashboard />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/order" element={<OrderPage />} />
-          <Route path="/request" element={<RequestInstallation />} /> 
-          <Route path="/install" element={<RequestInstallation />} />
-          
-          {/* Engineering Feature Interfaces */}
-          <Route path="/digital" element={<Avdigital />} />
-          <Route path="/cctv" element={<Cctv />} />
-          <Route path="/low" element={<LowVoltage />} />
-          <Route path="/structure" element={<Structure />} />
-          <Route path="/pos" element={<Pos />} />
-          <Route path="/self" element={<SelfCheckout />} />
-          <Route path="/lite" element={<Satellite />} />
-          <Route path="/server" element={<Server />} />
-          <Route path="/wireless" element={<Wireless />} />
-          
-          {/* Management Console Interface */}
-          <Route path="/admin" element={<Admin />} />
-        </Route>
+        {/* Protected Customer Routes */}
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/request" element={<RequestInstallation />} /> 
+        <Route path="/digital" element={<Avdigital />} />
+        <Route path="/cctv" element={<Cctv />} />
+        <Route path="/low" element={<LowVoltage />} />
+        <Route path="/structure" element={<Structure />} />
+        <Route path="/pos" element={<Pos />} />
+        <Route path="/self" element={<SelfCheckout />} />
+        <Route path="/lite" element={<Satellite />} />
+        <Route path="/server" element={<Server />} />
+        <Route path="/wireless" element={<Wireless />} />
+        <Route path="/dashboard" element={<ServicesDashboard />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/install" element={<RequestInstallation />} />
+        <Route path="/order" element={<OrderPage />} />
         
-        {/* ================= FALLBACKS ================= */}
+        {/* Protected Admin Dashboard */}
+        <Route path="/admin" element={<Admin />} />
+        
+        {/* Fallbacks */}
         <Route path="/error" element={<Error />} />
-        <Route path="*" element={<Error />} />
+        {/* <Route path="*" element={<Error />} /> */}
       </Routes>
     </>
   );
