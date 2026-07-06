@@ -1,23 +1,25 @@
-// // assets/components/ProtectedRoute.jsx
-// import React from 'react';
-// import { Navigate, Outlet, useLocation } from 'react-router-dom';
+// assets/components/ProtectedRoute.jsx
+import React from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-// const ProtectedRoute = () => {
-//   const location = useLocation();
-//   const token = localStorage.getItem('token');
+const ProtectedRoute = () => {
+  const location = useLocation();
+  
+  const token = localStorage.getItem('token');
+  const user = localStorage.getItem('user');
 
-//   // Strict Validation: Ensure token exists and isn't a broken string placeholder
-//   const isAuthenticated = token && 
-//                           token !== 'null' && 
-//                           token !== 'undefined' && 
-//                           token !== 'logged-in' && 
-//                           token.trim() !== '';
+  // ELIMINATES FALSE PASSES: Strictly ensures token and user keys exist, 
+  // are not empty, and are not placeholder strings.
+  const hasValidToken = token && token !== 'null' && token !== 'undefined' && token.trim() !== '';
+  const hasValidUser = user && user !== 'null' && user !== 'undefined' && user.trim() !== '';
 
-//   // Safe tracking to monitor route behavior in your developer tools console
-//   console.log(`[GUARD] Path: ${location.pathname} | Access Granted: ${!!isAuthenticated}`);
+  const isFullyAuthenticated = hasValidToken && hasValidUser;
 
-//   // If authenticated, render child matching routes. Otherwise, bounce to /error
-//   return isAuthenticated ? <Outlet /> : <Navigate to="/error" replace />;
-// };
+  // Monitor this inside your browser F12 inspection terminal!
+  console.log(`[ROUTE SECURITY GUARD] Path: ${location.pathname} -> Verified Authentic: ${!!isFullyAuthenticated}`);
 
-// export default ProtectedRoute;
+  // If authenticated, grant passage. If a generic hacker/unregistered user tries to pass, throw them out to /error
+  return isFullyAuthenticated ? <Outlet /> : <Navigate to="/error" replace />;
+};
+
+export default ProtectedRoute;

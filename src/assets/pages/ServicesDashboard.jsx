@@ -5,51 +5,21 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const ServicesDashboard = () => {
-//     const navigate = useNavigate(); 
-  
-
-//   const storedUserData = JSON.parse(localStorage.getItem('userData'));
-//   useEffect(() => {
     
-//     if (!storedUserData) {
-//       navigate('/error');
-//     }
-//   },
-//    [storedUserData, navigate]);
+  const navigate = useNavigate();
+  const storedUser = localStorage.getItem('user');
 
-  
-//   if (!storedUserData) {
-//     return null;
-//   }
+  useEffect(() => {
+    // Ultimate defensive fallback measure
+    if (!storedUser || storedUser === 'null' || storedUser === 'undefined') {
+      console.warn("[SECURITY ALERT] Unauthorized access footprint captured on node layout. Routing to /error.");
+      navigate('/error', { replace: true });
+    }
+  }, [storedUser, navigate]);
 
-
-// import { useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
-
-// Inside your ServicesDashboard component function:
-const navigate = useNavigate(); 
-
-// FIXED: Changed 'userData' to 'user' to match your SignInPage storage key perfectly
-const storedUserData = JSON.parse(localStorage.getItem('user'));
-
-useEffect(() => {
-  // If an unregistered hacker tries to type /dashboard manually, this boots them out
-  if (!storedUserData) {
-    console.log("[DASHBOARD ALERT] No user data found! Redirecting intruder to /error.");
-    navigate('/error', { replace: true });
+  if (!storedUser || storedUser === 'null' || storedUser === 'undefined') {
+    return null; // Don't paint a single pixel of your dashboard interface on the screen
   }
-}, [storedUserData, navigate]);
-
-// Prevent rendering anything if the user isn't logged in yet
-if (!storedUserData) {
-  return null;
-}
-
-// =========================================================================
-// The rest of your dashboard code can continue safely below this line...
-// Since the user is authenticated, links to other protected pages will work cleanly!
-// =========================================================================
-
     // Array definition mapping updated eCrown core tech titles, icons, and dynamic target routes
     const ecrownServices = [
         {
