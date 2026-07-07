@@ -29,72 +29,47 @@ import ProtectedRoute from './assets/components/ProtectedRoute.jsx';
 
 function App() {
   return (
-//     <Routes>
-//       ============================================================
-//       {/* 🔓 PUBLIC ROUTES (Accessible by everyone without a token)   */}
-//       {/* ============================================================ */}
-//       <Route path="/" element={<Home />} />
-//       <Route path="/contact" element={<Contact />} /> {/* Moved to public per your request */}
-//       <Route path="/signin" element={<SignInPage />} />
-//       <Route path="/signup" element={<SignUpPage />} />
-//       <Route path="/admin/signup" element={<AdminSignup />} />
-//       <Route path="/admin/signin" element={<AdminSignin />} />
-//       <Route path="/error" element={<Error />} />
+    <Routes>
+      ============================================================
+      {/* 🔓 PUBLIC ROUTES (Accessible by everyone without a token)   */}
+      {/* ============================================================ */}
+      <Route path="/" element={<Home />} />
+      <Route path="/contact" element={<Contact />} /> {/* Moved to public per your request */}
+      <Route path="/signin" element={<SignInPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/admin/signup" element={<AdminSignup />} />
+      <Route path="/admin/signin" element={<AdminSignin />} />
+      <Route path="/error" element={<Error />} />
 
-//       {/* ============================================================ */}
-//       {/* 🔒 PROTECTED ROUTE NETWORKS (Strict Backend Identity Validated)*/}
-//       {/* ============================================================ */}
-//       <Route element={<ProtectedRoute />}>
-//         <Route path="/about" element={<About />} />
-//         <Route path="/dashboard" element={<ServicesDashboard />} />
-//         <Route path="/payment" element={<Payment />} />
-//         <Route path="/order" element={<OrderPage />} />
-//         <Route path="/request" element={<RequestInstallation />} />
-//         <Route path="/install" element={<RequestInstallation />} />
-//         <Route path="/digital" element={<Avdigital />} />
-//         <Route path="/cctv" element={<Cctv />} />
-//         <Route path="/low" element={<LowVoltage />} />
-//         <Route path="/structure" element={<Structure />} />
-//         <Route path="/pos" element={<Pos />} />
-//         <Route path="/self" element={<SelfCheckout />} />
-//         <Route path="/lite" element={<Satellite />} />
-//         <Route path="/server" element={<Server />} />
-//         <Route path="/wireless" element={<Wireless />} />
-//         <Route path="/admin" element={<Admin />} />
-//       </Route>
+      {/* ============================================================ */}
+      {/* 🔒 PROTECTED ROUTE NETWORKS (Strict Backend Identity Validated)*/}
+      {/* ============================================================ */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/about" element={<About />} />
+        <Route path="/dashboard" element={<ServicesDashboard />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/order" element={<OrderPage />} />
+        <Route path="/request" element={<RequestInstallation />} />
+        <Route path="/install" element={<RequestInstallation />} />
+        <Route path="/digital" element={<Avdigital />} />
+        <Route path="/cctv" element={<Cctv />} />
+        <Route path="/low" element={<LowVoltage />} />
+        <Route path="/structure" element={<Structure />} />
+        <Route path="/pos" element={<Pos />} />
+        <Route path="/self" element={<SelfCheckout />} />
+        <Route path="/lite" element={<Satellite />} />
+        <Route path="/server" element={<Server />} />
+        <Route path="/wireless" element={<Wireless />} />
+        <Route path="/admin" element={<Admin />} />
+      </Route>
       
-//       {/* ============================================================ */}
-//       {/* 🚨 CATCH-ALL ROUTE                                           */}
-//       {/* ============================================================ */}
-//       <Route path="*" element={<Error />} />
-//     </Routes>
-<Routes>
-
-  {/* Public routes */}
-  <Route path="/" element={<Home />} />
-  <Route path="/signup" element={<Signup />} />
-  <Route path="/signin" element={<Signin />} />
-  {/* <Route path="/about" element={<About />} /> */}
-  <Route path="/contact" element={<Contact />} />
-  <Route path="/error" element={<Error />} />
-
-  {/* Admin routes */}
-  <Route path="/admin/signup" element={<AdminSignup />} />
-  <Route path="/admin/signin" element={<AdminSignin />} />
-
-  {/* Protected routes */}
-  <Route element={<ProtectedRoute />}>
-    <Route path="/dashboard" element={<Dashboard />} />
-    <Route path="/about" element={<About />} />
-    {/* <Route path="/profile" element={<Profile />} />
-    <Route path="/settings" element={<Settings />} /> */}
-  </Route>
-
-</Routes>
-
- );
- }
-
+      {/* ============================================================ */}
+      {/* 🚨 CATCH-ALL ROUTE                                           */}
+      {/* ============================================================ */}
+      <Route path="*" element={<Error />} />
+    </Routes>
+  );
+}
 
 export default App;
 
