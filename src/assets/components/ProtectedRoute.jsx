@@ -1,37 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import API from '../api'; // Import the security interceptor we made in Step 1
+import API from '../api'; // This must be your Axios instance file
 
 const ProtectedRoute = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(null);
+    // Status can be: 'loading', 'authenticated', or 'unauthenticated'
+    const [status, setStatus] = useState('loading');
     const token = localStorage.getItem('userToken');
 
     useEffect(() => {
+        // 1. If there's no token in storage at all, block immediately without hitting backend
         if (!token) {
-            setIsAuthenticated(false);
+            setStatus('unauthenticated');
             return;
         }
 
-        // Send a quick ping to the backend profile context route to verify authenticity
+        // 2. Ping the backend to cryptographically verify if the user is registered
         API.get('/api/user/profile-context')
             .then((res) => {
                 if (res.data.success) {
-                    setIsAuthenticated(true);
+                    setStatus('authenticated');
+                } else {
+                    setStatus('unauthenticated');
                 }
             })
-            .catch(() => {
-                // If the backend rejects the token, interceptor handles it, but safety fallback here:
-                setIsAuthenticated(false);
+            .catch((err) => {
+                console.error("Backend security guard rejected request:", err.message);
+                setStatus('unauthenticated');
             });
     }, [token]);
 
-    // Show a loading screen while the backend performs its security handshake
-    if (isAuthenticated === null) {
-        return <div className="text-center mt-5 text-white">Verifying Secure Network Credentials...</div>;
+    // ⏳ WHILE LOADING: Render a blank screen or a loading state. 
+    // This stops unauthorized users from seeing a brief flash of your protected pages!
+    if (status === 'loading') {
+        return (
+            <div style={{
+                height: '100vh',
+                backgroundColor: '#0b0c10',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: '#66fcf1',
+                fontFamily: 'sans-serif'
+            }}>
+                <div className="spinner">Verifying system node credentials...</div>
+            </div>
+        );
     }
 
-    // If backend rejects identity, redirect straight to /error
-    return isAuthenticated ? <Outlet /> : <Navigate to="/error" replace />;
+    // 🚨 IF UNREGISTERED: Boot them to the error page instantly
+    if (status === 'unauthenticated') {
+        return <Navigate to="/error" replace />;
+    }
+
+    // ✅ IF AUTHENTICATED: Allow passage to the 20+ protected pages
+    return <Outlet />;
 };
 
 export default ProtectedRoute;

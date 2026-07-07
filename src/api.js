@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-// Create a central Axios instance pointing to your Node backend
 const API = axios.create({
-    baseURL: 'https://ecrownode-1.onrender.com', // Update to your live URL when deployed
+    baseURL: 'https://ecrownode-1.onrender.com', // Adjust this to your actual server port/domain
     withCredentials: true
 });
 
-// Automatically inject the Bearer token into EVERY backend request
+// Pass token dynamically in the headers
 API.interceptors.request.use((config) => {
     const token = localStorage.getItem('userToken');
     if (token) {
@@ -17,15 +16,16 @@ API.interceptors.request.use((config) => {
     return Promise.reject(error);
 });
 
-// 🚨 THE CORE GUARD: Listen globally for the backend's protection signals
+// Central point for intercepting 401 blocks from the server middleware
 API.interceptors.response.use(
     (response) => response,
     (error) => {
-        // If the backend middleware responds with 401 (Unregistered/Bad Token)
         if (error.response && error.response.status === 401) {
-            console.error("🛡️ Backend Route Protection Triggered! Booting to error page.");
-            localStorage.removeItem('userToken'); // Clean up stale data
-            window.location.href = '/error';     // Force absolute redirect to your error route
+            console.warn("🚨 Security breach intercepted. Clearing token and redirecting...");
+            localStorage.removeItem('userToken');
+            
+            // Hard redirect overrides any lingering frontend states instantly
+            window.location.href = '/error'; 
         }
         return Promise.reject(error);
     }
