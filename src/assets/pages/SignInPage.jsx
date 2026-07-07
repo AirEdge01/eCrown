@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../redux/authSlice";
 
 const SignInPage = () => {
     const [email, setEmail] = useState('');
@@ -14,6 +16,42 @@ const SignInPage = () => {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
+    const token = res.data?.token || res.data?.accessToken || 'logged-in';
+
+localStorage.setItem('token', token);
+
+localStorage.setItem(
+    'user',
+    JSON.stringify(res.data?.user || res.data || {})
+);
+
+navigate('/dashboard', { replace: true });
+
+const token = res.data?.token || res.data?.accessToken;
+const user = res.data?.user || res.data?.data || {};
+
+dispatch(
+    loginSuccess({
+        user,
+        token,
+    })
+);
+
+navigate("/dashboard", { replace: true });
+const token = res.data?.token || res.data?.accessToken;
+const user = res.data?.user || res.data?.data || {};
+
+dispatch(
+    loginSuccess({
+        user,
+        token,
+    })
+);
+
+navigate("/dashboard", { replace: true });
 
     useEffect(() => {
         const t = setTimeout(() => setEntered(true), 80);
@@ -72,6 +110,8 @@ const SignInPage = () => {
             setLoading(false);
         }
     };
+
+    
 
     return (
         <>
