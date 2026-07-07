@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create a central Axios instance pointing to your Node backend
 const API = axios.create({
-    baseURL: 'http://localhost:2000', // Update to your live URL when deployed
+    baseURL: 'https://ecrownode-1.onrender.com', // Update to your live URL when deployed
     withCredentials: true
 });
 
