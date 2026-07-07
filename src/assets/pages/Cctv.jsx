@@ -7,28 +7,23 @@ import Dash from '../components/Dash';
 
 const Cctv = () => {
 
-const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
+const [cctvData, setCctvData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Look for the exact keys set during your registration/login process
-    const storedToken = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user') || localStorage.getItem('userData');
-
-    if (!storedToken || !storedUser) {
-      // Unregistered or unauthenticated; boot immediately to error route
-      navigate('/error', { replace: true });
-    } else {
-      // Session exists and keys are verified
-      setIsLoading(false);
-    }
-  }, [navigate]);
-
-  // Hard blocker preventing any structural visual flashes while evaluating auth status
-  if (isLoading) {
-    return null;
-  }
-
+    useEffect(() => {
+        API.get('/api/cctv')
+            .then((res) => {
+                if (res.data.success) {
+                    setCctvData(res.data.cctvContext);
+                }
+            })
+            .catch((err) => {
+                console.log("Global Interceptor is redirecting this traffic node...");
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
   
   return (
     <>

@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-// import ProtectedRoute from './components/ProtectedRoute.jsx'; 
+
 // Page Imports
 import Home from './assets/pages/Home.jsx';
 import About from './assets/pages/About.jsx';
@@ -23,39 +23,49 @@ import SelfCheckout from './assets/pages/SelfCheckout.jsx';
 import Satellite from './assets/pages/Satellite.jsx';
 import Server from './assets/pages/Server.jsx';
 import Wireless from './assets/pages/Wireless.jsx';
+
+// Component Security Wrapper
 import ProtectedRoute from './assets/components/ProtectedRoute.jsx';
 
 function App() {
   return (
     <Routes>
-      {/* PUBLIC ROUTES (Accessible by everyone) */}
+      {/* ============================================================ */}
+      {/* 🔓 PUBLIC ROUTES (Accessible by everyone without a token)   */}
+      {/* ============================================================ */}
       <Route path="/" element={<Home />} />
+      <Route path="/contact" element={<Contact />} /> {/* Moved to public per your request */}
       <Route path="/signin" element={<SignInPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/admin/signup" element={<AdminSignup />} />
       <Route path="/admin/signin" element={<AdminSignin />} />
       <Route path="/error" element={<Error />} />
 
-      {/* PROTECTED ROUTES (Only accessible if signed in) */}
-      <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
-      <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
-      <Route path="/dashboard" element={<ProtectedRoute><ServicesDashboard /></ProtectedRoute>} />
-      <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
-      <Route path="/order" element={<ProtectedRoute><OrderPage /></ProtectedRoute>} />
-      <Route path="/request" element={<ProtectedRoute><RequestInstallation /></ProtectedRoute>} />
-      <Route path="/install" element={<ProtectedRoute><RequestInstallation /></ProtectedRoute>} />
-      <Route path="/digital" element={<ProtectedRoute><Avdigital /></ProtectedRoute>} />
-      <Route path="/cctv" element={<ProtectedRoute><Cctv /></ProtectedRoute>} />
-      <Route path="/low" element={<ProtectedRoute><LowVoltage /></ProtectedRoute>} />
-      <Route path="/structure" element={<ProtectedRoute><Structure /></ProtectedRoute>} />
-      <Route path="/pos" element={<ProtectedRoute><Pos /></ProtectedRoute>} />
-      <Route path="/self" element={<ProtectedRoute><SelfCheckout /></ProtectedRoute>} />
-      <Route path="/lite" element={<ProtectedRoute><Satellite /></ProtectedRoute>} />
-      <Route path="/server" element={<ProtectedRoute><Server /></ProtectedRoute>} />
-      <Route path="/wireless" element={<ProtectedRoute><Wireless /></ProtectedRoute>} />
-      <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+      {/* ============================================================ */}
+      {/* 🔒 PROTECTED ROUTE NETWORKS (Strict Backend Identity Validated)*/}
+      {/* ============================================================ */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/about" element={<About />} />
+        <Route path="/dashboard" element={<ServicesDashboard />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/order" element={<OrderPage />} />
+        <Route path="/request" element={<RequestInstallation />} />
+        <Route path="/install" element={<RequestInstallation />} />
+        <Route path="/digital" element={<Avdigital />} />
+        <Route path="/cctv" element={<Cctv />} />
+        <Route path="/low" element={<LowVoltage />} />
+        <Route path="/structure" element={<Structure />} />
+        <Route path="/pos" element={<Pos />} />
+        <Route path="/self" element={<SelfCheckout />} />
+        <Route path="/lite" element={<Satellite />} />
+        <Route path="/server" element={<Server />} />
+        <Route path="/wireless" element={<Wireless />} />
+        <Route path="/admin" element={<Admin />} />
+      </Route>
       
-      {/* Catch-all route: Redirects any unknown URL to error page */}
+      {/* ============================================================ */}
+      {/* 🚨 CATCH-ALL ROUTE                                           */}
+      {/* ============================================================ */}
       <Route path="*" element={<Error />} />
     </Routes>
   );
