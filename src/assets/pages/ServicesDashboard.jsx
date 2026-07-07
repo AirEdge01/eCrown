@@ -5,35 +5,15 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const ServicesDashboard = () => {
-    const navigate = useNavigate(); 
-    const [isLoading, setIsLoading] = useState(true);
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        // Look for the exact keys set during your registration/login process
-        const storedToken = localStorage.getItem('token');
-        const storedUser = localStorage.getItem('user') || localStorage.getItem('userData');
-
-        if (!storedToken || !storedUser) {
-            // Unregistered or unauthenticated; boot to login or error
-            navigate('/error', { replace: true });
-        } else {
-            try {
-                // Safely parse the verified user session payload
-                setUser(typeof storedUser === 'string' ? JSON.parse(storedUser) : storedUser);
-                setIsLoading(false);
-            } catch (error) {
-                console.error("Session parsing failed:", error);
-                navigate('/error', { replace: true });
-            }
-        }
-    }, [navigate]);
-
-    // Hard blocker preventing any visual flashes or route bypasses while verifying auth
-    if (isLoading) {
-        return null; 
-    }
-
+    const [ServicesDashboardData, setServicesDashboardData] = useState(null);
+    
+        useEffect(() => {
+            // Just make a simple request. 
+            // If the backend says "Unregistered!", our central system boots them to /error automatically.
+            API.get('/api/dashboard')
+                .then(res => setServicesDashboardData(res.data))
+                .catch(err => console.log("Request blocked by backend security guard."));
+        }, []);
     // --- The 9 Enterprise Technology Pillars ---
     const ecrownServices = [
         {

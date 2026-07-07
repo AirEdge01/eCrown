@@ -5,6 +5,16 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const About = () => {
+
+  const [AboutData, setAboutData] = useState(null);
+
+    useEffect(() => {
+        // Just make a simple request. 
+        // If the backend says "Unregistered!", our central system boots them to /error automatically.
+        API.get('/api/about')
+            .then(res => setAboutData(res.data.posContext))
+            .catch(err => console.log("Request blocked by backend security guard."));
+    }, []);
   
   return (
     <>
