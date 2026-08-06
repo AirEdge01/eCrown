@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 // FIXED: Explicitly destructure your icons to stop the undefined crash
 
-import { Mail, Lock, LogIn } from 'lucide-react'; 
+import { Mail, Lock, LogIn } from 'lucide-react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
+import API from '../../api';
 
 import Navbar from '../components/Navbar';
 
@@ -34,7 +34,7 @@ const SignInPage = () => {
 
     const navigate = useNavigate();
 
-    
+
 
 
 
@@ -72,9 +72,9 @@ const SignInPage = () => {
 
         try {
 
-            const res = await axios.post(
+            const res = await API.post(
 
-                'https://ecrownode-1.onrender.com/user/signin',
+                '/signin',
 
                 {
 
@@ -85,8 +85,6 @@ const SignInPage = () => {
                 },
 
                 {
-
-                    headers: { 'Content-Type': 'application/json' },
 
                     validateStatus: () => true,
 
@@ -154,7 +152,7 @@ const SignInPage = () => {
 
 
 
-    
+
 
 
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://ecrownode-1.onrender.com', // Adjust this to your actual server port/domain
+    baseURL: '/api/user',
 });
 
 // Pass token dynamically in the headers
