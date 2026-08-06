@@ -33,7 +33,7 @@ function App() {
       ============================================================
       {/* 🔓 PUBLIC ROUTES (Accessible by everyone without a token)   */}
       {/* ============================================================ */}
-      <Route path="/" element={<Home />} />
+      
       <Route path="/contact" element={<Contact />} /> {/* Moved to public per your request */}
       <Route path="/signin" element={<SignInPage />} />
       <Route path="/signup" element={<SignUpPage />} />
