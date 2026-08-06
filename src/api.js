@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const API = axios.create({
     baseURL: 'https://ecrownode-1.onrender.com', // Adjust this to your actual server port/domain
-    withCredentials: true
 });
 
 // Pass token dynamically in the headers
@@ -23,9 +22,9 @@ API.interceptors.response.use(
         if (error.response && error.response.status === 401) {
             console.warn("🚨 Security breach intercepted. Clearing token and redirecting...");
             localStorage.removeItem('userToken');
-            
+
             // Hard redirect overrides any lingering frontend states instantly
-            window.location.href = '/error'; 
+            window.location.href = '/error';
         }
         return Promise.reject(error);
     }
