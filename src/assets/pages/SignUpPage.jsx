@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // FIXED: Destructured imports to stop the silent "undefined" component crash
 import { User, Mail, Lock, UserPlus } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
+import API from '../../api';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -13,7 +13,7 @@ const SignUpPage = () => {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -36,21 +36,18 @@ const SignUpPage = () => {
 
         setLoading(true);
         try {
-            // UPDATED: Changed 'localhost' to '127.0.0.1' to avoid IPv6/IPv4 address resolution blocks
-            const res = await axios.post(
-                "https://ecrownode-1.onrender.com/user/signup",
-                
-                newUser
-            );
-            
-            // FIXED ALERT: Safely uses the active local hook states to 
-            // ensure the user's name is NEVER blank or undefined.
+            const res = await API.post('/signup', newUser);
+
+            if (res.status !== 200 && res.status !== 201) {
+                setError(res.data?.message || 'Signup failed, try again');
+                return;
+            }
+
             alert(`Successfully Registered! Welcome, ${firstName} ${lastName}.`);
-            
-            navigate("/signin"); 
+            navigate('/signin');
         } catch (err) {
-            console.error("Signup error:", err.response || err);
-            setError(err.response?.data?.message || "Signup failed, try again");
+            console.error('Signup error:', err.response || err);
+            setError(err.response?.data?.message || err.message || 'Signup failed, try again');
         } finally {
             setLoading(false);
         }

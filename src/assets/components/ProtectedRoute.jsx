@@ -15,7 +15,7 @@ const ProtectedRoute = () => {
         }
 
         // 2. Ping the backend to cryptographically verify if the user is registered
-        API.get('/api/user/profile-context')
+        API.get('/profile-context')
             .then((res) => {
                 if (res.data.success) {
                     setStatus('authenticated');

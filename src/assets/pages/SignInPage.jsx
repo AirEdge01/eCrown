@@ -12,10 +12,6 @@ import Navbar from '../components/Navbar';
 
 import Footer from '../components/Footer';
 
-import { useDispatch } from "react-redux";
-
-import { loginSuccess } from "../redux/authSlice";
-
 
 
 const SignInPage = () => {
@@ -107,14 +103,18 @@ const SignInPage = () => {
 
 
             // Extract token safely from your API response payload
+            const token = res.data?.token || res.data?.accessToken;
+            if (!token) {
+                setError('Signin succeeded but no token was returned from server');
+                setLoading(false);
+                return;
+            }
 
-            const token = res.data?.token || res.data?.accessToken || 'logged-in';
 
 
-
-            // Save token to localStorage (ProtectedRoute reads this to allow access)
-
+            // Save token to localStorage for both frontend use and protected-route authentication
             localStorage.setItem('token', token);
+            localStorage.setItem('userToken', token);
 
 
 
