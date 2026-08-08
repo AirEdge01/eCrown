@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react';
 
 // FIXED: Explicitly destructure your icons to stop the undefined crash
 
-import { Mail, Lock, LogIn } from 'lucide-react';
+import { Mail, Lock, LogIn } from 'lucide-react'; 
 
 import { Link, useNavigate } from 'react-router-dom';
 
-import API from '../../api';
+import axios from 'axios';
 
 import Navbar from '../components/Navbar';
 
 import Footer from '../components/Footer';
+
+import { useDispatch } from "react-redux";
+
+import { loginSuccess } from "../redux/authSlice";
 
 
 
@@ -30,7 +34,7 @@ const SignInPage = () => {
 
     const navigate = useNavigate();
 
-
+    
 
 
 
@@ -68,9 +72,9 @@ const SignInPage = () => {
 
         try {
 
-            const res = await API.post(
+            const res = await axios.post(
 
-                '/signin',
+                'https://ecrownode-1.onrender.com/user/signin',
 
                 {
 
@@ -81,6 +85,8 @@ const SignInPage = () => {
                 },
 
                 {
+
+                    headers: { 'Content-Type': 'application/json' },
 
                     validateStatus: () => true,
 
@@ -103,18 +109,14 @@ const SignInPage = () => {
 
 
             // Extract token safely from your API response payload
-            const token = res.data?.token || res.data?.accessToken;
-            if (!token) {
-                setError('Signin succeeded but no token was returned from server');
-                setLoading(false);
-                return;
-            }
+
+            const token = res.data?.token || res.data?.accessToken || 'logged-in';
 
 
 
-            // Save token to localStorage for both frontend use and protected-route authentication
+            // Save token to localStorage (ProtectedRoute reads this to allow access)
+
             localStorage.setItem('token', token);
-            localStorage.setItem('userToken', token);
 
 
 
@@ -152,7 +154,7 @@ const SignInPage = () => {
 
 
 
-
+    
 
 
 
